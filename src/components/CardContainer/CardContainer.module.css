@@ -3,7 +3,7 @@
   flex-direction: row;
   align-items: flex-start;
   background: #ffffff;
-  margin-top: 16px;
+  margin-top: 30px;
   flex-wrap: wrap;
   margin-left: auto;
   margin-right: auto;
@@ -94,6 +94,7 @@
   } */
   .cardContainerRow > div {
     margin-bottom: 1.5rem;
+    margin-left: 1rem;
   }
   .cardContainerMobile {
     display: flex;
@@ -104,7 +105,7 @@
     padding: 0px;
     gap: 26px;
     height: 418px;
-    margin-top: 26px;
+    margin-top: 46px;
     margin-left: auto;
     margin-right:auto;
     flex-wrap: wrap;

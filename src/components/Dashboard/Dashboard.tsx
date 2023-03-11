@@ -39,7 +39,7 @@ const Dashboard = () => {
                         </>
                     )
                 }
-                <div className='padding-h-1 CardContainer' onClick={handleClick}>
+                <div className='CardContainer' onClick={handleClick}>
                     <CardContainer />
                 </div>
             </div>

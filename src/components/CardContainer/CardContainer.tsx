@@ -40,10 +40,6 @@ const CardContainer = ({ resultadosDeBusqueda }: DashboardProps) => {
         windowWidth >= 500 ? 
         (
           <>
-            {/* <div className={styles.limpiarFiltrosContainer}>
-              <Icon name="eliminar" onClick={() => { return }} size={18} />
-              <p> Limpiar Filtros</p>
-            </div> */}
             <div className={styles.cardContainerColumn}>
               <CardItemDesktop />
             </div>

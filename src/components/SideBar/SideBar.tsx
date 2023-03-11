@@ -57,8 +57,14 @@ const SideBar = ({ isOpenSideBar, setIsOpenSideBar }: SidebarProps) => {
                     <li>
                         <div onClick={() => handleDropdownClick(isDropdownOpenMarca, setIsDropdownOpenMarca)}>
                             Marca
-                            <span className={`${isDropdownOpenModelo ? 'open' : ''}`}>
-                            <Icon name="dropdown" onClick={() => { return }} size={18} />
+                            <span className={`${isDropdownOpenModelo ? 'open'
+                                : ''}`}>
+                                {
+                                    isDropdownOpenMarca ?
+                                        <Icon name="dropup" onClick={() => { return }} size={18} />
+                                        :
+                                        <Icon name="dropdown" onClick={() => { return }} size={18} />
+                                }
                             </span>
                         </div>
                         {isDropdownOpenMarca && (
@@ -73,7 +79,12 @@ const SideBar = ({ isOpenSideBar, setIsOpenSideBar }: SidebarProps) => {
                         <div onClick={() => handleDropdownClick(isDropdownOpenModelo, setIsDropdownOpenModelo)}>
                             Modelo
                             <span className={`${isDropdownOpenModelo ? 'open' : ''}`}>
-                            <Icon name="dropdown" onClick={() => { return }} size={18} />
+                                {
+                                    isDropdownOpenModelo ?
+                                        <Icon name="dropup" onClick={() => { return }} size={18} />
+                                        :
+                                        <Icon name="dropdown" onClick={() => { return }} size={18} />
+                                }
                             </span>
                         </div>
                         {isDropdownOpenModelo && (
@@ -88,7 +99,12 @@ const SideBar = ({ isOpenSideBar, setIsOpenSideBar }: SidebarProps) => {
                         <div onClick={() => handleDropdownClick(isDropdownOpenAno, setIsDropdownOpenAno)}>
                             Año
                             <span className={`${isDropdownOpenModelo ? 'open' : ''}`}>
-                            <Icon name="dropdown" onClick={() => { return }} size={18} />
+                                {
+                                    isDropdownOpenAno ?
+                                        <Icon name="dropup" onClick={() => { return }} size={18} />
+                                        :
+                                        <Icon name="dropdown" onClick={() => { return }} size={18} />
+                                }
                             </span>
                         </div>
                         {isDropdownOpenAno && (
@@ -103,7 +119,12 @@ const SideBar = ({ isOpenSideBar, setIsOpenSideBar }: SidebarProps) => {
                         <div onClick={() => handleDropdownClick(isDropdownOpenVersion, setIsDropdownOpenVersion)}>
                             Versión
                             <span className={`${isDropdownOpenModelo ? 'open' : ''}`}>
-                            <Icon name="dropdown" onClick={() => { return }} size={18} />
+                                {
+                                    isDropdownOpenVersion ?
+                                        <Icon name="dropup" onClick={() => { return }} size={18} />
+                                        :
+                                        <Icon name="dropdown" onClick={() => { return }} size={18} />
+                                }
                             </span>
                         </div>
                         {isDropdownOpenVersion && (
@@ -118,7 +139,12 @@ const SideBar = ({ isOpenSideBar, setIsOpenSideBar }: SidebarProps) => {
                         <div onClick={() => handleDropdownClick(isDropdownOpenCidade, setIsDropdownOpenCidade)}>
                             Ciudad
                             <span className={`${isDropdownOpenModelo ? 'open' : ''}`}>
-                            <Icon name="dropdown" onClick={() => { return }} size={18} />
+                                {
+                                    isDropdownOpenCidade ?
+                                        <Icon name="dropup" onClick={() => { return }} size={18} />
+                                        :
+                                        <Icon name="dropdown" onClick={() => { return }} size={18} />
+                                }
                             </span>
                         </div>
                         {isDropdownOpenCidade && (

@@ -11,11 +11,12 @@ let Icons: any = {
   dropdown: '/img/icons/dropdown.svg',
   eliminar: '/img/icons/eliminar.svg',
   cerrar: '/img/icons/cerrar.svg',
-  flechas: '/img/icons/flechasVerticales.svg'
+  flechas: '/img/icons/flechasVerticales.svg',
+  dropup: '/img/icons/flechaVerticalArriba.svg'
 };
 
 export type IconProps = {
-  name: "buscar" | "filtrar" | "like" | "cuadrados" | "calculadora" | "eliminar" | "mapa" | "flechas" | "cruz" | "lineaVertical" | "dropdown" | 'cerrar';
+  name: "buscar" | "filtrar" | "like" | "cuadrados" | "calculadora" | "eliminar" | "mapa" | "flechas" | "cruz" | "lineaVertical" | "dropdown" | 'cerrar' | 'dropup';
   size: number;
   onClick?: Function;
 };
