@@ -1,0 +1,50 @@
+.listContainer {
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+background: #FFFFFF;
+margin-top: 61px;
+}
+
+
+.unorderList {
+    list-style: none;
+}
+
+.unorderList li {
+    padding: 1rem;
+    cursor: pointer;
+}
+
+  .dropdown {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    z-index: 1;
+  }
+  
+  li:hover .dropdown {
+    display: block;
+  }
+  
+  .dropdown li {
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .open .dropdown {
+    display: block;
+  }
+
+  .listContainer div {
+    display: flex;
+    justify-content: space-between;
+    width: 230px;
+    align-items: center;
+  }
+
+  @media (max-width: 400px) {
+    .listContainer div {
+        width: 100px;
+    }
+  }

@@ -52,7 +52,7 @@ const CardItemDesktop = () => {
                             </div>
                             <div className={styles.price}>R$ {price.toLocaleString()}</div>
                             <div className={styles.cityState}>
-                                <span>{city}, {state}</span>
+                                <div>{city}, {state}</div>
                             </div>
                             <div className={styles.simularParcelas}>
                             <Icon name="calculadora" onClick={() => { return }} size={18} />

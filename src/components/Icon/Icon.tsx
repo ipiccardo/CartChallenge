@@ -1,4 +1,3 @@
-
 let Icons: any = {
   buscar: "/img/icons/buscar.svg",
   lineaVertical: "/img/icons/lineaVertical.svg",
@@ -8,11 +7,12 @@ let Icons: any = {
   calculadora: "/img/icons/calculadora.svg",
   success: "/img/icons/Correcto_1Light.svg",
   error: "/img/icons/Cancelar_1Light.svg",
-  enviar: "/img/icons/Enviar_1Light.svg"
+  enviar: "/img/icons/Enviar_1Light.svg",
+  dropdown: '/img/icons/dropdown.svg'
 };
 
 export type IconProps = {
-  name: "buscar" | "filtrar" | "like" | "cuadrados" | "calculadora" | "eliminar" | "mapa" | "flechas" | "cruz" | "lineaVertical";
+  name: "buscar" | "filtrar" | "like" | "cuadrados" | "calculadora" | "eliminar" | "mapa" | "flechas" | "cruz" | "lineaVertical" | "dropdown";
   size: number;
   onClick?: Function;
 };

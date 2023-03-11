@@ -1,10 +1,16 @@
-import React, {useState, useEffect} from 'react'
+import {useState, useEffect} from 'react'
 import styles from './Header.module.css'
 import Icon from '../Icon/Icon'
 
 
 
-const Header = (): any => {
+export type SidebarProps = {
+    isOpenSideBar: boolean;
+    setIsOpenSideBar: Function;
+};
+
+
+const Header = ({isOpenSideBar, setIsOpenSideBar}:SidebarProps)  => {
     const [windowWidth, setWindowWidth] = useState<number>(0)
     const handleResize = () => setWindowWidth(window.screen.width)
 
@@ -15,7 +21,10 @@ const Header = (): any => {
           window.removeEventListener('resize', handleResize)
         }
       }, [])
-      
+
+      const handleClick = () => {
+        setIsOpenSideBar(!isOpenSideBar)
+      }
     
 
     return (
@@ -35,9 +44,9 @@ const Header = (): any => {
                 </div>
                 <div className={styles.filtrarLink}>
                     <div className={styles.iconContainer}>
-                        <Icon name="filtrar" onClick={() => (<a href={'/'} />)} size={18} />
+                        <Icon name="filtrar" onClick={handleClick} size={18} />
                     </div>
-                    <a className={styles.link} href={'/'}>Filtrar</a>
+                    <span className={styles.link} onClick={handleClick}>Filtrar</span>
                 </div>
             </div>
     }
