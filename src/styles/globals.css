@@ -47,3 +47,9 @@ a {
 .CardContainer {
   grid-area: CardContainer;
 }
+
+@media (max-width: 345px) {
+  .padding-h-1 {
+    padding: 0 0.5rem !important;
+  }
+}

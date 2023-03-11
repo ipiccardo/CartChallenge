@@ -5,10 +5,10 @@
   justify-content: center;
   align-items: center;
   padding: 16px 1px 16px 0px;
-  position: absolute;
-  width: 410px;
+  /* position: absolute; */
+  /* width: 410px; */
   height: 60px;
-  top: 2px;
+  /* top: 2px; */
   background: #ffffff;
   border-top: 1px solid #e3e5ed;
 }
@@ -23,9 +23,6 @@
   width: 204.5px;
   height: 20px;
   border-radius: 4px;
-  flex: none;
-  order: 0;
-  flex-grow: 1;
 }
 
 .filtrarLink {
@@ -53,7 +50,4 @@ align-items: center;
 text-align: center;
 font-feature-settings: 'pnum' on, 'lnum' on;
 color: #566DED;
-flex: none;
-order: 1;
-flex-grow: 0;
 }
