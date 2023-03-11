@@ -42,8 +42,7 @@ const SideBar = ({ isOpenSideBar, setIsOpenSideBar }: SidebarProps) => {
                                 <li>Marca opción 2</li>
                                 <li>Marca opción 3</li>
                             </ul>
-                        )}
-                        <hr />
+                        )}                        
                     </li>
                     <li>
                         <div onClick={() => handleDropdownClick(isDropdownOpenModelo, setIsDropdownOpenModelo)}>
@@ -63,8 +62,7 @@ const SideBar = ({ isOpenSideBar, setIsOpenSideBar }: SidebarProps) => {
                                 <li>Modelo opción 2</li>
                                 <li>Modelo opción 3</li>
                             </ul>
-                        )}
-                         <hr />
+                        )}                        
                     </li>
                     <li>
                         <div onClick={() => handleDropdownClick(isDropdownOpenAno, setIsDropdownOpenAno)}>
@@ -84,8 +82,7 @@ const SideBar = ({ isOpenSideBar, setIsOpenSideBar }: SidebarProps) => {
                                 <li>Año opción 2</li>
                                 <li>Año opción 3</li>
                             </ul>
-                        )}
-                         <hr />
+                        )}                       
                     </li>
                     <li>
                         <div onClick={() => handleDropdownClick(isDropdownOpenVersion, setIsDropdownOpenVersion)}>
@@ -105,8 +102,7 @@ const SideBar = ({ isOpenSideBar, setIsOpenSideBar }: SidebarProps) => {
                                 <li>Versión opción 2</li>
                                 <li>Versión opción 3</li>
                             </ul>
-                        )}
-                         <hr />
+                        )}     
                     </li>
                     <li>
                         <div onClick={() => handleDropdownClick(isDropdownOpenCidade, setIsDropdownOpenCidade)}>
@@ -126,8 +122,7 @@ const SideBar = ({ isOpenSideBar, setIsOpenSideBar }: SidebarProps) => {
                                 <li>Ciudad opción 2</li>
                                 <li>Ciudad opción 3</li>
                             </ul>
-                        )}
-                         <hr />
+                        )}    
                     </li>
                 </ul>
             </div>
