@@ -49,12 +49,15 @@ const CardContainer = ({ resultadosDeBusqueda }: DashboardProps) => {
                 <Icon name="cuadrados" onClick={() => handleClick()} size={18} />
               </div>
             </div>
-            <div className={styles.cardContainerRow}>
               {windowWidth < 500 && !desktopMenu ? 
-                <CardItemMobile /> : 
-                <CardItemDesktop />
-                }
+            <div className={styles.cardContainerRow}>
+                <CardItemMobile /> 
             </div>
+                : 
+                <div className={styles.cardContainerMobile}>
+                <CardItemDesktop />
+                </div>
+                }
           </>
       }
     </>

@@ -1,14 +1,13 @@
 .cardContainerRow {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: flex-start;
-  padding: 0px 20px 32px;
-  position: absolute;
-  height: 572px;
-  left: 1.14%;
-  right: 0%;
-  top: 98px;
   background: #ffffff;
+  margin-top: 96px;
+  flex-wrap: wrap;
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: space-between;
 }
 
 .cardContainerColumn {
@@ -52,7 +51,7 @@
   position: absolute;
   width: 34px;
   height: 28px;
-  left: 386px;
+  left: 356px;
   top: 55px;
 }
 
@@ -73,10 +72,26 @@
 }
 
 @media (max-width: 500px) {
-  .cardContainerRow {
+  /* .cardContainerRow {
     width: 100%;
-  }
+  } */
   .cardContainerRow > div {
     margin-bottom: 1.5rem;
   }
+  .cardContainerMobile {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 290px;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 16px;
+    height: 418px;
+    margin-top: 96px;
+    margin-left: auto;
+    margin-right:auto;
+    flex-wrap: wrap;
+    position: relative;
+  }
+  
 }
