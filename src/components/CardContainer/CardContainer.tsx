@@ -4,6 +4,7 @@ import styles from './CardContainer.module.css'
 import CardItemMobile from '../CardItem/CardItemMobile/CardItemMobile'
 import CardItemDesktop from '../CardItem/CardItemDesktop/CardItemDesktop'
 import Icon from '../Icon/Icon'
+import Filters from '../Filters/Filters'
 
 
 interface DashboardProps {
@@ -31,15 +32,22 @@ const CardContainer = ({ resultadosDeBusqueda }: DashboardProps) => {
       window.removeEventListener('resize', handleResize)
     }
   }, [])
-  
+
 
   return (
     <>
       {
-        windowWidth >= 500 ?  (
-          <div className={styles.cardContainerColumn}>
-            <CardItemDesktop />
-          </div>
+        windowWidth >= 500 ? 
+        (
+          <>
+            {/* <div className={styles.limpiarFiltrosContainer}>
+              <Icon name="eliminar" onClick={() => { return }} size={18} />
+              <p> Limpiar Filtros</p>
+            </div> */}
+            <div className={styles.cardContainerColumn}>
+              <CardItemDesktop />
+            </div>
+          </>
         )
           :
           <>
@@ -49,15 +57,15 @@ const CardContainer = ({ resultadosDeBusqueda }: DashboardProps) => {
                 <Icon name="cuadrados" onClick={() => handleClick()} size={18} />
               </div>
             </div>
-              {windowWidth < 500 && !desktopMenu ? 
-            <div className={styles.cardContainerRow}>
-                <CardItemMobile /> 
-            </div>
-                : 
-                <div className={styles.cardContainerMobile}>
+            {windowWidth < 500 && !desktopMenu ?
+              <div className={styles.cardContainerRow}>
+                <CardItemMobile />
+              </div>
+              :
+              <div className={styles.cardContainerMobile}>
                 <CardItemDesktop />
-                </div>
-                }
+              </div>
+            }
           </>
       }
     </>

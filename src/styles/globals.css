@@ -31,35 +31,79 @@ a {
 
 .app-container {
   display: grid;
-  grid-template-columns: 402px 1fr;
+  grid-template-columns: 350px 1fr;
   grid-template-rows: 125px 1.7fr;
   gap: 0px 0px;
   grid-template-areas:
-    "Sidebar Filters"
+    "Sidebar desktopHeader"
     "Sidebar CardContainer";
 }
 .Sidebar {
-    position: fixed;
-    width: 350px;
-    z-index: 2;
-    grid-area: Sidebar;
-    height: 100%;
-    background-color: grey;
-    background-size: cover;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    scrollbar-width: auto;
-    scrollbar-color: #cfcfcf #ffffff;
-    overflow-y: scroll;
-  }
+  position: fixed;
+  width: 350px;
+  z-index: 2;
+  grid-area: Sidebar;
+  height: 100%;
+  background-color: white;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  scrollbar-width: auto;
+  scrollbar-color: #cfcfcf #ffffff;
+}
+
+.desktopHeader {
+  grid-area: desktopHeader;
+  display: flex;
+  height: 80px;
+  padding: 0;
+  gap: 50px;
+  align-items: flex-start;
+  margin-top: 61px;
+  flex-wrap: wrap;
+  max-width: 902px;
+  width: 100%;
+  flex-wrap: nowrap;
+}
 
 .Filters {
-  grid-area: Filters;
   display: flex;
-  align-items: center;
   height: 80px;
-  padding: 0 1rem;
+  padding: 0;
+  gap: 8px;
+  align-items: flex-start;
+  width: 719px;
+  flex-wrap: wrap;
+}
+
+.Filters > div {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 4px 8px 4px 12px;
+  gap: 8px;
+  width: auto;
+  min-width: 62px;
+  height: 28px;
+  background: #ffffff;
+  border: 1px solid #b4bef5;
+  border-radius: 64px;
+  box-sizing: border-box;
+}
+
+.Filters div div {
+  font-size: 14px;
+  line-height: 20px;
+  text-align: center;
+  color: #566ded;
+  font-feature-settings: "pnum" on, "lnum" on;
+}
+
+.Filters span img{
+  width: 8px;
+  height: 8px;
 }
 
 .CardContainer {
@@ -72,8 +116,6 @@ a {
   max-width: 1600px;
   padding-bottom: 4rem;
 }
-
-
 
 /* SIDEBAR */
 
@@ -96,16 +138,15 @@ a {
     grid-template-columns: 1fr;
     grid-template-rows: auto;
     gap: 0px 0px;
-    grid-template-areas:
-      "CardContainer";
+    grid-template-areas: "CardContainer";
   }
   .Sidebar {
-      position: fixed;
-      transform: translateX(-105%);
-      width: 300px;
-      transition: all 0.4s;
-      top: 0
-    }
+    position: fixed;
+    transform: translateX(-105%);
+    width: 300px;
+    transition: all 0.4s;
+    top: 0;
+  }
   .open {
     transform: translate(0%);
     overflow-y: unset;
@@ -118,11 +159,14 @@ a {
   }
 }
 
-
-
 @media (max-width: 345px) {
   .padding-h-1 {
     padding: 0 0.5rem !important;
   }
 }
 
+@media (min-width: 500px) {
+  .padding-h-1 {
+    padding: 0;
+  }
+}

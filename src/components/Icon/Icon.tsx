@@ -8,11 +8,14 @@ let Icons: any = {
   success: "/img/icons/Correcto_1Light.svg",
   error: "/img/icons/Cancelar_1Light.svg",
   enviar: "/img/icons/Enviar_1Light.svg",
-  dropdown: '/img/icons/dropdown.svg'
+  dropdown: '/img/icons/dropdown.svg',
+  eliminar: '/img/icons/eliminar.svg',
+  cerrar: '/img/icons/cerrar.svg',
+  flechas: '/img/icons/flechasVerticales.svg'
 };
 
 export type IconProps = {
-  name: "buscar" | "filtrar" | "like" | "cuadrados" | "calculadora" | "eliminar" | "mapa" | "flechas" | "cruz" | "lineaVertical" | "dropdown";
+  name: "buscar" | "filtrar" | "like" | "cuadrados" | "calculadora" | "eliminar" | "mapa" | "flechas" | "cruz" | "lineaVertical" | "dropdown" | 'cerrar';
   size: number;
   onClick?: Function;
 };

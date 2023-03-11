@@ -7,7 +7,9 @@ import Icon from '../../Icon/Icon'
 
 const CardItemDesktop = () => {
     const [products, setProducts] = useState([])
+    const [windowWidth, setWindowWidth] = useState<number>(0)
 
+    const handleResize = () => setWindowWidth(window.screen.width)
 
     useEffect(() => {
         const fetchData = async () => {
@@ -20,8 +22,26 @@ const CardItemDesktop = () => {
 
     console.log(products)
 
+    useEffect(() => {
+        handleResize()
+        window.addEventListener('resize', handleResize)
+        return () => {
+          window.removeEventListener('resize', handleResize)
+        }
+      }, [])
+
     return (
         <>
+        {
+            windowWidth >= 500 &&
+            <div className={styles.carrosEncontradosYRelevantes}>
+            <p>393.566 carros encontrados</p>
+            <div className={styles.masRelevantesEIconContainer}>
+            <Icon name="flechas" onClick={() => { return }} size={18} />
+                <p>Mais relevantes</p>
+            </div>
+        </div>
+        }
             {
                 products?.map(({ booking, brand = '', certificate, city, financing, id, image, mileage = '', model = '', price = '', promoted, state, version, year = '' }) =>{
                     const lowercaseBrand: string = brand.charAt(0).toUpperCase() + brand.slice(1).toLowerCase()

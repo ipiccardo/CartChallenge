@@ -236,6 +236,29 @@
   height: 13px;
 }
 
+.carrosEncontradosYRelevantes {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+  margin-bottom: -16px;
+}
+
+.masRelevantesEIconContainer {
+  display: flex;
+  align-items: center;
+  width: 157px;
+  border-radius: 4px;
+  gap: 4px;
+  justify-content: center;
+  padding: 0;
+  color: #566DED
+}
+
+.masRelevantesEIconContainer p{
+font-size: 14px;
+line-height: 20px;
+}
 
 @media (max-width: 500px) {
   .cardItemContainer {
