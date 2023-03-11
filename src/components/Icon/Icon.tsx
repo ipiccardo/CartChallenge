@@ -12,11 +12,13 @@ let Icons: any = {
   eliminar: '/img/icons/eliminar.svg',
   cerrar: '/img/icons/cerrar.svg',
   flechas: '/img/icons/flechasVerticales.svg',
-  dropup: '/img/icons/flechaVerticalArriba.svg'
+  dropup: '/img/icons/flechaVerticalArriba.svg',
+  flechaIzquierda: '/img/icons/flechaIzquierda.svg',
+  flechaDerecha: '/img/icons/flechaDerecha.svg'
 };
 
 export type IconProps = {
-  name: "buscar" | "filtrar" | "like" | "cuadrados" | "calculadora" | "eliminar" | "mapa" | "flechas" | "cruz" | "lineaVertical" | "dropdown" | 'cerrar' | 'dropup';
+  name: "buscar" | "filtrar" | "like" | "cuadrados" | "calculadora" | "eliminar" | "mapa" | "flechas" | "cruz" | "lineaVertical" | "dropdown" | 'cerrar' | 'dropup' | 'flechaIzquierda' | 'flechaDerecha';
   size: number;
   onClick?: Function;
 };

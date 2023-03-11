@@ -1,34 +1,3 @@
-// import React from 'react'
-// import '../../styles/globals.css'
-// import style from './SideBar.module.css'
-
-// export type SidebarProps = {
-//     isOpenSideBar: boolean;
-//     setIsOpenSideBar: Function;
-// };
-
-
-// const SideBar = ({ isOpenSideBar, setIsOpenSideBar }: SidebarProps) => {
-
-
-//     return (
-//         <div className={`Sidebar ${isOpenSideBar ? "open" : ""}`}>
-//             <div className={style.listContainer}>
-//                 <ul className={style.unorderList}>
-//                     <li>Marca</li>
-//                     <li>Modelo</li>
-//                     <li>Año</li>
-//                     <li>Version</li>
-//                     <li>Cidade</li>
-//                 </ul>
-//             </div>
-
-//         </div>
-//     )
-// }
-
-// export default SideBar
-
 import React, { useState } from 'react';
 import '../../styles/globals.css';
 import style from './SideBar.module.css';
@@ -74,6 +43,7 @@ const SideBar = ({ isOpenSideBar, setIsOpenSideBar }: SidebarProps) => {
                                 <li>Marca opción 3</li>
                             </ul>
                         )}
+                        <hr />
                     </li>
                     <li>
                         <div onClick={() => handleDropdownClick(isDropdownOpenModelo, setIsDropdownOpenModelo)}>
@@ -94,6 +64,7 @@ const SideBar = ({ isOpenSideBar, setIsOpenSideBar }: SidebarProps) => {
                                 <li>Modelo opción 3</li>
                             </ul>
                         )}
+                         <hr />
                     </li>
                     <li>
                         <div onClick={() => handleDropdownClick(isDropdownOpenAno, setIsDropdownOpenAno)}>
@@ -114,6 +85,7 @@ const SideBar = ({ isOpenSideBar, setIsOpenSideBar }: SidebarProps) => {
                                 <li>Año opción 3</li>
                             </ul>
                         )}
+                         <hr />
                     </li>
                     <li>
                         <div onClick={() => handleDropdownClick(isDropdownOpenVersion, setIsDropdownOpenVersion)}>
@@ -134,6 +106,7 @@ const SideBar = ({ isOpenSideBar, setIsOpenSideBar }: SidebarProps) => {
                                 <li>Versión opción 3</li>
                             </ul>
                         )}
+                         <hr />
                     </li>
                     <li>
                         <div onClick={() => handleDropdownClick(isDropdownOpenCidade, setIsDropdownOpenCidade)}>
@@ -154,6 +127,7 @@ const SideBar = ({ isOpenSideBar, setIsOpenSideBar }: SidebarProps) => {
                                 <li>Ciudad opción 3</li>
                             </ul>
                         )}
+                         <hr />
                     </li>
                 </ul>
             </div>

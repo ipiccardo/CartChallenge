@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { getProducts } from '../../../services/products'
 import styles from './CardItemDesktop.module.css'
 import Icon from '../../Icon/Icon'
+import Pagination from '../../Pagination/Pagination'
 
 
 const CardItemDesktop = () => {
@@ -82,8 +83,9 @@ const CardItemDesktop = () => {
                     </div>
                 )
             }
-                )
-            }
+            )
+        }
+        <Pagination />
         </>
     )
 }

@@ -1,0 +1,31 @@
+.paginationContainer {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  height: 42px;
+  margin-top: 30px;
+  padding-bottom: 51px;
+  align-items: center;
+  color: #5F647A
+}
+
+.numbersContainer {
+  display: flex;
+  justify-content: space-between;
+  width: 327px;
+  cursor: pointer;
+  color: #5f647a;
+}
+.anteriorContainer {
+  display: flex;
+  align-items: center;
+  gap:8px;
+  cursor: pointer;
+}
+
+.proximoContainer {
+  display: flex;
+  align-items: center;
+  gap:8px;
+  cursor: pointer;
+}

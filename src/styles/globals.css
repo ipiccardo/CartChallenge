@@ -31,7 +31,7 @@ a {
 
 .app-container {
   display: grid;
-  grid-template-columns: 350px 1fr;
+  grid-template-columns: 330px 1fr;
   grid-template-rows: 125px 1.7fr;
   gap: 0px 0px;
   grid-template-areas:
@@ -40,7 +40,7 @@ a {
 }
 .Sidebar {
   position: fixed;
-  width: 350px;
+  width: 310px;
   z-index: 2;
   grid-area: Sidebar;
   height: 100%;
