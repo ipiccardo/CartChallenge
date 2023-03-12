@@ -1,8 +1,11 @@
 import Dashboard from "./components/Dashboard/Dashboard";
+import ProductsProvider from "./context/productsContext";
 
 function App() {
   return (
-    <Dashboard />
+    <ProductsProvider >
+      <Dashboard />
+    </ProductsProvider>
   );
 }
 

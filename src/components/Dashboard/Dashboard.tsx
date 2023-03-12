@@ -4,10 +4,13 @@ import '../../styles/globals.css'
 import SideBar from '../SideBar/SideBar';
 import { useState, useEffect } from 'react';
 import Filters from '../Filters/Filters';
-
-
+import { useContext } from 'react';
+import { ProductsContext } from '../../context/productsContext';
+import { Product } from '../../context/productsContext';
 
 const Dashboard = () => {
+    const { products, setProducts } = useContext(ProductsContext);
+    const [filteredProducts, setFilteredProducts] = useState<Product[]>(products)
 
     const [isOpenSideBar, setIsOpenSideBar] = useState<boolean>(false);
     const [windowWidth, setWindowWidth] = useState<number>(0)
@@ -26,6 +29,7 @@ const Dashboard = () => {
         }
     }, [])
 
+    console.log(filteredProducts, 'productsfiltrados')
 
     return (
         <>
@@ -33,7 +37,11 @@ const Dashboard = () => {
                 <Header isOpenSideBar={isOpenSideBar} setIsOpenSideBar={setIsOpenSideBar} />
             </div>
             <div className='app-container'>
-                <SideBar isOpenSideBar={isOpenSideBar} setIsOpenSideBar={setIsOpenSideBar} />
+                <SideBar
+                    isOpenSideBar={isOpenSideBar}
+                    setIsOpenSideBar={setIsOpenSideBar}
+                    setFilteredProducts={setFilteredProducts}
+                    filteredProducts={filteredProducts} />
                 {
                     windowWidth >= 500 && (
                         <>

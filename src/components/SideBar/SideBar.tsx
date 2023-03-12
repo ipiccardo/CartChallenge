@@ -1,23 +1,43 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import '../../styles/globals.css';
 import style from './SideBar.module.css';
 import Icon from '../Icon/Icon';
+import { Product } from '../../context/productsContext';
+import { useContext } from 'react';
+import { ProductsContext } from '../../context/productsContext';
+import { getUniqueFilters } from '../../helpers/switchs';
 
 export type SidebarProps = {
     isOpenSideBar: boolean;
     setIsOpenSideBar: Function;
+    setFilteredProducts: Function;
+    filteredProducts: Array<Product>
 };
 
-const SideBar = ({ isOpenSideBar, setIsOpenSideBar }: SidebarProps) => {
+const SideBar = ({ isOpenSideBar, setIsOpenSideBar, setFilteredProducts, filteredProducts }: SidebarProps) => {
+    const { products, setProducts } = useContext(ProductsContext);
     const [isDropdownOpenMarca, setIsDropdownOpenMarca] = useState(false);
     const [isDropdownOpenModelo, setIsDropdownOpenModelo] = useState(false);
     const [isDropdownOpenAno, setIsDropdownOpenAno] = useState(false);
     const [isDropdownOpenVersion, setIsDropdownOpenVersion] = useState(false);
     const [isDropdownOpenCidade, setIsDropdownOpenCidade] = useState(false);
+    const marcas = getUniqueFilters(products, "brand");
+    const modelos = getUniqueFilters(products, "model");
+    const años = getUniqueFilters(products, "year");
+    const versiones = getUniqueFilters(products, "version");
+    const ciudades = getUniqueFilters(products, "city");
+
 
     const handleDropdownClick = (dropdownState: boolean, setDropdownState: Function) => {
         setDropdownState(!dropdownState);
     };
+
+    const handlerFilter = (property: string, value: any) => {
+        setProducts(products.filter((product) => product[property] === value));
+        console.log(value, 'value');
+      }
+
+    console.log(products, 'products')
 
     return (
         <div className={`Sidebar ${isOpenSideBar ? 'open' : ''}`}>
@@ -38,11 +58,11 @@ const SideBar = ({ isOpenSideBar, setIsOpenSideBar }: SidebarProps) => {
                         </div>
                         {isDropdownOpenMarca && (
                             <ul className={style.dropdown}>
-                                <li>Marca opción 1</li>
-                                <li>Marca opción 2</li>
-                                <li>Marca opción 3</li>
+                                {marcas.map((marca, index) => {
+                                    return <li key={index} onClick={() => handlerFilter('brand', marca)}>{marca}</li>;
+                                })}
                             </ul>
-                        )}                        
+                        )}
                     </li>
                     <li>
                         <div onClick={() => handleDropdownClick(isDropdownOpenModelo, setIsDropdownOpenModelo)}>
@@ -58,11 +78,13 @@ const SideBar = ({ isOpenSideBar, setIsOpenSideBar }: SidebarProps) => {
                         </div>
                         {isDropdownOpenModelo && (
                             <ul className={style.dropdown}>
-                                <li>Modelo opción 1</li>
-                                <li>Modelo opción 2</li>
-                                <li>Modelo opción 3</li>
+                                <ul className={style.dropdown}>
+                                    {modelos.map((modelo, index) => {
+                                        return <li key={index} onClick={() => handlerFilter('model', modelo)}>{modelo}</li>;
+                                    })}
+                                </ul>
                             </ul>
-                        )}                        
+                        )}
                     </li>
                     <li>
                         <div onClick={() => handleDropdownClick(isDropdownOpenAno, setIsDropdownOpenAno)}>
@@ -78,11 +100,13 @@ const SideBar = ({ isOpenSideBar, setIsOpenSideBar }: SidebarProps) => {
                         </div>
                         {isDropdownOpenAno && (
                             <ul className={style.dropdown}>
-                                <li>Año opción 1</li>
-                                <li>Año opción 2</li>
-                                <li>Año opción 3</li>
+                                <ul className={style.dropdown}>
+                                    {años.map((año, index) => {
+                                        return <li key={index} onClick={() => handlerFilter('year', año)}>{año}</li>;
+                                    })}
+                                </ul>
                             </ul>
-                        )}                       
+                        )}
                     </li>
                     <li>
                         <div onClick={() => handleDropdownClick(isDropdownOpenVersion, setIsDropdownOpenVersion)}>
@@ -98,11 +122,13 @@ const SideBar = ({ isOpenSideBar, setIsOpenSideBar }: SidebarProps) => {
                         </div>
                         {isDropdownOpenVersion && (
                             <ul className={style.dropdown}>
-                                <li>Versión opción 1</li>
-                                <li>Versión opción 2</li>
-                                <li>Versión opción 3</li>
+                                <ul className={style.dropdown}>
+                                    {versiones.map((version, index) => {
+                                        return <li key={index} onClick={() => handlerFilter('version', version)}>{version}</li>;
+                                    })}
+                                </ul>
                             </ul>
-                        )}     
+                        )}
                     </li>
                     <li>
                         <div onClick={() => handleDropdownClick(isDropdownOpenCidade, setIsDropdownOpenCidade)}>
@@ -118,11 +144,11 @@ const SideBar = ({ isOpenSideBar, setIsOpenSideBar }: SidebarProps) => {
                         </div>
                         {isDropdownOpenCidade && (
                             <ul className={style.dropdown}>
-                                <li>Ciudad opción 1</li>
-                                <li>Ciudad opción 2</li>
-                                <li>Ciudad opción 3</li>
+                                {ciudades.map((ciudad, index) => {
+                                    return <li key={index} onClick={() => handlerFilter('city', ciudad)}>{ciudad}</li>;
+                                })}
                             </ul>
-                        )}    
+                        )}
                     </li>
                 </ul>
             </div>

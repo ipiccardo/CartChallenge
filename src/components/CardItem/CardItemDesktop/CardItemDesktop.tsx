@@ -3,10 +3,12 @@ import { getProducts } from '../../../services/products'
 import styles from './CardItemDesktop.module.css'
 import Icon from '../../Icon/Icon'
 import Pagination from '../../Pagination/Pagination'
+import { useContext } from 'react';
+import { ProductsContext } from '../../../context/productsContext';
 
 
 const CardItemDesktop = () => {
-    const [products, setProducts] = useState([])
+    const { products, setProducts } = useContext(ProductsContext);
     const [windowWidth, setWindowWidth] = useState<number>(0)
     const [pageRendered, setPageRendered] = useState<number>(1)
     const [activePage, setActivePage] = useState<number>(1);
@@ -24,8 +26,6 @@ const CardItemDesktop = () => {
         }
         fetchData()
     }, []);
-
-    console.log(products)
 
     useEffect(() => {
         handleResize()
