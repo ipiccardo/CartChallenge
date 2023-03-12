@@ -7,8 +7,9 @@ import { useContext } from 'react';
 import { ProductsContext } from '../../../context/productsContext';
 
 
+
 const CardItemDesktop = () => {
-    const { products, setProducts } = useContext(ProductsContext);
+    const { products, setProducts, filteredProducts, setFilteredProducts } = useContext(ProductsContext);
     const [windowWidth, setWindowWidth] = useState<number>(0)
     const [pageRendered, setPageRendered] = useState<number>(1)
     const [activePage, setActivePage] = useState<number>(1);
@@ -16,7 +17,7 @@ const CardItemDesktop = () => {
     const productsPerPage = 12;
     const lastProductIndex = pageRendered * productsPerPage;
     const firstProductIndex = lastProductIndex - productsPerPage;
-    const productsToShow = products.slice(firstProductIndex, lastProductIndex);
+    const productsToShow = filteredProducts !== products ? filteredProducts.slice(firstProductIndex, lastProductIndex) : products.slice(firstProductIndex, lastProductIndex);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -61,6 +62,7 @@ const CardItemDesktop = () => {
             setPageRendered(7)
             setActivePage(pageNumber)
     }
+
 
     return (
         <>

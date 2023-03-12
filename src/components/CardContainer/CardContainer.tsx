@@ -3,6 +3,7 @@ import styles from './CardContainer.module.css'
 import CardItemMobile from '../CardItem/CardItemMobile/CardItemMobile'
 import CardItemDesktop from '../CardItem/CardItemDesktop/CardItemDesktop'
 import Icon from '../Icon/Icon'
+import { Product } from '../../context/productsContext'
 
 
 
@@ -10,7 +11,7 @@ interface DashboardProps {
   resultadosDeBusqueda?: number
 }
 
-const CardContainer = ({ resultadosDeBusqueda }: DashboardProps) => {
+const CardContainer = ({ resultadosDeBusqueda}: DashboardProps) => {
   const [windowWidth, setWindowWidth] = useState<number>(0)
   const [desktopMenu, setDesktopMenu] = useState<Boolean>(false)
 
@@ -40,7 +41,7 @@ const CardContainer = ({ resultadosDeBusqueda }: DashboardProps) => {
           (
             <>
               <div className={styles.cardContainerColumn}>
-                <CardItemDesktop />
+                <CardItemDesktop/>
               </div>
             </>
           )
@@ -58,7 +59,7 @@ const CardContainer = ({ resultadosDeBusqueda }: DashboardProps) => {
               </div>
               :
               <div className={styles.cardContainerMobile}>
-                <CardItemDesktop />
+                <CardItemDesktop/>
               </div>
             }
           </>

@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import '../../styles/globals.css';
 import style from './SideBar.module.css';
 import Icon from '../Icon/Icon';
-import { Product } from '../../context/productsContext';
 import { useContext } from 'react';
 import { ProductsContext } from '../../context/productsContext';
 import { getUniqueFilters } from '../../helpers/switchs';
@@ -10,38 +9,39 @@ import { getUniqueFilters } from '../../helpers/switchs';
 export type SidebarProps = {
     isOpenSideBar: boolean;
     setIsOpenSideBar: Function;
-    setFilteredProducts: Function;
-    filteredProducts: Array<Product>
 };
 
-const SideBar = ({ isOpenSideBar, setIsOpenSideBar, setFilteredProducts, filteredProducts }: SidebarProps) => {
-    const { products, setProducts } = useContext(ProductsContext);
+const SideBar = ({ isOpenSideBar, setIsOpenSideBar}: SidebarProps) => {
+    const { products, setProducts, setFilteredProducts, filteredProducts } = useContext(ProductsContext);
     const [isDropdownOpenMarca, setIsDropdownOpenMarca] = useState(false);
     const [isDropdownOpenModelo, setIsDropdownOpenModelo] = useState(false);
     const [isDropdownOpenAno, setIsDropdownOpenAno] = useState(false);
     const [isDropdownOpenVersion, setIsDropdownOpenVersion] = useState(false);
     const [isDropdownOpenCidade, setIsDropdownOpenCidade] = useState(false);
-    const marcas = getUniqueFilters(filteredProducts, "brand");
-    const modelos = getUniqueFilters(filteredProducts, "model");
-    const años = getUniqueFilters(filteredProducts, "year");
-    const versiones = getUniqueFilters(filteredProducts, "version");
-    const ciudades = getUniqueFilters(filteredProducts, "city");
-    const [selectedProperty, setSelectedProperty] = useState('');
+    const marcas = getUniqueFilters(products, "brand");
+    const modelos = getUniqueFilters(products, "model");
+    const años = getUniqueFilters(products, "year");
+    const versiones = getUniqueFilters(products, "version");
+    const ciudades = getUniqueFilters(products, "city");
+
 
 
     const handleDropdownClick = (dropdownState: boolean, setDropdownState: Function) => {
         setDropdownState(!dropdownState);
     };
 
+    // const handlerFilter = (property: string, value: any) => {
+    //     setProducts(products.filter((product) => product[property] === value));
+    //     console.log(value, 'value');
+    // }
+
     const handlerFilter = (property: string, value: any) => {
-        setProducts(products.filter((product) => product[property] === value));
+        const newFilteredProducts = products.filter((product) => product[property] === value);
+        setFilteredProducts(newFilteredProducts);
         console.log(value, 'value');
     }
 
-
-    console.log(selectedProperty, 'selectedPppt')
-
-    //   console.log(filteredProducts, 'filtered')
+    console.log(filteredProducts, 'productoFiltrado')
 
     return (
         <div className={`Sidebar ${isOpenSideBar ? 'open' : ''}`}>
@@ -65,7 +65,7 @@ const SideBar = ({ isOpenSideBar, setIsOpenSideBar, setFilteredProducts, filtere
                                 {marcas.map((marca, index) => {
                                     return <li key={index} onClick={() => handlerFilter('brand', marca)}>{marca}</li>;
                                 })}
-                                <li onClick={() => { products.length > 90 ? setProducts(products) : setProducts(filteredProducts) }}>Mostrar todo</li>
+                                <li onClick={() => { filteredProducts !== products ? setFilteredProducts(products) : setFilteredProducts(filteredProducts) }}>Mostrar todo</li>
                             </ul>
                         )}
                     </li>
@@ -87,7 +87,7 @@ const SideBar = ({ isOpenSideBar, setIsOpenSideBar, setFilteredProducts, filtere
                                     {modelos.map((modelo, index) => {
                                         return <li key={index} onClick={() => handlerFilter('model', modelo)}>{modelo}</li>;
                                     })}
-                                    <li onClick={() => { products.length > 90 ? setProducts(products) : setProducts(filteredProducts) }}>Mostrar todo</li>
+                                <li onClick={() => { filteredProducts !== products ? setFilteredProducts(products) : setFilteredProducts(filteredProducts) }}>Mostrar todo</li>
                                 </ul>
                             </ul>
                         )}
@@ -110,7 +110,7 @@ const SideBar = ({ isOpenSideBar, setIsOpenSideBar, setFilteredProducts, filtere
                                     {años.map((año, index) => {
                                         return <li key={index} onClick={() => handlerFilter('year', año)}>{año}</li>;
                                     })}
-                                    <li onClick={() => { products.length > 90 ? setProducts(products) : setProducts(filteredProducts) }}>Mostrar todo</li>
+                                <li onClick={() => { filteredProducts !== products ? setFilteredProducts(products) : setFilteredProducts(filteredProducts) }}>Mostrar todo</li>
                                 </ul>
                             </ul>
                         )}
@@ -133,7 +133,7 @@ const SideBar = ({ isOpenSideBar, setIsOpenSideBar, setFilteredProducts, filtere
                                     {versiones.map((version, index) => {
                                         return <li key={index} onClick={() => handlerFilter('version', version)}>{version}</li>;
                                     })}
-                                    <li onClick={() => { products.length > 90 ? setProducts(products) : setProducts(filteredProducts) }}>Mostrar todo</li>
+                                <li onClick={() => { filteredProducts !== products ? setFilteredProducts(products) : setFilteredProducts(filteredProducts) }}>Mostrar todo</li>
                                 </ul>
                             </ul>
                         )}
@@ -155,7 +155,7 @@ const SideBar = ({ isOpenSideBar, setIsOpenSideBar, setFilteredProducts, filtere
                                 {ciudades.map((ciudad, index) => {
                                     return <li key={index} onClick={() => handlerFilter('city', ciudad)}>{ciudad}</li>;
                                 })}
-                                <li onClick={() => { products.length > 90 ? setProducts(products) : setProducts(filteredProducts) }}>Mostrar todo</li>
+                                <li onClick={() => { filteredProducts !== products ? setFilteredProducts(products) : setFilteredProducts(filteredProducts) }}>Mostrar todo</li>
                             </ul>
                         )}
                     </li>

@@ -22,19 +22,26 @@ export type Product = {
 type ProductsContextType = {
   products: Product[],
   setProducts: React.Dispatch<React.SetStateAction<Product[]>>,
+  filteredProducts: Product[],
+  setFilteredProducts: React.Dispatch<React.SetStateAction<Product[]>>,
 };
 
 export const ProductsContext = createContext<ProductsContextType>({
   products: [],
   setProducts: () => {},
+  filteredProducts: [],
+  setFilteredProducts: () => {},
 });
 
 const ProductsProvider = ({ children }: { children: ReactNode }) => {
   const [products, setProducts] = useState<Product[]>([]);
+  const [filteredProducts, setFilteredProducts] = useState<Product[]>(products);
 
   const value = {
     products,
     setProducts,
+    filteredProducts,
+    setFilteredProducts,
   };
 
   return (

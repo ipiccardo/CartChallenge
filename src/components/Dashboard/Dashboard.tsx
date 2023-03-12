@@ -9,8 +9,7 @@ import { ProductsContext } from '../../context/productsContext';
 import { Product } from '../../context/productsContext';
 
 const Dashboard = () => {
-    const { products, setProducts } = useContext(ProductsContext);
-    const [filteredProducts, setFilteredProducts] = useState<Product[]>(products)
+    const { products, setProducts, setFilteredProducts, filteredProducts } = useContext(ProductsContext);
     const [isOpenSideBar, setIsOpenSideBar] = useState<boolean>(false);
     const [windowWidth, setWindowWidth] = useState<number>(0)
 
@@ -43,8 +42,7 @@ const Dashboard = () => {
                 <SideBar
                     isOpenSideBar={isOpenSideBar}
                     setIsOpenSideBar={setIsOpenSideBar}
-                    setFilteredProducts={setFilteredProducts}
-                    filteredProducts={filteredProducts} />
+ />
                 {
                     windowWidth >= 500 && (
                         <>
