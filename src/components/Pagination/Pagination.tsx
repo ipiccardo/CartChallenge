@@ -1,6 +1,5 @@
 import styles from './Pagination.module.css'
 import Icon from '../Icon/Icon'
-
 interface PaginationProps {
     handlePrevious: () => void;
     handleNext: () => void;
@@ -28,9 +27,7 @@ const Pagination = ({ handlePrevious, handleNext, handleSelect, activePage }: Pa
                     pages.map((page, index) => {
                         const pageNumber = index + 1
                         return (
-                            <>
-                                <div key={`${page} - ${index}`} onClick={(e) => handleSelect(e, pageNumber)} className={pageNumber === activePage ? styles.active : ''} >{page}</div>
-                            </>
+                            <div key={`${page} - ${index}`} onClick={(e) => handleSelect(e, pageNumber)} className={pageNumber === activePage ? styles.active : ''} >{page}</div>
                         )
                     })
                 }
