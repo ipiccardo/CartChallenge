@@ -5,8 +5,10 @@
   height: 42px;
   margin-top: 30px;
   padding-bottom: 51px;
-  align-items: center;
-  color: #5F647A
+  align-items: flex-start;
+  color: #5f647a;
+  border-top: solid 1px lightgray;
+  line-height: 54px;
 }
 
 .numbersContainer {
@@ -16,16 +18,33 @@
   cursor: pointer;
   color: #5f647a;
 }
+
+.numbersContainer div {
+  width: 42px;
+  text-align: center;
+  height: 42px;
+}
+
+.numbersContainer div:active,.numbersContainer div:focus {
+  border-top: solid 1px blue;
+  color: blue;
+}
+
+.active {
+  border-top: solid 1px blue;
+  color: blue;
+}
+
 .anteriorContainer {
   display: flex;
   align-items: center;
-  gap:8px;
+  gap: 8px;
   cursor: pointer;
 }
 
 .proximoContainer {
   display: flex;
   align-items: center;
-  gap:8px;
+  gap: 8px;
   cursor: pointer;
 }

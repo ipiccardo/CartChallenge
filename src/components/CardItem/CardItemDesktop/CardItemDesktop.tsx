@@ -10,6 +10,7 @@ const CardItemDesktop = () => {
     const [products, setProducts] = useState([])
     const [windowWidth, setWindowWidth] = useState<number>(0)
     const [pageRendered, setPageRendered] = useState<number>(1)
+    const [activePage, setActivePage] = useState<number>(1);
     const handleResize = () => setWindowWidth(window.screen.width)
     const productsPerPage = 12;
     const lastProductIndex = pageRendered * productsPerPage;
@@ -35,27 +36,38 @@ const CardItemDesktop = () => {
         }
     }, [])
 
-    const handleNext = ():void => {
-        pageRendered < 8 ?
-        setPageRendered(pageRendered + 1)
-        :
-        setPageRendered(1)
+    // useEffect(() => {
+    //   setPageRendered(activePage)
+    // }, [pageRendered])
+    
+
+
+
+    const handleNext = (): void => {
+        if (pageRendered < 8) {
+          setActivePage(activePage + 1);
+          setPageRendered(pageRendered + 1);
+        } else {
+          setActivePage(1);
+        }
+      };
+
+      const handlePrevious = (): void => {
+        if (pageRendered > 1) {
+          setActivePage(activePage - 1);
+          setPageRendered(pageRendered - 1);
+        } else {
+          setActivePage(8);
+        }
+      };
+
+    const handleSelect = (e: any, pageNumber?: any): void => {
+        e.target.innerText !== '...' ?
+            setPageRendered(parseInt(e.target.innerText))
+            :
+            setPageRendered(7)
+            setActivePage(pageNumber)
     }
-
-    const handlePrvious = ():void => {
-        pageRendered > 1 ?
-        setPageRendered(pageRendered - 1)
-        :
-        setPageRendered(8)
-    }
-
-        const handleSelect = (e:any):void => {
-        setPageRendered(e.target.innerText)
-    }
-
-
-    console.log(pageRendered, 'pageRendered')
-
 
     return (
         <>
@@ -112,7 +124,12 @@ const CardItemDesktop = () => {
                 )
             }
             {
-                products.length > 1 && <Pagination handlePrevious={handlePrvious} handleNext={handleNext} handleSelect={handleSelect} />
+                products.length > 1 &&
+                <Pagination
+                    handlePrevious={handlePrevious}
+                    handleNext={handleNext}
+                    handleSelect={handleSelect}
+                    activePage={activePage} />
             }
         </>
     )
