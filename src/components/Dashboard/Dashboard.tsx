@@ -6,10 +6,12 @@ import { useState, useEffect } from 'react';
 import Filters from '../Filters/Filters';
 
 
+
 const Dashboard = () => {
 
     const [isOpenSideBar, setIsOpenSideBar] = useState<boolean>(false);
     const [windowWidth, setWindowWidth] = useState<number>(0)
+
     const handleResize = () => setWindowWidth(window.screen.width)
 
     const handleClick = () => {

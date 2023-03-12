@@ -1,11 +1,9 @@
-import React from 'react'
 import { useEffect, useState } from 'react'
 import styles from './CardContainer.module.css'
 import CardItemMobile from '../CardItem/CardItemMobile/CardItemMobile'
 import CardItemDesktop from '../CardItem/CardItemDesktop/CardItemDesktop'
 import Icon from '../Icon/Icon'
-import Filters from '../Filters/Filters'
-import Pagination from '../Pagination/Pagination'
+
 
 
 interface DashboardProps {
@@ -38,14 +36,14 @@ const CardContainer = ({ resultadosDeBusqueda }: DashboardProps) => {
   return (
     <>
       {
-        windowWidth >= 500 ? 
-        (
-          <>
-            <div className={styles.cardContainerColumn}>
-              <CardItemDesktop />
-            </div>
-          </>
-        )
+        windowWidth >= 500 ?
+          (
+            <>
+              <div className={styles.cardContainerColumn}>
+                <CardItemDesktop />
+              </div>
+            </>
+          )
           :
           <>
             <p className={styles.resultadosDeBusquedaParagraph}>{resultadosDeBusqueda ? resultadosDeBusqueda : '393.566'} resultados</p>

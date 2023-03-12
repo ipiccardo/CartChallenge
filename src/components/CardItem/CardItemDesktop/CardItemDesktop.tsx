@@ -1,4 +1,3 @@
-import React from 'react'
 import { useEffect, useState } from 'react'
 import { getProducts } from '../../../services/products'
 import styles from './CardItemDesktop.module.css'
@@ -35,12 +34,6 @@ const CardItemDesktop = () => {
             window.removeEventListener('resize', handleResize)
         }
     }, [])
-
-    // useEffect(() => {
-    //   setPageRendered(activePage)
-    // }, [pageRendered])
-    
-
 
 
     const handleNext = (): void => {
