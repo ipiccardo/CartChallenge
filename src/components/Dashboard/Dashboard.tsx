@@ -11,15 +11,8 @@ import { Product } from '../../context/productsContext';
 const Dashboard = () => {
     const { products, setProducts } = useContext(ProductsContext);
     const [filteredProducts, setFilteredProducts] = useState<Product[]>(products)
-
     const [isOpenSideBar, setIsOpenSideBar] = useState<boolean>(false);
     const [windowWidth, setWindowWidth] = useState<number>(0)
-
-    const handleResize = () => setWindowWidth(window.screen.width)
-
-    const handleClick = () => {
-        isOpenSideBar && setIsOpenSideBar(false)
-    }
 
     useEffect(() => {
         handleResize()
@@ -29,7 +22,17 @@ const Dashboard = () => {
         }
     }, [])
 
-    console.log(filteredProducts, 'productsfiltrados')
+    useEffect(() => {
+        if (products.length > 90) {
+            setFilteredProducts(products);
+        }
+    }, [products]);
+
+    const handleResize = () => setWindowWidth(window.screen.width)
+
+    const handleClick = () => {
+        isOpenSideBar && setIsOpenSideBar(false)
+    }
 
     return (
         <>
