@@ -71,11 +71,7 @@ const SideBar = ({ isOpenSideBar, setIsOpenSideBar, setIsFiltered, isFiltered }:
         return cantidadDeProductos
     }
 
-    // ORDENO EL FILTEREDPRODUCTS
-    // const onFilteredPrice = () => {
-    //     filteredProducts.sort((a, b) => a.price - b.price);
-    //     return filteredProducts;
-    // }
+    
 
 
 

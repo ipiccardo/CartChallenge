@@ -81,6 +81,23 @@ const CardItemDesktop = ({ setTotalCarros }: cardItemDestopProps) => {
         setDropdownState(!dropdownState);
     };
 
+    // ORDENO EL FILTEREDPRODUCTS
+    // const onFilteredPrice = () => {
+    //     filteredProducts.sort((a, b) => a.price - b.price);
+    //     return filteredProducts;
+    // }
+
+    const handleFilterPriceMayorAMenor = () => {
+        const mayorAMenor = filteredProducts.sort((a, b) => a.price - b.price)
+        console.log(mayorAMenor,'mayorAMenor' )
+        return mayorAMenor;
+    }
+
+    const handleFilterPriceMenorAMayor = () => {
+        const menorAMayor = filteredProducts.sort((a, b) => b.price - a.price)
+        console.log(menorAMayor, 'menorAMayor')
+        return menorAMayor;
+    }
 
     return (
         <>
@@ -95,8 +112,8 @@ const CardItemDesktop = ({ setTotalCarros }: cardItemDestopProps) => {
                             isDropdownOpenMasRelevantes && (    
                                 <ul className={styles.masRelevantesUnorderList}>
                                 <li>Mais relevantes</li>
-                                <li>Menor precio</li>
-                                <li>Mayor precio</li>
+                                <li onClick={() =>handleFilterPriceMayorAMenor()}>Menor precio</li>
+                                <li onClick={() =>handleFilterPriceMenorAMayor()}>Mayor precio</li>
                                 </ul>
                             )
                         }
