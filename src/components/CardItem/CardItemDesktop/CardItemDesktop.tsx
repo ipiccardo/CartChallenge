@@ -18,6 +18,7 @@ const CardItemDesktop = ({ setTotalCarros }: cardItemDestopProps) => {
     const [pageRendered, setPageRendered] = useState<number>(1)
     const [activePage, setActivePage] = useState<number>(1);
     const [isDropdownOpenMasRelevantes, setIsDropdownOpenMasRelevantes] = useState<boolean>(false);
+    const [isActive, setIsActive] = useState<boolean>(false)
     const handleResize = () => setWindowWidth(window.screen.width)
     const productsPerPage = 12;
     const lastProductIndex = pageRendered * productsPerPage;
@@ -79,17 +80,12 @@ const CardItemDesktop = ({ setTotalCarros }: cardItemDestopProps) => {
 
     const handleDropdownClick = (dropdownState: boolean, setDropdownState: Function) => {
         setDropdownState(!dropdownState);
+        setIsActive(!isActive)
     };
-
-    // ORDENO EL FILTEREDPRODUCTS
-    // const onFilteredPrice = () => {
-    //     filteredProducts.sort((a, b) => a.price - b.price);
-    //     return filteredProducts;
-    // }
 
     const handleFilterPriceMayorAMenor = () => {
         const mayorAMenor = filteredProducts.sort((a, b) => a.price - b.price)
-        console.log(mayorAMenor,'mayorAMenor' )
+        console.log(mayorAMenor, 'mayorAMenor')
         return mayorAMenor;
     }
 
@@ -109,11 +105,11 @@ const CardItemDesktop = ({ setTotalCarros }: cardItemDestopProps) => {
                         <Icon name="flechas" onClick={() => { return }} size={18} />
                         <p>Mais relevantes</p>
                         {
-                            isDropdownOpenMasRelevantes && (    
-                                <ul className={styles.masRelevantesUnorderList}>
-                                <li>Mais relevantes</li>
-                                <li onClick={() =>handleFilterPriceMayorAMenor()}>Menor precio</li>
-                                <li onClick={() =>handleFilterPriceMenorAMayor()}>Mayor precio</li>
+                     (
+                                <ul className={`${styles.masRelevantesUnorderList} ${isDropdownOpenMasRelevantes && `${styles.active}`}`} >
+                                    <li>Mais relevantes</li>
+                                    <li onClick={() => handleFilterPriceMayorAMenor()}>Menor precio</li>
+                                    <li onClick={() => handleFilterPriceMenorAMayor()}>Mayor precio</li>
                                 </ul>
                             )
                         }

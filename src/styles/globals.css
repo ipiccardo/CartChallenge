@@ -170,3 +170,7 @@ a {
     padding: 0;
   }
 }
+
+.active {
+  max-height: 500px;
+}

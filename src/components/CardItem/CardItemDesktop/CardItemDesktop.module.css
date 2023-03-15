@@ -244,6 +244,8 @@
   margin-bottom: -16px;
 }
 
+/* Mas Relevantes */
+
 .masRelevantesEIconContainer {
   display: flex;
   align-items: center;
@@ -252,7 +254,8 @@
   gap: 4px;
   justify-content: center;
   padding: 0;
-  color: #566DED
+  color: #566DED;
+  cursor: pointer
 }
 
 .masRelevantesEIconContainer p{
@@ -260,7 +263,6 @@ font-size: 14px;
 line-height: 20px;
 }
 
-/* Mas Relevantes */
 
 .masRelevantesUnorderList {
   position: absolute;
@@ -268,13 +270,22 @@ line-height: 20px;
   z-index: 10;
   background: white;
   font-size: 14px;
+  max-height: 0;
+  overflow: hidden; 
+  transition: max-height 0.3s ease; 
+  
+  }
+
+.active {
+  max-height: 550px;
 }
+
 
 .masRelevantesUnorderList li{
   list-style: none;
   cursor: pointer;
   padding: 1rem;
-  border-bottom: 2px solid black;
+  border-bottom: 1px solid lightgray;
   border-left: solid white;
   font-size: 14px;
   margin-left: -40px;
@@ -288,8 +299,8 @@ line-height: 20px;
   list-style: none;
   cursor: pointer;
   padding: 1rem;
-  border-bottom: 2px solid black;
-  border-left:  3px solid #566DED;
+  border-bottom: 1px solid lightgray;
+  border-left:  4px solid #566DED;
   font-size: 14px;
   margin-left: -40px;
   padding-right: 25px;
