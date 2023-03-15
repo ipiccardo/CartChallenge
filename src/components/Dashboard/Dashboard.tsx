@@ -33,7 +33,7 @@ const Dashboard = () => {
         if (products.length > 90) {
             setFilteredProducts(products);
         }
-    }, [products]);
+    }, [products, setFilteredProducts]);
 
     const handleResize = () => setWindowWidth(window.screen.width)
 

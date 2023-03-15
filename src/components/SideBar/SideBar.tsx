@@ -64,12 +64,20 @@ const SideBar = ({ isOpenSideBar, setIsOpenSideBar, setIsFiltered, isFiltered }:
     }
 
     const handleCountProperty = (property: string, value?: any) => {
-        const totalDeProductos = products.filter(producto =>
+        const totalDeProductos = filteredProducts.filter(producto =>
             producto[property] === value
         );
         const cantidadDeProductos = totalDeProductos.length;
         return cantidadDeProductos
     }
+
+    // ORDENO EL FILTEREDPRODUCTS
+    // const onFilteredPrice = () => {
+    //     filteredProducts.sort((a, b) => a.price - b.price);
+    //     return filteredProducts;
+    // }
+
+
 
     return (
         <div className={`Sidebar ${isOpenSideBar ? 'open' : ''}`}>

@@ -12,7 +12,6 @@ type FilterProps = {
 
 const Filters = ({ isFiltered, setIsFiltered }: FilterProps) => {
   const { products, setFilteredProducts } = useContext(ProductsContext);
-
   const removeFilter = (index: number) => {
     setIsFiltered((prevFilteredProducts: any) => {
       const newFilteredProducts = [...prevFilteredProducts];
@@ -36,14 +35,10 @@ const Filters = ({ isFiltered, setIsFiltered }: FilterProps) => {
       return newFilteredProducts;
     });
   };
-
-
-
   const removeAll = () => {
     setFilteredProducts(products)
     setIsFiltered([])
   }
-
   return (
     <div className='desktopHeader'>
       <div className='Filters'>

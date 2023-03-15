@@ -3,7 +3,6 @@ import styles from './CardContainer.module.css'
 import CardItemMobile from '../CardItem/CardItemMobile/CardItemMobile'
 import CardItemDesktop from '../CardItem/CardItemDesktop/CardItemDesktop'
 import Icon from '../Icon/Icon'
-import { Product } from '../../context/productsContext'
 
 
 
@@ -14,6 +13,7 @@ interface DashboardProps {
 const CardContainer = ({ resultadosDeBusqueda}: DashboardProps) => {
   const [windowWidth, setWindowWidth] = useState<number>(0)
   const [desktopMenu, setDesktopMenu] = useState<Boolean>(false)
+  const [totalCarros, setTotalCarros] = useState<number>(0)
 
   const handleResize = () => setWindowWidth(window.screen.width)
 
@@ -41,13 +41,13 @@ const CardContainer = ({ resultadosDeBusqueda}: DashboardProps) => {
           (
             <>
               <div className={styles.cardContainerColumn}>
-                <CardItemDesktop/>
+                <CardItemDesktop setTotalCarros={setTotalCarros}/>
               </div>
             </>
           )
           :
           <>
-            <p className={styles.resultadosDeBusquedaParagraph}>{resultadosDeBusqueda ? resultadosDeBusqueda : '393.566'} resultados</p>
+            <p className={styles.resultadosDeBusquedaParagraph}>{totalCarros ? totalCarros : '393.566'} resultados</p>
             <div className={styles.dashboardIconContainer}>
               <div>
                 <Icon name="cuadrados" onClick={() => handleClick()} size={18} />
@@ -55,11 +55,11 @@ const CardContainer = ({ resultadosDeBusqueda}: DashboardProps) => {
             </div>
             {windowWidth < 500 && !desktopMenu ?
               <div className={styles.cardContainerRow}>
-                <CardItemMobile />
+                <CardItemMobile setTotalCarros={setTotalCarros} />
               </div>
               :
               <div className={styles.cardContainerMobile}>
-                <CardItemDesktop/>
+                <CardItemDesktop setTotalCarros={setTotalCarros}/>
               </div>
             }
           </>

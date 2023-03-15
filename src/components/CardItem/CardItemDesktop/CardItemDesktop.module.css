@@ -260,6 +260,45 @@ font-size: 14px;
 line-height: 20px;
 }
 
+/* Mas Relevantes */
+
+.masRelevantesUnorderList {
+  position: absolute;
+  top: 20px;
+  z-index: 10;
+  background: white;
+  font-size: 14px;
+}
+
+.masRelevantesUnorderList li{
+  list-style: none;
+  cursor: pointer;
+  padding: 1rem;
+  border-bottom: 2px solid black;
+  border-left: solid white;
+  font-size: 14px;
+  margin-left: -40px;
+  padding-right: 25px;
+  text-align: center;
+  width: 100%;
+  color: black
+}
+
+.masRelevantesUnorderList li:hover{
+  list-style: none;
+  cursor: pointer;
+  padding: 1rem;
+  border-bottom: 2px solid black;
+  border-left:  3px solid #566DED;
+  font-size: 14px;
+  margin-left: -40px;
+  padding-right: 25px;
+  text-align: center;
+  width: 100%;
+  color: #566DED
+}
+
+
 @media (max-width: 500px) {
   .cardItemContainer {
     margin-left: auto;
@@ -267,3 +306,23 @@ line-height: 20px;
   }
 }
 
+.dropdown {
+  display: none;
+  position: absolute;
+  background-color: #fff;
+  z-index: 1;
+}
+
+li:hover .dropdown {
+  display: block;
+}
+
+.dropdown li {
+  padding: 10px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.open .dropdown {
+  display: block;
+}

@@ -4,10 +4,12 @@ import styles from './CardItemMobile.module.css'
 import Icon from '../../Icon/Icon'
 import { useContext } from 'react';
 import { ProductsContext } from '../../../context/productsContext';
+import { cardItemDestopProps } from '../CardItemDesktop/CardItemDesktop';
 
 
-const CardItemMobile = () => {
-    const { products, setProducts } = useContext(ProductsContext);
+
+const CardItemMobile = ({setTotalCarros}: cardItemDestopProps) => {
+    const { products, setProducts, filteredProducts } = useContext(ProductsContext);
 
 
     useEffect(() => {
@@ -17,9 +19,12 @@ const CardItemMobile = () => {
             setProducts(items)
         }
         fetchData()
-    }, []);
+    }, [setProducts]);
 
-
+    useEffect(() => {
+        setTotalCarros(filteredProducts.length)
+    }, [setTotalCarros, filteredProducts])
+    
     return (
         <>
             {

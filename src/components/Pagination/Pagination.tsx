@@ -11,7 +11,7 @@ interface PaginationProps {
 const Pagination = ({ handlePrevious, handleNext, handleSelect, activePage }: PaginationProps) => {
 
 
-    const pages = [1, 2, 3, 4, 5, 6, '...', 8,]
+    const pages = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 
     return (

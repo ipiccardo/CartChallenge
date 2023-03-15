@@ -7,12 +7,17 @@ import { useContext } from 'react';
 import { ProductsContext } from '../../../context/productsContext';
 
 
+export interface cardItemDestopProps {
+    setTotalCarros: (filteredProducts: any) => void
+}
 
-const CardItemDesktop = () => {
+
+const CardItemDesktop = ({ setTotalCarros }: cardItemDestopProps) => {
     const { products, setProducts, filteredProducts } = useContext(ProductsContext);
     const [windowWidth, setWindowWidth] = useState<number>(0)
     const [pageRendered, setPageRendered] = useState<number>(1)
     const [activePage, setActivePage] = useState<number>(1);
+    const [isDropdownOpenMasRelevantes, setIsDropdownOpenMasRelevantes] = useState<boolean>(false);
     const handleResize = () => setWindowWidth(window.screen.width)
     const productsPerPage = 12;
     const lastProductIndex = pageRendered * productsPerPage;
@@ -26,7 +31,7 @@ const CardItemDesktop = () => {
             setProducts(items)
         }
         fetchData()
-    }, []);
+    }, [setProducts]);
 
     useEffect(() => {
         handleResize()
@@ -36,32 +41,45 @@ const CardItemDesktop = () => {
         }
     }, [])
 
+    useEffect(() => {
+        setActivePage(1)
+        setPageRendered(1)
+    }, [filteredProducts])
+
+    useEffect(() => {
+        setTotalCarros(filteredProducts.length)
+    }, [setTotalCarros, filteredProducts])
+
 
     const handleNext = (): void => {
-        if (pageRendered < 8) {
-          setActivePage(activePage + 1);
-          setPageRendered(pageRendered + 1);
+        if (pageRendered < 9) {
+            setActivePage(activePage + 1);
+            setPageRendered(pageRendered + 1);
         } else {
-          setActivePage(1);
+            setActivePage(9);
         }
-      };
+    };
 
-      const handlePrevious = (): void => {
+    const handlePrevious = (): void => {
         if (pageRendered > 1) {
-          setActivePage(activePage - 1);
-          setPageRendered(pageRendered - 1);
+            setActivePage(activePage - 1);
+            setPageRendered(pageRendered - 1);
         } else {
-          setActivePage(8);
+            setActivePage(1);
         }
-      };
+    };
 
     const handleSelect = (e: any, pageNumber?: any): void => {
         e.target.innerText !== '...' ?
             setPageRendered(parseInt(e.target.innerText))
             :
             setPageRendered(7)
-            setActivePage(pageNumber)
+        setActivePage(pageNumber)
     }
+
+    const handleDropdownClick = (dropdownState: boolean, setDropdownState: Function) => {
+        setDropdownState(!dropdownState);
+    };
 
 
     return (
@@ -69,10 +87,19 @@ const CardItemDesktop = () => {
             {
                 windowWidth >= 500 &&
                 <div className={styles.carrosEncontradosYRelevantes}>
-                    <p>393.566 carros encontrados</p>
-                    <div className={styles.masRelevantesEIconContainer}>
+                    <p>{filteredProducts.length} carros encontrados</p>
+                    <div className={styles.masRelevantesEIconContainer} onClick={() => handleDropdownClick(isDropdownOpenMasRelevantes, setIsDropdownOpenMasRelevantes)}>
                         <Icon name="flechas" onClick={() => { return }} size={18} />
                         <p>Mais relevantes</p>
+                        {
+                            isDropdownOpenMasRelevantes && (    
+                                <ul className={styles.masRelevantesUnorderList}>
+                                <li>Mais relevantes</li>
+                                <li>Menor precio</li>
+                                <li>Mayor precio</li>
+                                </ul>
+                            )
+                        }
                     </div>
                 </div>
             }
