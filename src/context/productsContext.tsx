@@ -16,7 +16,7 @@ export type Product = {
   version: number,
   year: string,
   description: string,
-  [key: string]: any;
+  [key: string]: string | number;
 };
 
 type ProductsContextType = {

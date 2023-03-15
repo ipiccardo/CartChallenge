@@ -6,12 +6,20 @@ import { useState, useEffect } from 'react';
 import Filters from '../Filters/Filters';
 import { useContext } from 'react';
 import { ProductsContext } from '../../context/productsContext';
-import { Product } from '../../context/productsContext';
+
+export interface isFilteredProps {
+    property: string,
+    value: string,
+}
+
+
+
 
 const Dashboard = () => {
-    const { products, setProducts, setFilteredProducts, filteredProducts } = useContext(ProductsContext);
+    const { products, setFilteredProducts } = useContext(ProductsContext);
     const [isOpenSideBar, setIsOpenSideBar] = useState<boolean>(false);
     const [windowWidth, setWindowWidth] = useState<number>(0)
+    const [isFiltered, setIsFiltered] = useState<isFilteredProps[]>([])
 
     useEffect(() => {
         handleResize()
@@ -42,11 +50,16 @@ const Dashboard = () => {
                 <SideBar
                     isOpenSideBar={isOpenSideBar}
                     setIsOpenSideBar={setIsOpenSideBar}
- />
+                    setIsFiltered={setIsFiltered}
+                    isFiltered={isFiltered}
+                />
                 {
                     windowWidth >= 500 && (
                         <>
-                            <Filters />
+                            <Filters
+                                setIsFiltered={setIsFiltered}
+                                isFiltered={isFiltered}
+                            />
                         </>
                     )
                 }

@@ -9,7 +9,7 @@ import { ProductsContext } from '../../../context/productsContext';
 
 
 const CardItemDesktop = () => {
-    const { products, setProducts, filteredProducts, setFilteredProducts } = useContext(ProductsContext);
+    const { products, setProducts, filteredProducts } = useContext(ProductsContext);
     const [windowWidth, setWindowWidth] = useState<number>(0)
     const [pageRendered, setPageRendered] = useState<number>(1)
     const [activePage, setActivePage] = useState<number>(1);
