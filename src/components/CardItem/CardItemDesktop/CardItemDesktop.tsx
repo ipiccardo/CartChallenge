@@ -19,7 +19,7 @@ const CardItemDesktop = ({ setTotalCarros }: cardItemDestopProps) => {
     const [pageRendered, setPageRendered] = useState<number>(1)
     const [activePage, setActivePage] = useState<number>(1);
     const [isDropdownOpenMasRelevantes, setIsDropdownOpenMasRelevantes] = useState<boolean>(false);
-    const [isActive, setIsActive] = useState<number>(1)
+    const [isActive, setIsActive] = useState<any>(1)
     const [images, setImages] = useState<Images>({});
     const handleResize = () => setWindowWidth(window.screen.width)
     const productsPerPage = 12;
@@ -97,7 +97,6 @@ const CardItemDesktop = ({ setTotalCarros }: cardItemDestopProps) => {
     }
 
     const handleGalery = (image: string, index: number, id: number,) => {
-        setIsActive(index);
         const imageNumberMatch = image.match(/Exterior_(\d+)\.jpg$/);
         if (imageNumberMatch) {
             const imageNumber = parseInt(imageNumberMatch[1]);
@@ -110,9 +109,14 @@ const CardItemDesktop = ({ setTotalCarros }: cardItemDestopProps) => {
                 ...prevImages,
                 [id]: newImage,
             }));
+            setIsActive(id + '-' + index);
         }
 
+        
+        
+        
     };
+
     return (
         <>
             {
@@ -156,13 +160,13 @@ const CardItemDesktop = ({ setTotalCarros }: cardItemDestopProps) => {
                     return (
                         <div className={styles.cardItemContainer} key={id}>
                             <div className={styles.cardItemImageContainer}>
-                                <div className={styles.cardItemImage} style={{ backgroundImage: backgroundImage !== '' ? `url(${backgroundImage})` : `url(${image})` }}>
+                                <div className={styles.cardItemImage} style={{ backgroundImage: `url(${backgroundImage})` }}>
                                     <div className={styles.cardItmeImageGalery}>
-                                        <span className={isActive === 1 ? `${styles.isActive}` : ''} onClick={() => handleGalery(image, 1, id)}></span>
-                                        <span className={isActive === 2 ? `${styles.isActive}` : ''} onClick={() => handleGalery(image, 2, id)}></span>
-                                        <span className={isActive === 3 ? `${styles.isActive}` : ''} onClick={() => handleGalery(image, 3, id)}></span>
-                                        <span className={isActive === 4 ? `${styles.isActive}` : ''} onClick={() => handleGalery(image, 4, id)}></span>
-                                        <span className={isActive === 5 ? `${styles.isActive}` : ''} onClick={() => handleGalery(image, 5, id)}></span>
+                                        <span className={isActive ===  1 ? `${styles.isActive}` : ''} onClick={() => handleGalery(image, 1, id)}></span>
+                                        <span className={isActive === id + '-' + 2 ? `${styles.isActive}` : ''} onClick={() => handleGalery(image, 2, id)}></span>
+                                        <span className={isActive === id + '-' + 3 ? `${styles.isActive}` : ''} onClick={() => handleGalery(image, 3, id)}></span>
+                                        <span className={isActive === id + '-' + 4 ? `${styles.isActive}` : ''} onClick={() => handleGalery(image, 4, id)}></span>
+                                        <span className={isActive === id + '-' + 5 ? `${styles.isActive}` : ''} onClick={() => handleGalery(image, 5, id)}></span>
                                     </div>
                                 </div>
                                 <button className={styles.cardItemImageButton}>
