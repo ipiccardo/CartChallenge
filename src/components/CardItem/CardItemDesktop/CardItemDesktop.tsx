@@ -19,7 +19,7 @@ const CardItemDesktop = ({ setTotalCarros }: cardItemDestopProps) => {
     const [pageRendered, setPageRendered] = useState<number>(1)
     const [activePage, setActivePage] = useState<number>(1);
     const [isDropdownOpenMasRelevantes, setIsDropdownOpenMasRelevantes] = useState<boolean>(false);
-    const [isActive, setIsActive] = useState<any>(1)
+    const [isActive, setIsActive] = useState<any>({})
     const [images, setImages] = useState<Images>({});
     const handleResize = () => setWindowWidth(window.screen.width)
     const productsPerPage = 12;
@@ -100,21 +100,21 @@ const CardItemDesktop = ({ setTotalCarros }: cardItemDestopProps) => {
         const imageNumberMatch = image.match(/Exterior_(\d+)\.jpg$/);
         if (imageNumberMatch) {
             const imageNumber = parseInt(imageNumberMatch[1]);
-            const newImageNumber = imageNumber + 1;
+            const newIndexNumber = index === 0 || index === 1 ? 1 : (index + 1);
+            console.log(newIndexNumber, 'newImageNumber')
             const newImage = image.replace(
                 `Exterior_${imageNumber}.jpg`,
-                `Exterior_${newImageNumber}.jpg`
+                `Exterior_${newIndexNumber}.jpg`
             );
             setImages((prevImages) => ({
                 ...prevImages,
                 [id]: newImage,
             }));
-            setIsActive(id + '-' + index);
+            setIsActive((prevIsActive: any) => ({
+                ...prevIsActive,
+                [id]: id + '-' + index,
+            }));
         }
-
-        
-        
-        
     };
 
     return (
@@ -140,17 +140,13 @@ const CardItemDesktop = ({ setTotalCarros }: cardItemDestopProps) => {
             }
             {
                 productsToShow?.map(({
-                    booking,
                     brand,
-                    certificate,
                     city,
-                    financing,
                     id,
                     image,
                     mileage,
                     model,
                     price,
-                    promoted,
                     state,
                     version,
                     year }) => {
@@ -162,11 +158,13 @@ const CardItemDesktop = ({ setTotalCarros }: cardItemDestopProps) => {
                             <div className={styles.cardItemImageContainer}>
                                 <div className={styles.cardItemImage} style={{ backgroundImage: `url(${backgroundImage})` }}>
                                     <div className={styles.cardItmeImageGalery}>
-                                        <span className={isActive ===  1 ? `${styles.isActive}` : ''} onClick={() => handleGalery(image, 1, id)}></span>
-                                        <span className={isActive === id + '-' + 2 ? `${styles.isActive}` : ''} onClick={() => handleGalery(image, 2, id)}></span>
-                                        <span className={isActive === id + '-' + 3 ? `${styles.isActive}` : ''} onClick={() => handleGalery(image, 3, id)}></span>
-                                        <span className={isActive === id + '-' + 4 ? `${styles.isActive}` : ''} onClick={() => handleGalery(image, 4, id)}></span>
-                                        <span className={isActive === id + '-' + 5 ? `${styles.isActive}` : ''} onClick={() => handleGalery(image, 5, id)}></span>
+                                        {Array.from({ length: 5 }).map((_, index) => (
+                                            <span
+                                                key={index}
+                                                className={isActive[id] === id + '-' + (index + 1) || (index === 0 && !isActive[id]) ? `${styles.isActive}` : ''}
+                                                onClick={() => handleGalery(image, index + 1, id)}
+                                            />
+                                        ))}
                                     </div>
                                 </div>
                                 <button className={styles.cardItemImageButton}>
