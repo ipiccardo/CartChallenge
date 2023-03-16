@@ -16,7 +16,7 @@ interface Images {
 };
 
 const CardItemDesktop = ({ setTotalCarros }: cardItemDestopProps) => {
-    const { products, setProducts, filteredProducts } = useContext(ProductsContext);
+    const { products, setProducts, filteredProducts, setFilteredProducts } = useContext(ProductsContext);
     const [windowWidth, setWindowWidth] = useState<number>(0)
     const [pageRendered, setPageRendered] = useState<number>(1)
     const [activePage, setActivePage] = useState<number>(1);
@@ -87,15 +87,19 @@ const CardItemDesktop = ({ setTotalCarros }: cardItemDestopProps) => {
     };
 
     const handleFilterPriceMayorAMenor = () => {
-        const mayorAMenor = filteredProducts.sort((a, b) => a.price - b.price)
-        console.log(mayorAMenor, 'mayorAMenor')
+        const mayorAMenor = [...filteredProducts].sort((a, b) => a.price - b.price)
+        setFilteredProducts(mayorAMenor)
         return mayorAMenor;
     }
 
     const handleFilterPriceMenorAMayor = () => {
-        const menorAMayor = filteredProducts.sort((a, b) => b.price - a.price)
-        console.log(menorAMayor, 'menorAMayor')
+        const menorAMayor = [...filteredProducts].sort((a, b) => b.price - a.price)
+        setFilteredProducts(menorAMayor)
         return menorAMayor;
+    }
+
+    const handleMoreRelevant = () => {
+            setFilteredProducts(products)
     }
 
     const handleGalery = (image: string, index: number, id: number,) => {
@@ -156,7 +160,7 @@ const CardItemDesktop = ({ setTotalCarros }: cardItemDestopProps) => {
                         {
                             (
                                 <ul className={`${styles.masRelevantesUnorderList} ${isDropdownOpenMasRelevantes && `${styles.active}`}`} >
-                                    <li>Mais relevantes</li>
+                                    <li onClick={() => handleMoreRelevant()}>Mais relevantes</li>
                                     <li onClick={() => handleFilterPriceMayorAMenor()}>Menor precio</li>
                                     <li onClick={() => handleFilterPriceMenorAMayor()}>Mayor precio</li>
                                 </ul>
