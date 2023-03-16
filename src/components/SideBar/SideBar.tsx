@@ -71,7 +71,7 @@ const SideBar = ({ isOpenSideBar, setIsOpenSideBar, setIsFiltered, isFiltered }:
         return cantidadDeProductos
     }
 
-    
+
 
 
 
@@ -95,7 +95,11 @@ const SideBar = ({ isOpenSideBar, setIsOpenSideBar, setIsFiltered, isFiltered }:
                         {isDropdownOpenMarca && (
                             <ul className={style.dropdown}>
                                 {marcas.map((marca, index) => {
-                                    return <li key={index} onClick={() => handlerFilter('brand', marca)}>{marca} {`(${(handleCountProperty('brand', marca))})`}</li>;
+                                    return <li key={index} onClick={() => handlerFilter('brand', marca)}>{marca}
+                                        <span className={style.spanInListItem}>
+                                            {`(${(handleCountProperty('brand', marca))})`}
+                                        </span>
+                                    </li>;
                                 })}
                                 <li onClick={() => { filteredProducts !== products && handleShowEvery() }}>Mostrar todo {`(${products.length})`}</li>
                             </ul>
@@ -117,7 +121,11 @@ const SideBar = ({ isOpenSideBar, setIsOpenSideBar, setIsFiltered, isFiltered }:
                             <ul className={style.dropdown}>
                                 <ul className={style.dropdown}>
                                     {modelos.map((modelo, index) => {
-                                        return <li key={index} onClick={() => handlerFilter('model', modelo)}>{modelo} {`(${(handleCountProperty('model', modelo))})`}</li>;
+                                        return <li key={index} onClick={() => handlerFilter('model', modelo)}>{modelo}
+                                        <span className={style.spanInListItem}>
+                                         {`(${(handleCountProperty('model', modelo))})`}
+                                        </span>
+                                         </li>;
                                     })}
                                     <li onClick={() => { filteredProducts !== products && handleShowEvery() }}>Mostrar todo {`(${products.length})`}</li>
                                 </ul>
@@ -140,7 +148,11 @@ const SideBar = ({ isOpenSideBar, setIsOpenSideBar, setIsFiltered, isFiltered }:
                             <ul className={style.dropdown}>
                                 <ul className={style.dropdown}>
                                     {años.map((año, index) => {
-                                        return <li key={index} onClick={() => handlerFilter('year', año)}>{año} {`(${(handleCountProperty('year', año))})`}</li>;
+                                        return <li key={index} onClick={() => handlerFilter('year', año)}>{año}
+                                        <span className={style.spanInListItem}>
+                                         {`(${(handleCountProperty('year', año))})`}
+                                        </span>
+                                         </li>;
                                     })}
                                     <li onClick={() => { filteredProducts !== products && handleShowEvery() }}>Mostrar todo {`(${products.length})`}</li>
                                 </ul>
@@ -163,7 +175,11 @@ const SideBar = ({ isOpenSideBar, setIsOpenSideBar, setIsFiltered, isFiltered }:
                             <ul className={style.dropdown}>
                                 <ul className={style.dropdown}>
                                     {versiones.map((version, index) => {
-                                        return <li key={index} onClick={() => handlerFilter('version', version)}>{version} {`(${(handleCountProperty('version', version))})`}</li>;
+                                        return <li key={index} onClick={() => handlerFilter('version', version)}>{version} 
+                                        <span className={style.spanInListItem}>
+                                        {`(${(handleCountProperty('version', version))})`}
+                                        </span>
+                                        </li>;
                                     })}
                                     <li onClick={() => { filteredProducts !== products && handleShowEvery() }}>Mostrar todo {`(${products.length})`}</li>
                                 </ul>
@@ -185,7 +201,11 @@ const SideBar = ({ isOpenSideBar, setIsOpenSideBar, setIsFiltered, isFiltered }:
                         {isDropdownOpenCidade && (
                             <ul className={style.dropdown}>
                                 {ciudades.map((ciudad, index) => {
-                                    return <li key={index} onClick={() => handlerFilter('city', ciudad)}>{ciudad} {`(${(handleCountProperty('city', ciudad))})`}</li>;
+                                    return <li key={index} onClick={() => handlerFilter('city', ciudad)}>{ciudad}
+                                    <span className={style.spanInListItem}>
+                                     {`(${(handleCountProperty('city', ciudad))})`}
+                                    </span>
+                                     </li>;
                                 })}
                                 <li onClick={() => { filteredProducts !== products && handleShowEvery() }}>Mostrar todo {`(${products.length})`}</li>
                             </ul>

@@ -6,11 +6,12 @@ import Pagination from '../../Pagination/Pagination'
 import { useContext } from 'react';
 import { ProductsContext } from '../../../context/productsContext';
 
-
 export interface cardItemDestopProps {
     setTotalCarros: (filteredProducts: any) => void
 }
-
+interface Images {
+    [id: number]: string;
+};
 
 const CardItemDesktop = ({ setTotalCarros }: cardItemDestopProps) => {
     const { products, setProducts, filteredProducts } = useContext(ProductsContext);
@@ -18,7 +19,8 @@ const CardItemDesktop = ({ setTotalCarros }: cardItemDestopProps) => {
     const [pageRendered, setPageRendered] = useState<number>(1)
     const [activePage, setActivePage] = useState<number>(1);
     const [isDropdownOpenMasRelevantes, setIsDropdownOpenMasRelevantes] = useState<boolean>(false);
-    const [isActive, setIsActive] = useState<boolean>(false)
+    const [isActive, setIsActive] = useState<number>(1)
+    const [images, setImages] = useState<Images>({});
     const handleResize = () => setWindowWidth(window.screen.width)
     const productsPerPage = 12;
     const lastProductIndex = pageRendered * productsPerPage;
@@ -80,7 +82,6 @@ const CardItemDesktop = ({ setTotalCarros }: cardItemDestopProps) => {
 
     const handleDropdownClick = (dropdownState: boolean, setDropdownState: Function) => {
         setDropdownState(!dropdownState);
-        setIsActive(!isActive)
     };
 
     const handleFilterPriceMayorAMenor = () => {
@@ -95,6 +96,23 @@ const CardItemDesktop = ({ setTotalCarros }: cardItemDestopProps) => {
         return menorAMayor;
     }
 
+    const handleGalery = (image: string, index: number, id: number,) => {
+        setIsActive(index);
+        const imageNumberMatch = image.match(/Exterior_(\d+)\.jpg$/);
+        if (imageNumberMatch) {
+            const imageNumber = parseInt(imageNumberMatch[1]);
+            const newImageNumber = imageNumber + 1;
+            const newImage = image.replace(
+                `Exterior_${imageNumber}.jpg`,
+                `Exterior_${newImageNumber}.jpg`
+            );
+            setImages((prevImages) => ({
+                ...prevImages,
+                [id]: newImage,
+            }));
+        }
+
+    };
     return (
         <>
             {
@@ -105,7 +123,7 @@ const CardItemDesktop = ({ setTotalCarros }: cardItemDestopProps) => {
                         <Icon name="flechas" onClick={() => { return }} size={18} />
                         <p>Mais relevantes</p>
                         {
-                     (
+                            (
                                 <ul className={`${styles.masRelevantesUnorderList} ${isDropdownOpenMasRelevantes && `${styles.active}`}`} >
                                     <li>Mais relevantes</li>
                                     <li onClick={() => handleFilterPriceMayorAMenor()}>Menor precio</li>
@@ -117,13 +135,36 @@ const CardItemDesktop = ({ setTotalCarros }: cardItemDestopProps) => {
                 </div>
             }
             {
-                productsToShow?.map(({ booking, brand = '', certificate, city, financing, id, image, mileage = '', model = '', price = '', promoted, state, version, year = '' }) => {
+                productsToShow?.map(({
+                    booking,
+                    brand,
+                    certificate,
+                    city,
+                    financing,
+                    id,
+                    image,
+                    mileage,
+                    model,
+                    price,
+                    promoted,
+                    state,
+                    version,
+                    year }) => {
                     const lowercaseBrand: string = brand.charAt(0).toUpperCase() + brand.slice(1).toLowerCase()
                     const lowerCaseModel: string = model.charAt(0).toUpperCase() + model.slice(1).toLowerCase()
+                    const backgroundImage = images[id] || image;
                     return (
                         <div className={styles.cardItemContainer} key={id}>
                             <div className={styles.cardItemImageContainer}>
-                                <div className={styles.cardItemImage} style={{ backgroundImage: `url(${image})` }}></div>
+                                <div className={styles.cardItemImage} style={{ backgroundImage: backgroundImage !== '' ? `url(${backgroundImage})` : `url(${image})` }}>
+                                    <div className={styles.cardItmeImageGalery}>
+                                        <span className={isActive === 1 ? `${styles.isActive}` : ''} onClick={() => handleGalery(image, 1, id)}></span>
+                                        <span className={isActive === 2 ? `${styles.isActive}` : ''} onClick={() => handleGalery(image, 2, id)}></span>
+                                        <span className={isActive === 3 ? `${styles.isActive}` : ''} onClick={() => handleGalery(image, 3, id)}></span>
+                                        <span className={isActive === 4 ? `${styles.isActive}` : ''} onClick={() => handleGalery(image, 4, id)}></span>
+                                        <span className={isActive === 5 ? `${styles.isActive}` : ''} onClick={() => handleGalery(image, 5, id)}></span>
+                                    </div>
+                                </div>
                                 <button className={styles.cardItemImageButton}>
                                     <div className={styles.iconContainer}>
                                         <Icon name="like" onClick={() => { return }} size={18} />

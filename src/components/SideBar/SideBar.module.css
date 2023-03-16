@@ -19,17 +19,18 @@ margin-top: 61px;
 
   .dropdown {
     display: none;
-    position: absolute;
     background-color: #fff;
     z-index: 1;
   }
   
   li:hover .dropdown {
     display: block;
+    padding-inline-start: 0;
   }
   
   .dropdown li {
     padding: 10px;
+    padding-left: 0;
     cursor: pointer;
     list-style: none;
   }
@@ -60,6 +61,24 @@ margin-top: 61px;
     font-size: 14px;
     gap: 8px;
 }
+
+.spanInListItem {
+  color: #87899C;
+  margin-left: 10px;
+}
+
+/* SCROLLBAR */
+
+::-webkit-scrollbar {
+  width: 0.1em;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+/* MEDIA QUERYS */
+
 
   @media (max-width: 400px) {
     .listContainer div {

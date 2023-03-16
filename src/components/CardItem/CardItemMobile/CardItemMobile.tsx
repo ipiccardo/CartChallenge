@@ -34,7 +34,14 @@ const CardItemMobile = ({setTotalCarros}: cardItemDestopProps) => {
                     return (
                         <div className={styles.cardItemContainer} key={id}>
                             <div className={styles.cardItemImageContainer}>
-                                <div className={styles.cardItemImage} style={{ backgroundImage: `url(${image})` }}></div>
+                                <div className={styles.cardItemImage} style={{ backgroundImage: `url(${image})` }}>
+                                <div className={styles.cardItmeImageGalery}>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    </div>
+                                </div>
                                 <button className={styles.cardItemImageButton}>
                                     <div className={styles.iconContainer}>
                                         <Icon name="like" onClick={() => { return }} size={18} />
