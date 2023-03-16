@@ -5,6 +5,8 @@ import Icon from '../../Icon/Icon'
 import Pagination from '../../Pagination/Pagination'
 import { useContext } from 'react';
 import { ProductsContext } from '../../../context/productsContext';
+import karviImage from '../../../assets/karviImage.jpg'
+import karviblanco from '../../../assets/karviblanco.jpg'
 
 export interface cardItemDestopProps {
     setTotalCarros: (filteredProducts: any) => void
@@ -114,6 +116,31 @@ const CardItemDesktop = ({ setTotalCarros }: cardItemDestopProps) => {
                 ...prevIsActive,
                 [id]: id + '-' + index,
             }));
+        } else {
+
+            let newImage: any;
+            if (index === 1) {
+                newImage = image;
+            } else if (index === 2) {
+                newImage = karviblanco;
+            } else if (index === 3) {
+                newImage = karviImage;
+            } else if (index === 4) {
+                newImage = karviblanco;
+            } else if (index === 5) {
+                newImage = karviImage;
+            }
+            else {
+                newImage = image;
+            }
+            setImages((prevImages) => ({
+                ...prevImages,
+                [id]: newImage,
+            }));
+            setIsActive((prevIsActive: any) => ({
+                ...prevIsActive,
+                [id]: id + '-' + index,
+            }));
         }
     };
 
@@ -156,7 +183,9 @@ const CardItemDesktop = ({ setTotalCarros }: cardItemDestopProps) => {
                     return (
                         <div className={styles.cardItemContainer} key={id}>
                             <div className={styles.cardItemImageContainer}>
-                                <div className={styles.cardItemImage} style={{ backgroundImage: `url(${backgroundImage})` }}>
+                                <div className={styles.cardItemImage} style={{
+                                    backgroundImage: `url(${backgroundImage})`,
+                                }}>
                                     <div className={styles.cardItmeImageGalery}>
                                         {Array.from({ length: 5 }).map((_, index) => (
                                             <span
