@@ -67,12 +67,12 @@
 
 .iconContainer * img {
   position: absolute;
-  left: 1.75%;
+  left: 15%;
   right: 9.75%;
-  top: 1.5%;
+  top: 6%;
   bottom: 12.25%;
-  width: 28px;
-  height: 28px;
+  width: 20px;
+  height: 25px;
 }
 
 .cardItemContentContainer {

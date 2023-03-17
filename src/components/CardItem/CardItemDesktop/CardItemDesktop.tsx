@@ -6,7 +6,10 @@ import Pagination from '../../Pagination/Pagination'
 import { useContext } from 'react';
 import { ProductsContext } from '../../../context/productsContext';
 import karviImage from '../../../assets/karviImage.jpg'
-import karviblanco from '../../../assets/karviblanco.jpg'
+import Karviblanco from '../../../assets/Karviblanco.jpg'
+import terceraImagen from '../../../assets/terceraImagen.jpg'
+import cuartaImagen from '../../../assets/cuartaImagen.jpg'
+import { Product } from '../../../context/productsContext'
 
 export interface cardItemDestopProps {
     setTotalCarros: (filteredProducts: any) => void
@@ -14,6 +17,7 @@ export interface cardItemDestopProps {
 interface Images {
     [id: number]: string;
 };
+
 
 const CardItemDesktop = ({ setTotalCarros }: cardItemDestopProps) => {
     const { products, setProducts, filteredProducts, setFilteredProducts } = useContext(ProductsContext);
@@ -23,6 +27,8 @@ const CardItemDesktop = ({ setTotalCarros }: cardItemDestopProps) => {
     const [isDropdownOpenMasRelevantes, setIsDropdownOpenMasRelevantes] = useState<boolean>(false);
     const [isActive, setIsActive] = useState<any>({})
     const [images, setImages] = useState<Images>({});
+    const [title, setTitle] = useState<string>('Mais Relevantes')
+    const [favoriteArray, setFavoriteArray] = useState<Product[]>([]);
     const handleResize = () => setWindowWidth(window.screen.width)
     const productsPerPage = 12;
     const lastProductIndex = pageRendered * productsPerPage;
@@ -89,17 +95,20 @@ const CardItemDesktop = ({ setTotalCarros }: cardItemDestopProps) => {
     const handleFilterPriceMayorAMenor = () => {
         const mayorAMenor = [...filteredProducts].sort((a, b) => a.price - b.price)
         setFilteredProducts(mayorAMenor)
+        setTitle('Mayor precio')
         return mayorAMenor;
     }
 
     const handleFilterPriceMenorAMayor = () => {
         const menorAMayor = [...filteredProducts].sort((a, b) => b.price - a.price)
         setFilteredProducts(menorAMayor)
+        setTitle('Menor precio')
         return menorAMayor;
     }
 
     const handleMoreRelevant = () => {
-            setFilteredProducts(products)
+        setFilteredProducts(products)
+        setTitle('Mais Relevantes')
     }
 
     const handleGalery = (image: string, index: number, id: number,) => {
@@ -107,7 +116,6 @@ const CardItemDesktop = ({ setTotalCarros }: cardItemDestopProps) => {
         if (imageNumberMatch) {
             const imageNumber = parseInt(imageNumberMatch[1]);
             const newIndexNumber = index === 0 || index === 1 ? 1 : (index + 1);
-            console.log(newIndexNumber, 'newImageNumber')
             const newImage = image.replace(
                 `Exterior_${imageNumber}.jpg`,
                 `Exterior_${newIndexNumber}.jpg`
@@ -126,13 +134,13 @@ const CardItemDesktop = ({ setTotalCarros }: cardItemDestopProps) => {
             if (index === 1) {
                 newImage = image;
             } else if (index === 2) {
-                newImage = karviblanco;
+                newImage = terceraImagen;
             } else if (index === 3) {
                 newImage = karviImage;
             } else if (index === 4) {
-                newImage = karviblanco;
+                newImage = Karviblanco;
             } else if (index === 5) {
-                newImage = karviImage;
+                newImage = cuartaImagen;
             }
             else {
                 newImage = image;
@@ -148,6 +156,13 @@ const CardItemDesktop = ({ setTotalCarros }: cardItemDestopProps) => {
         }
     };
 
+    const handleFavorite = (id: any) => {
+        const filteredFavoriteCard = filteredProducts.find((product) => product.id === id)
+        if (filteredFavoriteCard) {
+            setFavoriteArray((favoriteArray) => [...favoriteArray, filteredFavoriteCard])
+        }
+    }
+
     return (
         <>
             {
@@ -156,7 +171,7 @@ const CardItemDesktop = ({ setTotalCarros }: cardItemDestopProps) => {
                     <p>{filteredProducts.length} carros encontrados</p>
                     <div className={styles.masRelevantesEIconContainer} onClick={() => handleDropdownClick(isDropdownOpenMasRelevantes, setIsDropdownOpenMasRelevantes)}>
                         <Icon name="flechas" onClick={() => { return }} size={18} />
-                        <p>Mais relevantes</p>
+                        <p>{title}</p>
                         {
                             (
                                 <ul className={`${styles.masRelevantesUnorderList} ${isDropdownOpenMasRelevantes && `${styles.active}`}`} >
@@ -180,7 +195,8 @@ const CardItemDesktop = ({ setTotalCarros }: cardItemDestopProps) => {
                     price,
                     state,
                     version,
-                    year }) => {
+                    year,
+                }) => {
                     const lowercaseBrand: string = brand.charAt(0).toUpperCase() + brand.slice(1).toLowerCase()
                     const lowerCaseModel: string = model.charAt(0).toUpperCase() + model.slice(1).toLowerCase()
                     const backgroundImage = images[id] || image;
@@ -202,7 +218,7 @@ const CardItemDesktop = ({ setTotalCarros }: cardItemDestopProps) => {
                                 </div>
                                 <button className={styles.cardItemImageButton}>
                                     <div className={styles.iconContainer}>
-                                        <Icon name="like" onClick={() => { return }} size={18} />
+                                        <Icon name="like" onClick={() => handleFavorite(id)} size={18} />
                                     </div>
                                 </button>
                             </div>

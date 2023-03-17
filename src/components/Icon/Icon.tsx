@@ -39,6 +39,9 @@ export default function Icon({ name, size, onClick }: IconProps) {
           }
         }}
       />
+      <span>
+
+      </span>
     </span>
   );
 }
