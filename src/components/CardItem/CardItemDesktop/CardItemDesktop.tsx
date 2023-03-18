@@ -12,13 +12,14 @@ import cuartaImagen from '../../../assets/cuartaImagen.jpg'
 
 export interface cardItemDestopProps {
     setTotalCarros: (filteredProducts: any) => void
+    isOpenSideBar: boolean
 }
 interface Images {
     [id: number]: string;
 };
 
 
-const CardItemDesktop = ({ setTotalCarros }: cardItemDestopProps) => {
+const CardItemDesktop = ({ setTotalCarros, isOpenSideBar }: cardItemDestopProps) => {
     const { products, setProducts, filteredProducts, setFilteredProducts, favoriteArray, setFavoriteArray } = useContext(ProductsContext);
     const [windowWidth, setWindowWidth] = useState<number>(0)
     const [pageRendered, setPageRendered] = useState<number>(1)
@@ -159,8 +160,9 @@ const CardItemDesktop = ({ setTotalCarros }: cardItemDestopProps) => {
     };
 
     const handleFavorite = (id: any) => {
-        const filteredFavoriteCard = filteredProducts.find((product) => product.id === id)
-        if (filteredFavoriteCard) {
+        if (!isOpenSideBar) {
+            const filteredFavoriteCard = filteredProducts.find((product) => product.id === id)
+            if (filteredFavoriteCard) {
             const isFavorite = favoriteArray.some((favorite) => favorite.id === id)
             if (!isFavorite) {
                 setFavoriteArray((favoriteArray) => [...favoriteArray, filteredFavoriteCard])
@@ -170,6 +172,7 @@ const CardItemDesktop = ({ setTotalCarros }: cardItemDestopProps) => {
                 newFavoriteCards[id] = !prevFavoriteCards[id];
                 return newFavoriteCards;
             });
+        }
         }
     }
     return (

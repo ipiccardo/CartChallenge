@@ -61,7 +61,7 @@ const Dashboard = () => {
                     )
                 }
                 <div className='CardContainer' onClick={handleClick}>
-                    <CardContainer />
+                    <CardContainer isOpenSideBar={isOpenSideBar} />
                 </div>
             </div>
         </>

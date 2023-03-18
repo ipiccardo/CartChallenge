@@ -8,9 +8,10 @@ import Icon from '../Icon/Icon'
 
 interface DashboardProps {
   resultadosDeBusqueda?: number
+  isOpenSideBar: boolean
 }
 
-const CardContainer = ({ resultadosDeBusqueda}: DashboardProps) => {
+const CardContainer = ({ resultadosDeBusqueda, isOpenSideBar}: DashboardProps) => {
   const [windowWidth, setWindowWidth] = useState<number>(0)
   const [desktopMenu, setDesktopMenu] = useState<Boolean>(false)
   const [totalCarros, setTotalCarros] = useState<number>(0)
@@ -18,10 +19,12 @@ const CardContainer = ({ resultadosDeBusqueda}: DashboardProps) => {
   const handleResize = () => setWindowWidth(window.screen.width)
 
   const handleClick = () => {
-    if (windowWidth < 500 && desktopMenu) {
-      setDesktopMenu(false)
-    } else {
-      setDesktopMenu(!desktopMenu)
+    if (!isOpenSideBar) {
+      if (windowWidth < 500 && desktopMenu) {
+        setDesktopMenu(false)
+      } else {
+        setDesktopMenu(!desktopMenu)
+      }
     }
   }
 
@@ -41,7 +44,7 @@ const CardContainer = ({ resultadosDeBusqueda}: DashboardProps) => {
           (
             <>
               <div className={styles.cardContainerColumn}>
-                <CardItemDesktop setTotalCarros={setTotalCarros}/>
+                <CardItemDesktop setTotalCarros={setTotalCarros} isOpenSideBar={isOpenSideBar}/>
               </div>
             </>
           )
@@ -55,11 +58,11 @@ const CardContainer = ({ resultadosDeBusqueda}: DashboardProps) => {
             </div>
             {windowWidth < 500 && !desktopMenu ?
               <div className={styles.cardContainerRow}>
-                <CardItemMobile setTotalCarros={setTotalCarros} />
+                <CardItemMobile setTotalCarros={setTotalCarros} isOpenSideBar={isOpenSideBar} />
               </div>
               :
               <div className={styles.cardContainerMobile}>
-                <CardItemDesktop setTotalCarros={setTotalCarros}/>
+                <CardItemDesktop setTotalCarros={setTotalCarros} isOpenSideBar={isOpenSideBar}/>
               </div>
             }
           </>
