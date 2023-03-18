@@ -150,7 +150,7 @@ a {
   }
   .open {
     transform: translate(0%);
-    overflow-y: unset;
+    overflow-y: scroll;
   }
 }
 

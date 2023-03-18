@@ -104,7 +104,7 @@
     align-items: flex-start;
     padding: 0px;
     gap: 26px;
-    height: 418px;
+    min-height: 418px;
     margin-top: 46px;
     margin-left: auto;
     margin-right:auto;
