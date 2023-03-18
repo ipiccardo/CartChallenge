@@ -36,6 +36,12 @@ const CardContainer = ({ resultadosDeBusqueda, isOpenSideBar}: DashboardProps) =
     }
   }, [])
 
+  // const handleClose = (e:any) => {
+  //   if (e.target.id !== 'dropdown-button') {
+  //       setIsDropdownOpenMasRelevantes(false)
+  //   }
+  // }
+
 
   return (
     <>
@@ -44,7 +50,7 @@ const CardContainer = ({ resultadosDeBusqueda, isOpenSideBar}: DashboardProps) =
           (
             <>
               <div className={styles.cardContainerColumn}>
-                <CardItemDesktop setTotalCarros={setTotalCarros} isOpenSideBar={isOpenSideBar}/>
+                <CardItemDesktop setTotalCarros={setTotalCarros} isOpenSideBar={isOpenSideBar} />
               </div>
             </>
           )
@@ -58,7 +64,7 @@ const CardContainer = ({ resultadosDeBusqueda, isOpenSideBar}: DashboardProps) =
             </div>
             {windowWidth < 500 && !desktopMenu ?
               <div className={styles.cardContainerRow}>
-                <CardItemMobile setTotalCarros={setTotalCarros} isOpenSideBar={isOpenSideBar} />
+                <CardItemMobile setTotalCarros={setTotalCarros} isOpenSideBar={isOpenSideBar}/>
               </div>
               :
               <div className={styles.cardContainerMobile}>

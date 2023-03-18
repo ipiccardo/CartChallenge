@@ -13,7 +13,7 @@ export interface isFilteredProps {
 }
 
 const Dashboard = () => {
-    const { products, setFilteredProducts } = useContext(ProductsContext);
+    const { products, setFilteredProducts, isDropdownOpenMasRelevantes, setIsDropdownOpenMasRelevantes } = useContext(ProductsContext);
     const [isOpenSideBar, setIsOpenSideBar] = useState<boolean>(false);
     const [windowWidth, setWindowWidth] = useState<number>(0)
     const [isFiltered, setIsFiltered] = useState<isFilteredProps[]>([])
@@ -38,12 +38,18 @@ const Dashboard = () => {
         isOpenSideBar && setIsOpenSideBar(false)
     }
 
+      const handleClose = (e:any) => {
+    if (e.target.id !== 'dropdown-button') {
+        setIsDropdownOpenMasRelevantes(false)
+    }
+  }
+
     return (
         <>
             <div onClick={handleClick}>
                 <Header isOpenSideBar={isOpenSideBar} setIsOpenSideBar={setIsOpenSideBar} />
             </div>
-            <div className='app-container'>
+            <div className='app-container' onClick={(e) => handleClose(e)}>
                 <SideBar
                     isOpenSideBar={isOpenSideBar}
                     setIsOpenSideBar={setIsOpenSideBar}

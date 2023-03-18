@@ -26,6 +26,8 @@ type ProductsContextType = {
   setFilteredProducts: React.Dispatch<React.SetStateAction<Product[]>>,
   favoriteArray: Product[],
   setFavoriteArray: React.Dispatch<React.SetStateAction<Product[]>>,
+  isDropdownOpenMasRelevantes: boolean,
+  setIsDropdownOpenMasRelevantes: React.Dispatch<React.SetStateAction<boolean>>
 };
 
 export const ProductsContext = createContext<ProductsContextType>({
@@ -35,12 +37,15 @@ export const ProductsContext = createContext<ProductsContextType>({
   setFilteredProducts: () => {},
   favoriteArray: [],
   setFavoriteArray: () => {},
+  isDropdownOpenMasRelevantes: false,
+  setIsDropdownOpenMasRelevantes: () => true
 });
 
 const ProductsProvider = ({ children }: { children: ReactNode }) => {
   const [products, setProducts] = useState<Product[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<Product[]>(products);
   const [favoriteArray, setFavoriteArray] = useState<Product[]>([]);
+  const [isDropdownOpenMasRelevantes, setIsDropdownOpenMasRelevantes] = useState<boolean>(false)
 
   const value = {
     products,
@@ -48,7 +53,9 @@ const ProductsProvider = ({ children }: { children: ReactNode }) => {
     filteredProducts,
     setFilteredProducts,
     favoriteArray,
-    setFavoriteArray
+    setFavoriteArray,
+    isDropdownOpenMasRelevantes,
+    setIsDropdownOpenMasRelevantes
   };
 
 

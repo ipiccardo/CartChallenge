@@ -20,11 +20,20 @@ interface Images {
 
 
 const CardItemDesktop = ({ setTotalCarros, isOpenSideBar }: cardItemDestopProps) => {
-    const { products, setProducts, filteredProducts, setFilteredProducts, favoriteArray, setFavoriteArray } = useContext(ProductsContext);
+    const { 
+        products,
+        setProducts, 
+        filteredProducts, 
+        setFilteredProducts, 
+        favoriteArray, 
+        setFavoriteArray,
+        isDropdownOpenMasRelevantes,
+        setIsDropdownOpenMasRelevantes,
+     } = useContext(ProductsContext);
     const [windowWidth, setWindowWidth] = useState<number>(0)
     const [pageRendered, setPageRendered] = useState<number>(1)
     const [activePage, setActivePage] = useState<number>(1);
-    const [isDropdownOpenMasRelevantes, setIsDropdownOpenMasRelevantes] = useState<boolean>(false);
+    // const [isDropdownOpenMasRelevantes, setIsDropdownOpenMasRelevantes] = useState<boolean>(false);
     const [isActive, setIsActive] = useState<any>({})
     const [images, setImages] = useState<Images>({})
     const [title, setTitle] = useState<string>('Mais Relevantes')
@@ -34,8 +43,6 @@ const CardItemDesktop = ({ setTotalCarros, isOpenSideBar }: cardItemDestopProps)
     const lastProductIndex = pageRendered * productsPerPage;
     const firstProductIndex = lastProductIndex - productsPerPage;
     const productsToShow = filteredProducts !== products ? filteredProducts.slice(firstProductIndex, lastProductIndex) : products.slice(firstProductIndex, lastProductIndex);
-
-
 
     useEffect(() => {
         const fetchData = async () => {
@@ -90,7 +97,7 @@ const CardItemDesktop = ({ setTotalCarros, isOpenSideBar }: cardItemDestopProps)
         setActivePage(pageNumber)
     }
 
-    const handleDropdownClick = (dropdownState: boolean, setDropdownState: Function) => {
+    const handleDropdownClick = (dropdownState: boolean, setDropdownState: Function,) => {
         setDropdownState(!dropdownState);
     };
 
@@ -183,7 +190,7 @@ const CardItemDesktop = ({ setTotalCarros, isOpenSideBar }: cardItemDestopProps)
                     <p>{filteredProducts.length} carros encontrados</p>
                     <div className={styles.masRelevantesEIconContainer} onClick={() => handleDropdownClick(isDropdownOpenMasRelevantes, setIsDropdownOpenMasRelevantes)}>
                         <Icon name="flechas" onClick={() => { return }} size={18} />
-                        <p>{title}</p>
+                        <p id='dropdown-button'>{title}</p>
                         {
                             (
                                 <ul id='dropdown-button' className={`${styles.masRelevantesUnorderList} ${isDropdownOpenMasRelevantes && `${styles.active}`}`} >
