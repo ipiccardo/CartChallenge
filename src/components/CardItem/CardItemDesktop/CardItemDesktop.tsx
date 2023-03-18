@@ -6,7 +6,7 @@ import Pagination from '../../Pagination/Pagination'
 import { useContext } from 'react';
 import { ProductsContext } from '../../../context/productsContext';
 import karviImage from '../../../assets/karviImage.jpg'
-import Karviblanco from '../../../assets/Karviblanco.jpg'
+import karviblanco from '../../../assets/karviblanco.jpg'
 import terceraImagen from '../../../assets/terceraImagen.jpg'
 import cuartaImagen from '../../../assets/cuartaImagen.jpg'
 import { Product } from '../../../context/productsContext'
@@ -20,20 +20,21 @@ interface Images {
 
 
 const CardItemDesktop = ({ setTotalCarros }: cardItemDestopProps) => {
-    const { products, setProducts, filteredProducts, setFilteredProducts } = useContext(ProductsContext);
+    const { products, setProducts, filteredProducts, setFilteredProducts, favoriteArray, setFavoriteArray } = useContext(ProductsContext);
     const [windowWidth, setWindowWidth] = useState<number>(0)
     const [pageRendered, setPageRendered] = useState<number>(1)
     const [activePage, setActivePage] = useState<number>(1);
     const [isDropdownOpenMasRelevantes, setIsDropdownOpenMasRelevantes] = useState<boolean>(false);
     const [isActive, setIsActive] = useState<any>({})
-    const [images, setImages] = useState<Images>({});
+    const [images, setImages] = useState<Images>({})
     const [title, setTitle] = useState<string>('Mais Relevantes')
-    const [favoriteArray, setFavoriteArray] = useState<Product[]>([]);
+    const [favoriteCards, setFavoriteCards] = useState<{ [id: string]: boolean }>({});
     const handleResize = () => setWindowWidth(window.screen.width)
     const productsPerPage = 12;
     const lastProductIndex = pageRendered * productsPerPage;
     const firstProductIndex = lastProductIndex - productsPerPage;
     const productsToShow = filteredProducts !== products ? filteredProducts.slice(firstProductIndex, lastProductIndex) : products.slice(firstProductIndex, lastProductIndex);
+
 
     useEffect(() => {
         const fetchData = async () => {
@@ -95,14 +96,14 @@ const CardItemDesktop = ({ setTotalCarros }: cardItemDestopProps) => {
     const handleFilterPriceMayorAMenor = () => {
         const mayorAMenor = [...filteredProducts].sort((a, b) => a.price - b.price)
         setFilteredProducts(mayorAMenor)
-        setTitle('Mayor precio')
+        setTitle('Menor precio')
         return mayorAMenor;
     }
 
     const handleFilterPriceMenorAMayor = () => {
         const menorAMayor = [...filteredProducts].sort((a, b) => b.price - a.price)
         setFilteredProducts(menorAMayor)
-        setTitle('Menor precio')
+        setTitle('Mayor precio')
         return menorAMayor;
     }
 
@@ -110,6 +111,7 @@ const CardItemDesktop = ({ setTotalCarros }: cardItemDestopProps) => {
         setFilteredProducts(products)
         setTitle('Mais Relevantes')
     }
+
 
     const handleGalery = (image: string, index: number, id: number,) => {
         const imageNumberMatch = image.match(/Exterior_(\d+)\.jpg$/);
@@ -138,7 +140,7 @@ const CardItemDesktop = ({ setTotalCarros }: cardItemDestopProps) => {
             } else if (index === 3) {
                 newImage = karviImage;
             } else if (index === 4) {
-                newImage = Karviblanco;
+                newImage = karviblanco;
             } else if (index === 5) {
                 newImage = cuartaImagen;
             }
@@ -159,7 +161,15 @@ const CardItemDesktop = ({ setTotalCarros }: cardItemDestopProps) => {
     const handleFavorite = (id: any) => {
         const filteredFavoriteCard = filteredProducts.find((product) => product.id === id)
         if (filteredFavoriteCard) {
-            setFavoriteArray((favoriteArray) => [...favoriteArray, filteredFavoriteCard])
+            const isFavorite = favoriteArray.some((favorite) => favorite.id === id)
+            if (!isFavorite) {
+                setFavoriteArray((favoriteArray) => [...favoriteArray, filteredFavoriteCard])
+            }
+            setFavoriteCards((prevFavoriteCards) => {
+                const newFavoriteCards = { ...prevFavoriteCards };
+                newFavoriteCards[id] = !prevFavoriteCards[id];
+                return newFavoriteCards;
+            });
         }
     }
 
@@ -174,7 +184,7 @@ const CardItemDesktop = ({ setTotalCarros }: cardItemDestopProps) => {
                         <p>{title}</p>
                         {
                             (
-                                <ul className={`${styles.masRelevantesUnorderList} ${isDropdownOpenMasRelevantes && `${styles.active}`}`} >
+                                <ul id='dropdown-button' className={`${styles.masRelevantesUnorderList} ${isDropdownOpenMasRelevantes && `${styles.active}`}`} >
                                     <li onClick={() => handleMoreRelevant()}>Mais relevantes</li>
                                     <li onClick={() => handleFilterPriceMayorAMenor()}>Menor precio</li>
                                     <li onClick={() => handleFilterPriceMenorAMayor()}>Mayor precio</li>
@@ -218,7 +228,13 @@ const CardItemDesktop = ({ setTotalCarros }: cardItemDestopProps) => {
                                 </div>
                                 <button className={styles.cardItemImageButton}>
                                     <div className={styles.iconContainer}>
-                                        <Icon name="like" onClick={() => handleFavorite(id)} size={18} />
+                                        {
+                                            favoriteCards[id] ? (
+                                                <Icon name="likeLleno" onClick={() => handleFavorite(id)} size={18} />
+                                            ) : (
+                                                <Icon name="like" onClick={() => handleFavorite(id)} size={18} />
+                                            )
+                                        }
                                     </div>
                                 </button>
                             </div>

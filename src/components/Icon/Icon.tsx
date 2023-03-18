@@ -1,6 +1,6 @@
 let Icons: any = {
   buscar: "/img/icons/buscar.svg",
-  lineaVertical: "/img/icons/lineaVertical.svg",
+  lineaVertical:"/img/icons/lineaVertical.svg",
   cuadrados: "/img/icons/cuadrados.svg",
   filtrar: "/img/icons/filtrar.svg",
   like: "/img/icons/like.svg",
@@ -14,11 +14,12 @@ let Icons: any = {
   flechas: '/img/icons/flechasVerticales.svg',
   dropup: '/img/icons/flechaVerticalArriba.svg',
   flechaIzquierda: '/img/icons/flechaIzquierda.svg',
-  flechaDerecha: '/img/icons/flechaDerecha.svg'
+  flechaDerecha: '/img/icons/flechaDerecha.svg',
+  likeLleno: '/img/icons/likeLleno.svg'
 };
 
 export type IconProps = {
-  name: "buscar" | "filtrar" | "like" | "cuadrados" | "calculadora" | "eliminar" | "mapa" | "flechas" | "cruz" | "lineaVertical" | "dropdown" | 'cerrar' | 'dropup' | 'flechaIzquierda' | 'flechaDerecha';
+  name: "buscar" | "filtrar" | "like" | "cuadrados" | "calculadora" | "eliminar" | "mapa" | "flechas" | "cruz" | "lineaVertical" | "dropdown" | 'cerrar' | 'dropup' | 'flechaIzquierda' | 'flechaDerecha' | 'likeLleno';
   size: number;
   onClick?: Function;
 };
@@ -39,9 +40,6 @@ export default function Icon({ name, size, onClick }: IconProps) {
           }
         }}
       />
-      <span>
-
-      </span>
     </span>
   );
 }

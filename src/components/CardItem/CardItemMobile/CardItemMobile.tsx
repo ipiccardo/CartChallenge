@@ -35,12 +35,12 @@ const CardItemMobile = ({setTotalCarros}: cardItemDestopProps) => {
                         <div className={styles.cardItemContainer} key={id}>
                             <div className={styles.cardItemImageContainer}>
                                 <div className={styles.cardItemImage} style={{ backgroundImage: `url(${image})` }}>
-                                <div className={styles.cardItmeImageGalery}>
+                                {/* <div className={styles.cardItmeImageGalery}>
                                     <span></span>
                                     <span></span>
                                     <span></span>
                                     <span></span>
-                                    </div>
+                                    </div> */}
                                 </div>
                                 <button className={styles.cardItemImageButton}>
                                     <div className={styles.iconContainer}>
