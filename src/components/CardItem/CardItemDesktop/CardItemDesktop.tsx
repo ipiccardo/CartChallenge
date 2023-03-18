@@ -9,7 +9,6 @@ import karviImage from '../../../assets/karviImage.jpg'
 import karviblanco from '../../../assets/karviblanco.jpg'
 import terceraImagen from '../../../assets/terceraImagen.jpg'
 import cuartaImagen from '../../../assets/cuartaImagen.jpg'
-import { Product } from '../../../context/productsContext'
 
 export interface cardItemDestopProps {
     setTotalCarros: (filteredProducts: any) => void
@@ -34,6 +33,7 @@ const CardItemDesktop = ({ setTotalCarros }: cardItemDestopProps) => {
     const lastProductIndex = pageRendered * productsPerPage;
     const firstProductIndex = lastProductIndex - productsPerPage;
     const productsToShow = filteredProducts !== products ? filteredProducts.slice(firstProductIndex, lastProductIndex) : products.slice(firstProductIndex, lastProductIndex);
+
 
 
     useEffect(() => {
@@ -172,7 +172,6 @@ const CardItemDesktop = ({ setTotalCarros }: cardItemDestopProps) => {
             });
         }
     }
-
     return (
         <>
             {

@@ -1,9 +1,9 @@
 import React from 'react'
 
-const favorite = () => {
+const Favorite = () => {
   return (
-    <div>favorite</div>
+    <div>HOLA MUNDOOOOOO</div>
   )
 }
 
-export default favorite
+export default Favorite

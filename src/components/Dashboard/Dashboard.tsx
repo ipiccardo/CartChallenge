@@ -12,9 +12,6 @@ export interface isFilteredProps {
     value: string,
 }
 
-
-
-
 const Dashboard = () => {
     const { products, setFilteredProducts } = useContext(ProductsContext);
     const [isOpenSideBar, setIsOpenSideBar] = useState<boolean>(false);

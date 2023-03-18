@@ -51,6 +51,7 @@ a {
   justify-content: space-between;
   scrollbar-width: auto;
   scrollbar-color: #cfcfcf #ffffff;
+  overflow-y: scroll;
 }
 
 .desktopHeader {
