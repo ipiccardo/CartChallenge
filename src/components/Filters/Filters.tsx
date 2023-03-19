@@ -1,18 +1,19 @@
 import Icon from '../Icon/Icon'
 import styles from './Filters.module.css'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { ProductsContext } from '../../context/productsContext'
 import { isFilteredProps } from '../Dashboard/Dashboard'
 import { Product } from '../../context/productsContext'
-import { Link } from 'react-router-dom'
 
 type FilterProps = {
   isFiltered: Array<isFilteredProps>,
   setIsFiltered: Function
+  isInFavorite?: boolean
 }
 
-const Filters = ({ isFiltered, setIsFiltered }: FilterProps) => {
-  const { products, setFilteredProducts } = useContext(ProductsContext);
+const Filters = ({ isFiltered, setIsFiltered, isInFavorite }: FilterProps) => {
+  const { products, setFilteredProducts, favoriteArray, setFavoriteArray, setFilteredFavoriteArray, filteredFavoriteArray} = useContext(ProductsContext);
+
   const removeFilter = (index: number) => {
     setIsFiltered((prevFilteredProducts: any) => {
       const newFilteredProducts = [...prevFilteredProducts];
@@ -27,18 +28,33 @@ const Filters = ({ isFiltered, setIsFiltered }: FilterProps) => {
         }
         return true;
       };
-      const filteredProducts = products.filter(filterProducts);
-      if (newFilteredProducts.length >= 1) {
-        setFilteredProducts(filteredProducts);
+      if (!isInFavorite) {
+        const filteredProducts = products.filter(filterProducts);
+        if (newFilteredProducts.length >= 1) {
+          setFilteredProducts(filteredProducts);
+        } else {
+          setFilteredProducts(products);
+        }
+        return newFilteredProducts;
       } else {
-        setFilteredProducts(products);
+        const filteredProducts = favoriteArray.filter(filterProducts);
+        if (newFilteredProducts.length >= 1) {
+          setFilteredFavoriteArray(filteredProducts);
+        } else {
+          setFilteredFavoriteArray(favoriteArray);
+        }
+        return newFilteredProducts;
       }
-      return newFilteredProducts;
     });
   };
   const removeAll = () => {
-    setFilteredProducts(products)
-    setIsFiltered([])
+    if (!isInFavorite) {
+      setFilteredProducts(products)
+      setIsFiltered([])
+    } else {
+      setIsFiltered([])
+      setFilteredFavoriteArray(favoriteArray)
+    }
   }
   return (
     <div className='desktopHeader'>
@@ -62,7 +78,7 @@ const Filters = ({ isFiltered, setIsFiltered }: FilterProps) => {
       </div>
       <div className={styles.limpiarFiltrosContainer} onClick={removeAll}>
         <Icon name="eliminar" onClick={removeAll} size={18} />
-        <p> Limpiar Filtros</p>
+        <p>Limpiar Filtros</p>
       </div>
     </div>
   )

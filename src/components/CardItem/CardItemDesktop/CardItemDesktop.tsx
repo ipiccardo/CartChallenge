@@ -27,6 +27,8 @@ const CardItemDesktop = ({ setTotalCarros, isOpenSideBar, isInFavorite }: cardIt
         setFilteredProducts,
         favoriteArray,
         setFavoriteArray,
+        filteredFavoriteArray,
+        setFilteredFavoriteArray,
         isDropdownOpenMasRelevantes,
         setIsDropdownOpenMasRelevantes,
     } = useContext(ProductsContext);
@@ -42,7 +44,7 @@ const CardItemDesktop = ({ setTotalCarros, isOpenSideBar, isInFavorite }: cardIt
     const lastProductIndex = pageRendered * productsPerPage;
     const firstProductIndex = lastProductIndex - productsPerPage;
     const productsToShow = !isInFavorite ? filteredProducts !== products ? filteredProducts.slice(firstProductIndex, lastProductIndex) : products.slice(firstProductIndex, lastProductIndex)
-        : favoriteArray.slice(firstProductIndex, lastProductIndex)
+        : filteredFavoriteArray !== favoriteArray ? filteredFavoriteArray.slice(firstProductIndex, lastProductIndex) : favoriteArray.slice(firstProductIndex, lastProductIndex)
 
     useEffect(() => {
         const fetchData = async () => {
@@ -64,7 +66,7 @@ const CardItemDesktop = ({ setTotalCarros, isOpenSideBar, isInFavorite }: cardIt
     useEffect(() => {
         setActivePage(1)
         setPageRendered(1)
-    }, [filteredProducts, favoriteArray])
+    }, [filteredProducts])
 
     useEffect(() => {
         setTotalCarros(filteredProducts.length)
@@ -73,8 +75,16 @@ const CardItemDesktop = ({ setTotalCarros, isOpenSideBar, isInFavorite }: cardIt
     useEffect(() => {
         if (isInFavorite) {
             setFavoriteArray(JSON.parse(sessionStorage.getItem('favoriteArray') || '[]'));
+            setFilteredFavoriteArray(JSON.parse(sessionStorage.getItem('filteredFavoriteArray') || '[]'))
         }
     }, [isInFavorite])
+
+
+    console.log(filteredFavoriteArray, 'filteredFavoriteArray')
+    console.log(favoriteArray, 'favoriteArray')
+    // console.log(filteredProducts, 'filteredProducts')
+
+
 
     const handleNext = (): void => {
         if (pageRendered < 9) {
@@ -107,10 +117,10 @@ const CardItemDesktop = ({ setTotalCarros, isOpenSideBar, isInFavorite }: cardIt
     };
 
     const handleFilterPriceMayorAMenor = () => {
-        const arrayToSort = isInFavorite ? favoriteArray : filteredProducts;
+        const arrayToSort = isInFavorite ? filteredFavoriteArray : filteredProducts;
         const sortedArray = [...arrayToSort].sort((a, b) => a.price - b.price);
         if (isInFavorite) {
-            setFavoriteArray(sortedArray);
+            setFilteredFavoriteArray(sortedArray);
         } else {
             setFilteredProducts(sortedArray);
         }
@@ -119,10 +129,10 @@ const CardItemDesktop = ({ setTotalCarros, isOpenSideBar, isInFavorite }: cardIt
     }
 
     const handleFilterPriceMenorAMayor = () => {
-        const arrayToSort = isInFavorite ? favoriteArray : filteredProducts;
+        const arrayToSort = isInFavorite ? filteredFavoriteArray : filteredProducts;
         const sortedArray = [...arrayToSort].sort((a, b) => b.price - a.price);
         if (isInFavorite) {
-            setFavoriteArray(sortedArray);
+            setFilteredFavoriteArray(sortedArray);
         } else {
             setFilteredProducts(sortedArray);
         }
@@ -132,6 +142,9 @@ const CardItemDesktop = ({ setTotalCarros, isOpenSideBar, isInFavorite }: cardIt
 
     const handleMoreRelevant = () => {
         setTitle('Mais Relevantes')
+        if (isInFavorite) {
+            setFilteredFavoriteArray(favoriteArray)
+      }  
         setFilteredProducts(products)
     }
 
@@ -185,6 +198,8 @@ const CardItemDesktop = ({ setTotalCarros, isOpenSideBar, isInFavorite }: cardIt
         const withoutRemoved = favoriteArray.filter((product) => product.id !== id)
         setFavoriteArray(withoutRemoved)
         sessionStorage.setItem('favoriteArray', JSON.stringify(withoutRemoved))
+        setFilteredFavoriteArray(withoutRemoved)
+        sessionStorage.setItem('filteredFavoriteArray', JSON.stringify(withoutRemoved))
     }
 
     const handleFavorite = (id: any) => {
@@ -194,7 +209,9 @@ const CardItemDesktop = ({ setTotalCarros, isOpenSideBar, isInFavorite }: cardIt
                 const isFavorite = favoriteArray.some((favorite) => favorite.id === id)
                 if (!isFavorite) {
                     setFavoriteArray((favoriteArray) => [...favoriteArray, filteredFavoriteCard])
+                    setFilteredFavoriteArray((filteredFavoriteArray) => [...filteredFavoriteArray, filteredFavoriteCard])
                     sessionStorage.setItem('favoriteArray', JSON.stringify([...favoriteArray, filteredFavoriteCard]));
+                    sessionStorage.setItem('filteredFavoriteArray', JSON.stringify([...filteredFavoriteArray, filteredFavoriteCard]));
                 } else {
                     handleRemove(id)
                 }

@@ -12,10 +12,11 @@ export type SidebarProps = {
     setIsOpenSideBar: Function;
     setIsFiltered: Function,
     isFiltered: Array<isFilteredProps>
+    isInFavorite?: boolean
 };
 
-const SideBar = ({ isOpenSideBar, setIsOpenSideBar, setIsFiltered, isFiltered }: SidebarProps) => {
-    const { products, setFilteredProducts, filteredProducts } = useContext(ProductsContext);
+const SideBar = ({ isOpenSideBar, setIsOpenSideBar, setIsFiltered, isFiltered, isInFavorite }: SidebarProps) => {
+    const { products, setFilteredProducts, filteredProducts, favoriteArray, setFavoriteArray, filteredFavoriteArray, setFilteredFavoriteArray } = useContext(ProductsContext);
     const [isDropdownOpenMarca, setIsDropdownOpenMarca] = useState<boolean>(false);
     const [isDropdownOpenModelo, setIsDropdownOpenModelo] = useState<boolean>(false);
     const [isDropdownOpenAno, setIsDropdownOpenAno] = useState<boolean>(false);
@@ -49,7 +50,9 @@ const SideBar = ({ isOpenSideBar, setIsOpenSideBar, setIsFiltered, isFiltered }:
 
     const handlerFilter = (property: string, value: any) => {
         const newFilteredProducts = filteredProducts.filter((product) => product[property] === value);
+        const newFilteredFavoriteProducts = favoriteArray.filter((product) => product[property] === value)
         setFilteredProducts(newFilteredProducts);
+        setFilteredFavoriteArray(newFilteredFavoriteProducts)
         const updatedIsFiltered = mapFilteredArray(property, value);
         if (findInFilteredArray(property)) {
             setIsFiltered(updatedIsFiltered);
@@ -59,22 +62,30 @@ const SideBar = ({ isOpenSideBar, setIsOpenSideBar, setIsFiltered, isFiltered }:
     }
 
     const handleShowEvery = () => {
-        setFilteredProducts(products)
-        setIsFiltered([])
+        if (!isInFavorite) {
+            setFilteredProducts(products)
+            setIsFiltered([])
+        } else {
+            setFilteredFavoriteArray(favoriteArray)
+            setIsFiltered([])
+        }
     }
 
     const handleCountProperty = (property: string, value?: any) => {
-        const totalDeProductos = filteredProducts.filter(producto =>
-            producto[property] === value
-        );
-        const cantidadDeProductos = totalDeProductos.length;
-        return cantidadDeProductos
+        if (!isInFavorite) {
+            const totalDeProductos = filteredProducts.filter(producto =>
+                producto[property] === value
+            );
+            const cantidadDeProductos = totalDeProductos.length;
+            return cantidadDeProductos
+        } else {
+            const totalDeProductos = filteredFavoriteArray.filter(producto =>
+                producto[property] === value
+            );
+            const cantidadDeProductos = totalDeProductos.length;
+            return cantidadDeProductos > 0 ? cantidadDeProductos : null
+        }
     }
-
-
-
-
-
     return (
         <div className={`Sidebar ${isOpenSideBar ? 'open' : ''}`}>
             <div className={style.listContainer}>
@@ -95,11 +106,13 @@ const SideBar = ({ isOpenSideBar, setIsOpenSideBar, setIsFiltered, isFiltered }:
                         {isDropdownOpenMarca && (
                             <ul className={style.dropdown}>
                                 {marcas.map((marca, index) => {
-                                    return <li key={index} onClick={() => handlerFilter('brand', marca)}>{marca}
+                                const cantidadDeProductos = handleCountProperty("brand", marca)
+                                    return cantidadDeProductos && (
+                                    <li key={index} onClick={() => handlerFilter('brand', marca)}>{marca}
                                         <span className={style.spanInListItem}>
                                             {`(${(handleCountProperty('brand', marca))})`}
                                         </span>
-                                    </li>;
+                                    </li>)
                                 })}
                                 <li onClick={() => { filteredProducts !== products && handleShowEvery() }}>Mostrar todo {`(${products.length})`}</li>
                             </ul>
@@ -121,7 +134,9 @@ const SideBar = ({ isOpenSideBar, setIsOpenSideBar, setIsFiltered, isFiltered }:
                             <ul className={style.dropdown}>
                                 <ul className={style.dropdown}>
                                     {modelos.map((modelo, index) => {
-                                        return <li key={index} onClick={() => handlerFilter('model', modelo)}>{modelo}
+                                        const cantidadDeProductos = handleCountProperty("model", modelo)
+                                        return cantidadDeProductos && 
+                                        <li key={index} onClick={() => handlerFilter('model', modelo)}>{modelo}
                                         <span className={style.spanInListItem}>
                                          {`(${(handleCountProperty('model', modelo))})`}
                                         </span>
@@ -148,7 +163,9 @@ const SideBar = ({ isOpenSideBar, setIsOpenSideBar, setIsFiltered, isFiltered }:
                             <ul className={style.dropdown}>
                                 <ul className={style.dropdown}>
                                     {años.map((año, index) => {
-                                        return <li key={index} onClick={() => handlerFilter('year', año)}>{año}
+                                        const cantidadDeProductos = handleCountProperty("year", año)
+                                        return cantidadDeProductos && 
+                                        <li key={index} onClick={() => handlerFilter('year', año)}>{año}
                                         <span className={style.spanInListItem}>
                                          {`(${(handleCountProperty('year', año))})`}
                                         </span>
@@ -175,7 +192,9 @@ const SideBar = ({ isOpenSideBar, setIsOpenSideBar, setIsFiltered, isFiltered }:
                             <ul className={style.dropdown}>
                                 <ul className={style.dropdown}>
                                     {versiones.map((version, index) => {
-                                        return <li key={index} onClick={() => handlerFilter('version', version)}>{version} 
+                                       const cantidadDeProductos = handleCountProperty("version", version)
+                                       return cantidadDeProductos && 
+                                        <li key={index} onClick={() => handlerFilter('version', version)}>{version} 
                                         <span className={style.spanInListItem}>
                                         {`(${(handleCountProperty('version', version))})`}
                                         </span>
@@ -201,7 +220,9 @@ const SideBar = ({ isOpenSideBar, setIsOpenSideBar, setIsFiltered, isFiltered }:
                         {isDropdownOpenCidade && (
                             <ul className={style.dropdown}>
                                 {ciudades.map((ciudad, index) => {
-                                    return <li key={index} onClick={() => handlerFilter('city', ciudad)}>{ciudad}
+                                   const cantidadDeProductos = handleCountProperty("city", ciudad)
+                                   return cantidadDeProductos &&
+                                     <li key={index} onClick={() => handlerFilter('city', ciudad)}>{ciudad}
                                     <span className={style.spanInListItem}>
                                      {`(${(handleCountProperty('city', ciudad))})`}
                                     </span>

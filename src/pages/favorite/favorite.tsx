@@ -17,7 +17,7 @@ export interface DashboardProps {
 }
 
 const Dashboard = () => {
-    const { products, setFilteredProducts, isDropdownOpenMasRelevantes, setIsDropdownOpenMasRelevantes } = useContext(ProductsContext);
+    const { products, setFilteredProducts, isDropdownOpenMasRelevantes, setIsDropdownOpenMasRelevantes, setFilteredFavoriteArray, favoriteArray } = useContext(ProductsContext);
     const [isOpenSideBar, setIsOpenSideBar] = useState<boolean>(false);
     const [windowWidth, setWindowWidth] = useState<number>(0)
     const [isFiltered, setIsFiltered] = useState<isFilteredProps[]>([])
@@ -34,8 +34,9 @@ const Dashboard = () => {
     useEffect(() => {
         if (products.length > 90) {
             setFilteredProducts(products);
+            setFilteredFavoriteArray(favoriteArray)
         }
-    }, [products, setFilteredProducts]);
+    }, [products, setFilteredProducts, setFilteredFavoriteArray, favoriteArray]);
 
     const handleResize = () => setWindowWidth(window.screen.width)
 
@@ -62,6 +63,7 @@ const Dashboard = () => {
                     setIsOpenSideBar={setIsOpenSideBar}
                     setIsFiltered={setIsFiltered}
                     isFiltered={isFiltered}
+                    isInFavorite={true}
                 />
                 {
                     windowWidth >= 500 && (
@@ -69,6 +71,7 @@ const Dashboard = () => {
                             <Filters
                                 setIsFiltered={setIsFiltered}
                                 isFiltered={isFiltered}
+                                isInFavorite={true}
                             />
                         </>
                     )
