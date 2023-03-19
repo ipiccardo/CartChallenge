@@ -6,9 +6,13 @@ import { useContext } from 'react';
 import { ProductsContext } from '../../../context/productsContext';
 import { cardItemDestopProps } from '../CardItemDesktop/CardItemDesktop';
 
+export interface cardItemMobileProps {
+    setTotalCarros: (filteredProducts: any) => void
+    isOpenSideBar: boolean
+    isInFavorite?: boolean
+}
 
-
-const CardItemMobile = ({setTotalCarros}: cardItemDestopProps) => {
+const CardItemMobile = ({setTotalCarros, isInFavorite}: cardItemMobileProps) => {
     const { products, setProducts, filteredProducts } = useContext(ProductsContext);
 
 

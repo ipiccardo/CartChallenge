@@ -6,13 +6,19 @@ import { useState, useEffect } from 'react';
 import Filters from '../Filters/Filters';
 import { useContext } from 'react';
 import { ProductsContext } from '../../context/productsContext';
+import { isInferTypeNode } from 'typescript';
 
 export interface isFilteredProps {
     property: string,
     value: string,
 }
 
-const Dashboard = () => {
+export interface DashboardProps {
+    children: React.ReactNode;
+    isInFavorite?: boolean
+}
+
+const Dashboard = ({isInFavorite}: DashboardProps) => {
     const { products, setFilteredProducts, isDropdownOpenMasRelevantes, setIsDropdownOpenMasRelevantes } = useContext(ProductsContext);
     const [isOpenSideBar, setIsOpenSideBar] = useState<boolean>(false);
     const [windowWidth, setWindowWidth] = useState<number>(0)
@@ -34,15 +40,16 @@ const Dashboard = () => {
 
     const handleResize = () => setWindowWidth(window.screen.width)
 
-    const handleClick = () => {
+     const handleClick = () => {
         isOpenSideBar && setIsOpenSideBar(false)
     }
 
-      const handleClose = (e:any) => {
-    if (e.target.id !== 'dropdown-button') {
-        setIsDropdownOpenMasRelevantes(false)
+    const handleClose = (e: any) => {
+        if (e.target.id !== 'dropdown-button') {
+            setIsDropdownOpenMasRelevantes(false)
+        }
     }
-  }
+
 
     return (
         <>
@@ -66,9 +73,18 @@ const Dashboard = () => {
                         </>
                     )
                 }
-                <div className='CardContainer' onClick={handleClick}>
-                    <CardContainer isOpenSideBar={isOpenSideBar} />
-                </div>
+
+                {
+                    isInFavorite ? 
+                        <div className='CardContainer' onClick={handleClick}>
+                            <CardContainer isOpenSideBar={isOpenSideBar} isInFavorite={true}/>
+                        </div>
+                        :
+                        <div className='CardContainer' onClick={handleClick}>
+                            <CardContainer isOpenSideBar={isOpenSideBar} isInFavorite={false}/>
+                        </div>
+                }
+
             </div>
         </>
     )

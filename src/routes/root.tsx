@@ -1,14 +1,14 @@
 import React from 'react'
-import HomePage from '../pages/homePage/homePage'
-import Favorite from '../pages/favorite/favorite'
+import { Link, Outlet } from 'react-router-dom'
 
-const Root = () => {
+const root = () => {
   return (
     <>
-    {/* <HomePage /> */}
-    {/* <Favorite/> */}
+    <Link to='/'></Link>
+    <Link to='/favorite'></Link>
+    <Outlet />
     </>
   )
 }
 
-export default Root
+export default root

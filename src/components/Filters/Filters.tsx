@@ -4,6 +4,7 @@ import { useContext } from 'react'
 import { ProductsContext } from '../../context/productsContext'
 import { isFilteredProps } from '../Dashboard/Dashboard'
 import { Product } from '../../context/productsContext'
+import { Link } from 'react-router-dom'
 
 type FilterProps = {
   isFiltered: Array<isFilteredProps>,

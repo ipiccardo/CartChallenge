@@ -13,27 +13,27 @@ import cuartaImagen from '../../../assets/cuartaImagen.jpg'
 export interface cardItemDestopProps {
     setTotalCarros: (filteredProducts: any) => void
     isOpenSideBar: boolean
+    isInFavorite?: boolean
 }
 interface Images {
     [id: number]: string;
 };
 
 
-const CardItemDesktop = ({ setTotalCarros, isOpenSideBar }: cardItemDestopProps) => {
-    const { 
+const CardItemDesktop = ({ setTotalCarros, isOpenSideBar, isInFavorite }: cardItemDestopProps) => {
+    const {
         products,
-        setProducts, 
-        filteredProducts, 
-        setFilteredProducts, 
-        favoriteArray, 
+        setProducts,
+        filteredProducts,
+        setFilteredProducts,
+        favoriteArray,
         setFavoriteArray,
         isDropdownOpenMasRelevantes,
         setIsDropdownOpenMasRelevantes,
-     } = useContext(ProductsContext);
+    } = useContext(ProductsContext);
     const [windowWidth, setWindowWidth] = useState<number>(0)
     const [pageRendered, setPageRendered] = useState<number>(1)
     const [activePage, setActivePage] = useState<number>(1);
-    // const [isDropdownOpenMasRelevantes, setIsDropdownOpenMasRelevantes] = useState<boolean>(false);
     const [isActive, setIsActive] = useState<any>({})
     const [images, setImages] = useState<Images>({})
     const [title, setTitle] = useState<string>('Mais Relevantes')
@@ -70,6 +70,14 @@ const CardItemDesktop = ({ setTotalCarros, isOpenSideBar }: cardItemDestopProps)
         setTotalCarros(filteredProducts.length)
     }, [setTotalCarros, filteredProducts])
 
+    // useEffect(() => {
+    //     if (isInFavorite) {
+    //         setFilteredProducts(JSON.parse(sessionStorage.getItem('favoriteArray') || '[]'));
+    //       }
+    //       else {
+    //         setFilteredProducts(products);
+    //       }
+    // }, [isInFavorite])
 
     const handleNext = (): void => {
         if (pageRendered < 9) {
@@ -166,20 +174,29 @@ const CardItemDesktop = ({ setTotalCarros, isOpenSideBar }: cardItemDestopProps)
         }
     };
 
+    const handleRemove = (id: any) => {
+        const withoutRemoved = favoriteArray.filter((product) => product.id !== id)
+        setFavoriteArray(withoutRemoved)
+        sessionStorage.setItem('favoriteArray', JSON.stringify(withoutRemoved))
+    }
+
     const handleFavorite = (id: any) => {
         if (!isOpenSideBar) {
             const filteredFavoriteCard = filteredProducts.find((product) => product.id === id)
             if (filteredFavoriteCard) {
-            const isFavorite = favoriteArray.some((favorite) => favorite.id === id)
-            if (!isFavorite) {
-                setFavoriteArray((favoriteArray) => [...favoriteArray, filteredFavoriteCard])
+                const isFavorite = favoriteArray.some((favorite) => favorite.id === id)
+                if (!isFavorite) {
+                    setFavoriteArray((favoriteArray) => [...favoriteArray, filteredFavoriteCard])
+                    sessionStorage.setItem('favoriteArray', JSON.stringify([...favoriteArray, filteredFavoriteCard]));
+                } else {
+                    handleRemove(id)
+                }
+                setFavoriteCards((prevFavoriteCards) => {
+                    const newFavoriteCards = { ...prevFavoriteCards };
+                    newFavoriteCards[id] = !prevFavoriteCards[id];
+                    return newFavoriteCards;
+                });
             }
-            setFavoriteCards((prevFavoriteCards) => {
-                const newFavoriteCards = { ...prevFavoriteCards };
-                newFavoriteCards[id] = !prevFavoriteCards[id];
-                return newFavoriteCards;
-            });
-        }
         }
     }
     return (
@@ -238,6 +255,7 @@ const CardItemDesktop = ({ setTotalCarros, isOpenSideBar }: cardItemDestopProps)
                                 <button className={styles.cardItemImageButton}>
                                     <div className={styles.iconContainer}>
                                         {
+
                                             favoriteCards[id] ? (
                                                 <Icon name="likeLleno" onClick={() => handleFavorite(id)} size={18} />
                                             ) : (

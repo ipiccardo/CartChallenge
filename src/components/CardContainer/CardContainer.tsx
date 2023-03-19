@@ -9,9 +9,10 @@ import Icon from '../Icon/Icon'
 interface DashboardProps {
   resultadosDeBusqueda?: number
   isOpenSideBar: boolean
+  isInFavorite?: boolean
 }
 
-const CardContainer = ({ resultadosDeBusqueda, isOpenSideBar}: DashboardProps) => {
+const CardContainer = ({ resultadosDeBusqueda, isOpenSideBar, isInFavorite}: DashboardProps) => {
   const [windowWidth, setWindowWidth] = useState<number>(0)
   const [desktopMenu, setDesktopMenu] = useState<Boolean>(false)
   const [totalCarros, setTotalCarros] = useState<number>(0)
@@ -36,11 +37,6 @@ const CardContainer = ({ resultadosDeBusqueda, isOpenSideBar}: DashboardProps) =
     }
   }, [])
 
-  // const handleClose = (e:any) => {
-  //   if (e.target.id !== 'dropdown-button') {
-  //       setIsDropdownOpenMasRelevantes(false)
-  //   }
-  // }
 
 
   return (
@@ -50,7 +46,7 @@ const CardContainer = ({ resultadosDeBusqueda, isOpenSideBar}: DashboardProps) =
           (
             <>
               <div className={styles.cardContainerColumn}>
-                <CardItemDesktop setTotalCarros={setTotalCarros} isOpenSideBar={isOpenSideBar} />
+                <CardItemDesktop setTotalCarros={setTotalCarros} isOpenSideBar={isOpenSideBar} isInFavorite={isInFavorite}/>
               </div>
             </>
           )
@@ -64,11 +60,11 @@ const CardContainer = ({ resultadosDeBusqueda, isOpenSideBar}: DashboardProps) =
             </div>
             {windowWidth < 500 && !desktopMenu ?
               <div className={styles.cardContainerRow}>
-                <CardItemMobile setTotalCarros={setTotalCarros} isOpenSideBar={isOpenSideBar}/>
+                <CardItemMobile setTotalCarros={setTotalCarros} isOpenSideBar={isOpenSideBar} isInFavorite={isInFavorite}/>
               </div>
               :
               <div className={styles.cardContainerMobile}>
-                <CardItemDesktop setTotalCarros={setTotalCarros} isOpenSideBar={isOpenSideBar}/>
+                <CardItemDesktop setTotalCarros={setTotalCarros} isOpenSideBar={isOpenSideBar} isInFavorite={isInFavorite}/>
               </div>
             }
           </>
