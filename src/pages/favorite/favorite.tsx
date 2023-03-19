@@ -1,29 +1,84 @@
-import Dashboard from '../../components/Dashboard/Dashboard';
-import { useState } from 'react';
 import CardContainer from '../../components/CardContainer/CardContainer';
-import { Link } from 'react-router-dom';
+import Header from '../../components/Header/Header';
+import '../../styles/globals.css'
+import SideBar from '../../components/SideBar/SideBar';
+import { useState, useEffect } from 'react';
+import Filters from '../../components/Filters/Filters';
+import { useContext } from 'react';
+import { ProductsContext } from '../../context/productsContext';
+import styles from './favorite.module.css'
 
-export const Favorite = () => {
+export interface isFilteredProps {
+    property: string,
+    value: string,
+}
+export interface DashboardProps {
+    children: React.ReactNode;
+}
+
+const Dashboard = () => {
+    const { products, setFilteredProducts, isDropdownOpenMasRelevantes, setIsDropdownOpenMasRelevantes } = useContext(ProductsContext);
     const [isOpenSideBar, setIsOpenSideBar] = useState<boolean>(false);
+    const [windowWidth, setWindowWidth] = useState<number>(0)
+    const [isFiltered, setIsFiltered] = useState<isFilteredProps[]>([])
+    const [isInFavorite, setIsInFavorite] = useState<boolean>(true)
 
-    const favoriteProps = {
-        isInFavorite: true
-    }
+    useEffect(() => {
+        handleResize()
+        window.addEventListener('resize', handleResize)
+        return () => {
+            window.removeEventListener('resize', handleResize)
+        }
+    }, [])
 
-    const handleClick = () => {
+    useEffect(() => {
+        if (products.length > 90) {
+            setFilteredProducts(products);
+        }
+    }, [products, setFilteredProducts]);
+
+    const handleResize = () => setWindowWidth(window.screen.width)
+
+     const handleClick = () => {
         isOpenSideBar && setIsOpenSideBar(false)
     }
 
-        return (
+    const handleClose = (e: any) => {
+        if (e.target.id !== 'dropdown-button') {
+            setIsDropdownOpenMasRelevantes(false)
+        }
+    }
+
+    console.log()
+
+    return (
         <>
-        <Link to='/'>Ir a Home</Link>
-        <Dashboard {...favoriteProps}>
-                <div className='CardContainer' onClick={handleClick}>
-                    <CardContainer isOpenSideBar={isOpenSideBar}/>
-                </div>
-            </Dashboard>
+           <div onClick={handleClick} className={styles.inMobile}>
+                <Header isOpenSideBar={isOpenSideBar} setIsOpenSideBar={setIsOpenSideBar} />
+            </div>
+            <div className='app-container' onClick={(e) => handleClose(e)}>
+                <SideBar
+                    isOpenSideBar={isOpenSideBar}
+                    setIsOpenSideBar={setIsOpenSideBar}
+                    setIsFiltered={setIsFiltered}
+                    isFiltered={isFiltered}
+                />
+                {
+                    windowWidth >= 500 && (
+                        <>
+                            <Filters
+                                setIsFiltered={setIsFiltered}
+                                isFiltered={isFiltered}
+                            />
+                        </>
+                    )
+                }
+                        <div className='CardContainer' onClick={handleClick}>
+                            <CardContainer isOpenSideBar={isOpenSideBar} isInFavorite={isInFavorite}/>
+                        </div>
+            </div>
         </>
     )
 }
 
-export default Favorite
+export default Dashboard

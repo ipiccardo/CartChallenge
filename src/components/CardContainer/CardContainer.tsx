@@ -12,13 +12,13 @@ interface DashboardProps {
   isInFavorite?: boolean
 }
 
-const CardContainer = ({ resultadosDeBusqueda, isOpenSideBar, isInFavorite}: DashboardProps) => {
+const CardContainer = ({ resultadosDeBusqueda, isOpenSideBar, isInFavorite }: DashboardProps) => {
   const [windowWidth, setWindowWidth] = useState<number>(0)
   const [desktopMenu, setDesktopMenu] = useState<Boolean>(false)
   const [totalCarros, setTotalCarros] = useState<number>(0)
 
   const handleResize = () => setWindowWidth(window.screen.width)
-
+  
   const handleClick = () => {
     if (!isOpenSideBar) {
       if (windowWidth < 500 && desktopMenu) {
@@ -36,8 +36,6 @@ const CardContainer = ({ resultadosDeBusqueda, isOpenSideBar, isInFavorite}: Das
       window.removeEventListener('resize', handleResize)
     }
   }, [])
-
-
 
   return (
     <>
@@ -60,11 +58,11 @@ const CardContainer = ({ resultadosDeBusqueda, isOpenSideBar, isInFavorite}: Das
             </div>
             {windowWidth < 500 && !desktopMenu ?
               <div className={styles.cardContainerRow}>
-                <CardItemMobile setTotalCarros={setTotalCarros} isOpenSideBar={isOpenSideBar} isInFavorite={isInFavorite}/>
+                <CardItemMobile setTotalCarros={setTotalCarros} isOpenSideBar={isOpenSideBar}/>
               </div>
               :
               <div className={styles.cardContainerMobile}>
-                <CardItemDesktop setTotalCarros={setTotalCarros} isOpenSideBar={isOpenSideBar} isInFavorite={isInFavorite}/>
+                <CardItemDesktop setTotalCarros={setTotalCarros} isOpenSideBar={isOpenSideBar}/>
               </div>
             }
           </>

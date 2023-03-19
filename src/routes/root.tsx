@@ -4,8 +4,8 @@ import { Link, Outlet } from 'react-router-dom'
 const root = () => {
   return (
     <>
-    <Link to='/'></Link>
-    <Link to='/favorite'></Link>
+    <Link to='/'>HOME</Link>
+    <Link to='/favorite'>FAVORITE</Link>
     <Outlet />
     </>
   )

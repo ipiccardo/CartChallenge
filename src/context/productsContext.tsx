@@ -55,7 +55,7 @@ const ProductsProvider = ({ children }: { children: ReactNode }) => {
     favoriteArray,
     setFavoriteArray,
     isDropdownOpenMasRelevantes,
-    setIsDropdownOpenMasRelevantes
+    setIsDropdownOpenMasRelevantes,
   };
 
 

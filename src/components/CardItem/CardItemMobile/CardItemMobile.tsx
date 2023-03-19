@@ -9,10 +9,9 @@ import { cardItemDestopProps } from '../CardItemDesktop/CardItemDesktop';
 export interface cardItemMobileProps {
     setTotalCarros: (filteredProducts: any) => void
     isOpenSideBar: boolean
-    isInFavorite?: boolean
 }
 
-const CardItemMobile = ({setTotalCarros, isInFavorite}: cardItemMobileProps) => {
+const CardItemMobile = ({setTotalCarros, }: cardItemMobileProps) => {
     const { products, setProducts, filteredProducts } = useContext(ProductsContext);
 
 

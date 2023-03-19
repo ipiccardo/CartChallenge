@@ -19,7 +19,6 @@ interface Images {
     [id: number]: string;
 };
 
-
 const CardItemDesktop = ({ setTotalCarros, isOpenSideBar, isInFavorite }: cardItemDestopProps) => {
     const {
         products,
@@ -42,7 +41,8 @@ const CardItemDesktop = ({ setTotalCarros, isOpenSideBar, isInFavorite }: cardIt
     const productsPerPage = 12;
     const lastProductIndex = pageRendered * productsPerPage;
     const firstProductIndex = lastProductIndex - productsPerPage;
-    const productsToShow = filteredProducts !== products ? filteredProducts.slice(firstProductIndex, lastProductIndex) : products.slice(firstProductIndex, lastProductIndex);
+    const productsToShow = !isInFavorite ? filteredProducts !== products ? filteredProducts.slice(firstProductIndex, lastProductIndex) : products.slice(firstProductIndex, lastProductIndex)
+        : favoriteArray.slice(firstProductIndex, lastProductIndex)
 
     useEffect(() => {
         const fetchData = async () => {
@@ -64,20 +64,17 @@ const CardItemDesktop = ({ setTotalCarros, isOpenSideBar, isInFavorite }: cardIt
     useEffect(() => {
         setActivePage(1)
         setPageRendered(1)
-    }, [filteredProducts])
+    }, [filteredProducts, favoriteArray])
 
     useEffect(() => {
         setTotalCarros(filteredProducts.length)
     }, [setTotalCarros, filteredProducts])
 
-    // useEffect(() => {
-    //     if (isInFavorite) {
-    //         setFilteredProducts(JSON.parse(sessionStorage.getItem('favoriteArray') || '[]'));
-    //       }
-    //       else {
-    //         setFilteredProducts(products);
-    //       }
-    // }, [isInFavorite])
+    useEffect(() => {
+        if (isInFavorite) {
+            setFavoriteArray(JSON.parse(sessionStorage.getItem('favoriteArray') || '[]'));
+        }
+    }, [isInFavorite])
 
     const handleNext = (): void => {
         if (pageRendered < 9) {
@@ -110,22 +107,32 @@ const CardItemDesktop = ({ setTotalCarros, isOpenSideBar, isInFavorite }: cardIt
     };
 
     const handleFilterPriceMayorAMenor = () => {
-        const mayorAMenor = [...filteredProducts].sort((a, b) => a.price - b.price)
-        setFilteredProducts(mayorAMenor)
-        setTitle('Menor precio')
-        return mayorAMenor;
+        const arrayToSort = isInFavorite ? favoriteArray : filteredProducts;
+        const sortedArray = [...arrayToSort].sort((a, b) => a.price - b.price);
+        if (isInFavorite) {
+            setFavoriteArray(sortedArray);
+        } else {
+            setFilteredProducts(sortedArray);
+        }
+        setTitle('Menor precio');
+        return sortedArray;
     }
 
     const handleFilterPriceMenorAMayor = () => {
-        const menorAMayor = [...filteredProducts].sort((a, b) => b.price - a.price)
-        setFilteredProducts(menorAMayor)
-        setTitle('Mayor precio')
-        return menorAMayor;
+        const arrayToSort = isInFavorite ? favoriteArray : filteredProducts;
+        const sortedArray = [...arrayToSort].sort((a, b) => b.price - a.price);
+        if (isInFavorite) {
+            setFavoriteArray(sortedArray);
+        } else {
+            setFilteredProducts(sortedArray);
+        }
+        setTitle('Mayor precio');
+        return sortedArray;
     }
 
     const handleMoreRelevant = () => {
-        setFilteredProducts(products)
         setTitle('Mais Relevantes')
+        setFilteredProducts(products)
     }
 
 
@@ -204,7 +211,7 @@ const CardItemDesktop = ({ setTotalCarros, isOpenSideBar, isInFavorite }: cardIt
             {
                 windowWidth >= 500 &&
                 <div className={styles.carrosEncontradosYRelevantes}>
-                    <p>{filteredProducts.length} carros encontrados</p>
+                    <p>{!isInFavorite ? filteredProducts.length : favoriteArray.length} carros encontrados</p>
                     <div className={styles.masRelevantesEIconContainer} onClick={() => handleDropdownClick(isDropdownOpenMasRelevantes, setIsDropdownOpenMasRelevantes)}>
                         <Icon name="flechas" onClick={() => { return }} size={18} />
                         <p id='dropdown-button'>{title}</p>
@@ -255,7 +262,9 @@ const CardItemDesktop = ({ setTotalCarros, isOpenSideBar, isInFavorite }: cardIt
                                 <button className={styles.cardItemImageButton}>
                                     <div className={styles.iconContainer}>
                                         {
-
+                                            isInFavorite ? (
+                                                <Icon name="likeLleno" onClick={() => handleFavorite(id)} size={18} />
+                                            ) :
                                             favoriteCards[id] ? (
                                                 <Icon name="likeLleno" onClick={() => handleFavorite(id)} size={18} />
                                             ) : (
