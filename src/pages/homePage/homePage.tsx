@@ -72,7 +72,7 @@ const HomePage = () => {
                     )
                 }
                 <div className='CardContainer' onClick={handleClick}>
-                    <CardContainer isOpenSideBar={isOpenSideBar} isInFavorite={false} />
+                    <CardContainer isOpenSideBar={isOpenSideBar} isInFavorite={false} setIsFiltered={setIsFiltered}/>
                 </div>
 
 

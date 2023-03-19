@@ -10,9 +10,10 @@ interface DashboardProps {
   resultadosDeBusqueda?: number
   isOpenSideBar: boolean
   isInFavorite?: boolean
+  setIsFiltered: Function 
 }
 
-const CardContainer = ({ resultadosDeBusqueda, isOpenSideBar, isInFavorite }: DashboardProps) => {
+const CardContainer = ({ resultadosDeBusqueda, isOpenSideBar, isInFavorite, setIsFiltered }: DashboardProps) => {
   const [windowWidth, setWindowWidth] = useState<number>(0)
   const [desktopMenu, setDesktopMenu] = useState<Boolean>(false)
   const [totalCarros, setTotalCarros] = useState<number>(0)
@@ -44,7 +45,7 @@ const CardContainer = ({ resultadosDeBusqueda, isOpenSideBar, isInFavorite }: Da
           (
             <>
               <div className={styles.cardContainerColumn}>
-                <CardItemDesktop setTotalCarros={setTotalCarros} isOpenSideBar={isOpenSideBar} isInFavorite={isInFavorite}/>
+                <CardItemDesktop setTotalCarros={setTotalCarros} isOpenSideBar={isOpenSideBar} isInFavorite={isInFavorite} setIsFiltered={setIsFiltered}/>
               </div>
             </>
           )
@@ -62,7 +63,7 @@ const CardContainer = ({ resultadosDeBusqueda, isOpenSideBar, isInFavorite }: Da
               </div>
               :
               <div className={styles.cardContainerMobile}>
-                <CardItemDesktop setTotalCarros={setTotalCarros} isOpenSideBar={isOpenSideBar}/>
+                <CardItemDesktop setTotalCarros={setTotalCarros} isOpenSideBar={isOpenSideBar} setIsFiltered={setIsFiltered}/>
               </div>
             }
           </>

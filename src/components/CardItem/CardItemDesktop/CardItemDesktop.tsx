@@ -9,17 +9,19 @@ import karviImage from '../../../assets/karviImage.jpg'
 import karviblanco from '../../../assets/karviblanco.jpg'
 import terceraImagen from '../../../assets/terceraImagen.jpg'
 import cuartaImagen from '../../../assets/cuartaImagen.jpg'
+import { Link } from 'react-router-dom'
 
 export interface cardItemDestopProps {
     setTotalCarros: (filteredProducts: any) => void
     isOpenSideBar: boolean
     isInFavorite?: boolean
+    setIsFiltered: Function
 }
 interface Images {
     [id: number]: string;
 };
 
-const CardItemDesktop = ({ setTotalCarros, isOpenSideBar, isInFavorite }: cardItemDestopProps) => {
+const CardItemDesktop = ({ setTotalCarros, isOpenSideBar, isInFavorite, setIsFiltered }: cardItemDestopProps) => {
     const {
         products,
         setProducts,
@@ -79,13 +81,6 @@ const CardItemDesktop = ({ setTotalCarros, isOpenSideBar, isInFavorite }: cardIt
         }
     }, [isInFavorite])
 
-
-    console.log(filteredFavoriteArray, 'filteredFavoriteArray')
-    console.log(favoriteArray, 'favoriteArray')
-    // console.log(filteredProducts, 'filteredProducts')
-
-
-
     const handleNext = (): void => {
         if (pageRendered < 9) {
             setActivePage(activePage + 1);
@@ -144,8 +139,11 @@ const CardItemDesktop = ({ setTotalCarros, isOpenSideBar, isInFavorite }: cardIt
         setTitle('Mais Relevantes')
         if (isInFavorite) {
             setFilteredFavoriteArray(favoriteArray)
-      }  
-        setFilteredProducts(products)
+            setIsFiltered([])
+        } else {
+            setFilteredProducts(products)
+            setIsFiltered([])
+        }
     }
 
 
@@ -229,6 +227,7 @@ const CardItemDesktop = ({ setTotalCarros, isOpenSideBar, isInFavorite }: cardIt
                 windowWidth >= 500 &&
                 <div className={styles.carrosEncontradosYRelevantes}>
                     <p>{!isInFavorite ? filteredProducts.length : favoriteArray.length} carros encontrados</p>
+                    <p className={styles.links}>{!isInFavorite ? <Link to='/favorite'>ir a Favoritos</Link> : <Link to='/'>ir al Home</Link>}</p>
                     <div className={styles.masRelevantesEIconContainer} onClick={() => handleDropdownClick(isDropdownOpenMasRelevantes, setIsDropdownOpenMasRelevantes)}>
                         <Icon name="flechas" onClick={() => { return }} size={18} />
                         <p id='dropdown-button'>{title}</p>
@@ -282,11 +281,11 @@ const CardItemDesktop = ({ setTotalCarros, isOpenSideBar, isInFavorite }: cardIt
                                             isInFavorite ? (
                                                 <Icon name="likeLleno" onClick={() => handleFavorite(id)} size={18} />
                                             ) :
-                                            favoriteCards[id] ? (
-                                                <Icon name="likeLleno" onClick={() => handleFavorite(id)} size={18} />
-                                            ) : (
-                                                <Icon name="like" onClick={() => handleFavorite(id)} size={18} />
-                                            )
+                                                favoriteCards[id] ? (
+                                                    <Icon name="likeLleno" onClick={() => handleFavorite(id)} size={18} />
+                                                ) : (
+                                                    <Icon name="like" onClick={() => handleFavorite(id)} size={18} />
+                                                )
                                         }
                                     </div>
                                 </button>

@@ -58,9 +58,9 @@
 .dashboardIconContainer div {
   width: 28px;
   height: 28px;
-  flex: none;
+  /* flex: none;
   order: 0;
-  flex-grow: 0;
+  flex-grow: 0; */
 }
 
 .dashboardIconContainer div img {

@@ -2,7 +2,7 @@ import Icon from '../Icon/Icon'
 import styles from './Filters.module.css'
 import { useContext, useState } from 'react'
 import { ProductsContext } from '../../context/productsContext'
-import { isFilteredProps } from '../Dashboard/Dashboard'
+import { isFilteredProps } from '../../pages/favorite/favorite'
 import { Product } from '../../context/productsContext'
 
 type FilterProps = {

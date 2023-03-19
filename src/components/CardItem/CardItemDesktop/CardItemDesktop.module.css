@@ -10,9 +10,9 @@
   background: #ffffff;
   box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.06), 0px 1px 3px rgba(0, 0, 0, 0.1);
   border-radius: 12px;
-  flex: none;
+  /* flex: none;
   order: 0;
-  flex-grow: 1;
+  flex-grow: 1; */
 }
 
 .cardItemImage {
@@ -49,9 +49,9 @@
 .iconContainer {
   width: 20px;
   height: 20px;
-  flex: none;
+  /* flex: none;
   order: 0;
-  flex-grow: 0;
+  flex-grow: 0; */
   top: 4px;
   left: 4px;
 }
@@ -87,9 +87,9 @@
   height: 40px;
   color: #1b2141;
   border-radius: 4px;
-  order: 0;
+  /* order: 0; */
   align-self: stretch;
-  flex-grow: 0;
+  /* flex-grow: 0; */
 }
 
 .brand {
@@ -243,6 +243,18 @@
   align-items: center;
   margin-bottom: -16px;
 }
+
+/* Links */
+
+.links a {
+  color: #566ded;
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 20px;
+    font-family: "Raleway-Medium", sans-serif;
+    font-weight: 500;
+}
+
 
 /* Mas Relevantes */
 

@@ -5,7 +5,7 @@ import Icon from '../Icon/Icon';
 import { useContext } from 'react';
 import { ProductsContext } from '../../context/productsContext';
 import { getUniqueFilters } from '../../helpers/switchs';
-import { isFilteredProps } from '../Dashboard/Dashboard';
+import { isFilteredProps } from '../../pages/favorite/favorite'
 
 export type SidebarProps = {
     isOpenSideBar: boolean;

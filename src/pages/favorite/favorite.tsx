@@ -77,7 +77,7 @@ const Dashboard = () => {
                     )
                 }
                         <div className='CardContainer' onClick={handleClick}>
-                            <CardContainer isOpenSideBar={isOpenSideBar} isInFavorite={isInFavorite}/>
+                            <CardContainer isOpenSideBar={isOpenSideBar} isInFavorite={isInFavorite} setIsFiltered={setIsFiltered}/>
                         </div>
             </div>
         </>
