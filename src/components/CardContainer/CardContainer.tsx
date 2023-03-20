@@ -63,7 +63,7 @@ const CardContainer = ({ resultadosDeBusqueda, isOpenSideBar, isInFavorite, setI
               </div>
               :
               <div className={styles.cardContainerMobile}>
-                <CardItemDesktop setTotalCarros={setTotalCarros} isOpenSideBar={isOpenSideBar} setIsFiltered={setIsFiltered}/>
+                <CardItemDesktop setTotalCarros={setTotalCarros} isOpenSideBar={isOpenSideBar} setIsFiltered={setIsFiltered} isInFavorite={isInFavorite}/>
               </div>
             }
           </>

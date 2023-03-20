@@ -1,6 +1,7 @@
 import {useState, useEffect} from 'react'
 import styles from './Header.module.css'
 import Icon from '../Icon/Icon'
+import { Link } from 'react-router-dom';
 
 
 
@@ -37,7 +38,7 @@ const Header = ({isOpenSideBar, setIsOpenSideBar}:SidebarProps)  => {
                     <div className={styles.iconContainer}>
                         <Icon name="buscar" onClick={() => {return}} size={18} />
                     </div>
-                    <a className={styles.link} href={'/'}>Buscar</a>
+                    <Link className={styles.link} to={'/favorites'}>Buscar</Link>
                 </div>
                 <div className={styles.lineaVertical}>
                     <Icon name="lineaVertical" onClick={() => {return}} size={18} />

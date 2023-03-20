@@ -131,6 +131,7 @@ const CardItemMobile = ({setTotalCarros, isOpenSideBar, isInFavorite}: cardItemM
     return (
         <>
             {
+                
                 productsToShow?.map(({
                     brand,
                     city,
