@@ -12,7 +12,7 @@ type FilterProps = {
 }
 
 const Filters = ({ isFiltered, setIsFiltered, isInFavorite }: FilterProps) => {
-  const { products, setFilteredProducts, favoriteArray, setFilteredFavoriteArray, setTitle, title} = useContext(ProductsContext);
+  const { products, setFilteredProducts, favoriteArray, setFilteredFavoriteArray, setTitle } = useContext(ProductsContext);
 
   const removeFilter = (index: number) => {
     setIsFiltered((prevFilteredProducts: any) => {
