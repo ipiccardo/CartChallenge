@@ -38,7 +38,7 @@ const Header = ({isOpenSideBar, setIsOpenSideBar}:SidebarProps)  => {
                     <div className={styles.iconContainer}>
                         <Icon name="buscar" onClick={() => {return}} size={18} />
                     </div>
-                    <Link className={styles.link} to={'/favorites'}>Buscar</Link>
+                    <Link className={styles.link} to={'/favorite'}>Buscar</Link>
                 </div>
                 <div className={styles.lineaVertical}>
                     <Icon name="lineaVertical" onClick={() => {return}} size={18} />
