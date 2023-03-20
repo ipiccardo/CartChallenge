@@ -51,6 +51,7 @@ const SideBar = ({ isOpenSideBar, setIsOpenSideBar, setIsFiltered, isFiltered, i
     const handlerFilter = (property: string, value: any) => {
         const newFilteredProducts = filteredProducts.filter((product) => product[property] === value);
         const newFilteredFavoriteProducts = favoriteArray.filter((product) => product[property] === value)
+        setIsOpenSideBar(!isOpenSideBar)
         setFilteredProducts(newFilteredProducts);
         setFilteredFavoriteArray(newFilteredFavoriteProducts)
         const updatedIsFiltered = mapFilteredArray(property, value);
