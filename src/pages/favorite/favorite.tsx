@@ -17,7 +17,7 @@ export interface DashboardProps {
 }
 
 const Dashboard = () => {
-    const { products, setFilteredProducts, isDropdownOpenMasRelevantes, setIsDropdownOpenMasRelevantes, setFilteredFavoriteArray, favoriteArray } = useContext(ProductsContext);
+    const { products, setFilteredProducts, setIsDropdownOpenMasRelevantes, setFilteredFavoriteArray, favoriteArray } = useContext(ProductsContext);
     const [isOpenSideBar, setIsOpenSideBar] = useState<boolean>(false);
     const [windowWidth, setWindowWidth] = useState<number>(0)
     const [isFiltered, setIsFiltered] = useState<isFilteredProps[]>([])
@@ -30,6 +30,11 @@ const Dashboard = () => {
             window.removeEventListener('resize', handleResize)
         }
     }, [])
+
+    useEffect(() => {
+        setIsInFavorite(true)
+    }, [setIsInFavorite])
+    
 
     useEffect(() => {
         if (products.length > 90) {

@@ -35,12 +35,12 @@ const Header = ({isOpenSideBar, setIsOpenSideBar}:SidebarProps)  => {
             <div className={styles.headerContainer}>
                 <div className={styles.buscarLink}>
                     <div className={styles.iconContainer}>
-                        <Icon name="buscar" onClick={() => (<a href={'/'} />)} size={18} />
+                        <Icon name="buscar" onClick={() => {return}} size={18} />
                     </div>
                     <a className={styles.link} href={'/'}>Buscar</a>
                 </div>
                 <div className={styles.lineaVertical}>
-                    <Icon name="lineaVertical" onClick={() => (<a href={'/'} />)} size={18} />
+                    <Icon name="lineaVertical" onClick={() => {return}} size={18} />
                 </div>
                 <div className={styles.filtrarLink}>
                     <div className={styles.iconContainer}>

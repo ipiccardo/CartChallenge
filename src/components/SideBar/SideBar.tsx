@@ -16,7 +16,7 @@ export type SidebarProps = {
 };
 
 const SideBar = ({ isOpenSideBar, setIsOpenSideBar, setIsFiltered, isFiltered, isInFavorite }: SidebarProps) => {
-    const { products, setFilteredProducts, filteredProducts, favoriteArray, setFavoriteArray, filteredFavoriteArray, setFilteredFavoriteArray } = useContext(ProductsContext);
+    const { products, setFilteredProducts, filteredProducts, favoriteArray, filteredFavoriteArray, setFilteredFavoriteArray } = useContext(ProductsContext);
     const [isDropdownOpenMarca, setIsDropdownOpenMarca] = useState<boolean>(false);
     const [isDropdownOpenModelo, setIsDropdownOpenModelo] = useState<boolean>(false);
     const [isDropdownOpenAno, setIsDropdownOpenAno] = useState<boolean>(false);

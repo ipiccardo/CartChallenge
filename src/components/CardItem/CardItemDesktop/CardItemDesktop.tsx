@@ -79,7 +79,7 @@ const CardItemDesktop = ({ setTotalCarros, isOpenSideBar, isInFavorite, setIsFil
             setFavoriteArray(JSON.parse(sessionStorage.getItem('favoriteArray') || '[]'));
             setFilteredFavoriteArray(JSON.parse(sessionStorage.getItem('filteredFavoriteArray') || '[]'))
         }
-    }, [isInFavorite])
+    }, [isInFavorite, setFavoriteArray, setFilteredFavoriteArray])
 
     const handleNext = (): void => {
         if (pageRendered < 9) {

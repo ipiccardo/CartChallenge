@@ -4,7 +4,7 @@ import styles from './CardItemMobile.module.css'
 import Icon from '../../Icon/Icon'
 import { useContext } from 'react';
 import { ProductsContext } from '../../../context/productsContext';
-import { cardItemDestopProps } from '../CardItemDesktop/CardItemDesktop';
+
 
 export interface cardItemMobileProps {
     setTotalCarros: (filteredProducts: any) => void

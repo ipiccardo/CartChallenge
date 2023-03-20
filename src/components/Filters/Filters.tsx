@@ -1,6 +1,6 @@
 import Icon from '../Icon/Icon'
 import styles from './Filters.module.css'
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 import { ProductsContext } from '../../context/productsContext'
 import { isFilteredProps } from '../../pages/favorite/favorite'
 import { Product } from '../../context/productsContext'
@@ -12,12 +12,12 @@ type FilterProps = {
 }
 
 const Filters = ({ isFiltered, setIsFiltered, isInFavorite }: FilterProps) => {
-  const { products, setFilteredProducts, favoriteArray, setFavoriteArray, setFilteredFavoriteArray, filteredFavoriteArray} = useContext(ProductsContext);
+  const { products, setFilteredProducts, favoriteArray, setFilteredFavoriteArray} = useContext(ProductsContext);
 
   const removeFilter = (index: number) => {
     setIsFiltered((prevFilteredProducts: any) => {
       const newFilteredProducts = [...prevFilteredProducts];
-      const removedFilter = newFilteredProducts.splice(index, 1)[0];
+      newFilteredProducts.splice(index, 1);
       const filterProducts = (product: Product) => {
         for (let i = 0; i < newFilteredProducts.length; i++) {
           const property = newFilteredProducts[i].property;

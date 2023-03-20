@@ -1,4 +1,3 @@
-import Dashboard from "./components/Dashboard/Dashboard";
 import ProductsProvider from "./context/productsContext";
 import { Routes, Route } from "react-router-dom";
 import Root from "./routes/root";
