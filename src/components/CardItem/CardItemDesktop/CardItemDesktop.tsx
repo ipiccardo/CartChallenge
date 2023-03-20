@@ -320,6 +320,7 @@ const CardItemDesktop = ({ setTotalCarros, isOpenSideBar, isInFavorite, setIsFil
                 )
             }
             {
+                !isInFavorite ?
                 products.length > 1 &&
                 <Pagination
                     handlePrevious={handlePrevious}
@@ -328,6 +329,17 @@ const CardItemDesktop = ({ setTotalCarros, isOpenSideBar, isInFavorite, setIsFil
                     activePage={activePage}
                     pageRendered={pageRendered}
                      />
+                     :
+                     filteredFavoriteArray.length >= 1 ? 
+                     <Pagination
+                    handlePrevious={handlePrevious}
+                    handleNext={handleNext}
+                    handleSelect={handleSelect}
+                    activePage={activePage}
+                    pageRendered={pageRendered}
+                     /> :
+
+                    <p className={styles.noProductsSelected}>No has seleccionado productos favoritos</p>
             }
         </>
     )

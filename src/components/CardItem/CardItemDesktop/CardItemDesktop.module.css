@@ -351,6 +351,13 @@
   display: none;
 }
 
+.noProductsSelected {
+  text-align: center;
+  font-size: 1em;
+  margin: 0 auto;
+}
+
+
 @media (max-width: 500px) {
   .cardItemContainer {
     margin-left: auto;
