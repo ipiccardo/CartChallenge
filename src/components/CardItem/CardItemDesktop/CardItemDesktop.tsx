@@ -17,7 +17,7 @@ export interface cardItemDestopProps {
     isInFavorite?: boolean
     setIsFiltered: Function
 }
-interface Images {
+export interface Images {
     [id: number]: string;
 };
 
@@ -324,7 +324,9 @@ const CardItemDesktop = ({ setTotalCarros, isOpenSideBar, isInFavorite, setIsFil
                     handlePrevious={handlePrevious}
                     handleNext={handleNext}
                     handleSelect={handleSelect}
-                    activePage={activePage} />
+                    activePage={activePage}
+                    pageRendered={pageRendered}
+                     />
             }
         </>
     )

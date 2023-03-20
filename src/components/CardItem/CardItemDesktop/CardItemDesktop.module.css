@@ -347,11 +347,22 @@
   cursor: pointer;
 }
 
+.pageRenderInMobile {
+  display: none;
+}
+
 @media (max-width: 500px) {
   .cardItemContainer {
     margin-left: auto;
     margin-right: auto;
   }
+}
+
+.numbersContainer {
+  display: none;
+}
+.pageRenderInMobile {
+  display: block;
 }
 
 .dropdown {

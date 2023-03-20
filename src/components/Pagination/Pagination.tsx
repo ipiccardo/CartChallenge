@@ -4,15 +4,15 @@ interface PaginationProps {
     handlePrevious: () => void;
     handleNext: () => void;
     handleSelect: (e: any, pageNumber?: any) => void;
+    pageRendered?: number;
     activePage: number
 
 }
 
-const Pagination = ({ handlePrevious, handleNext, handleSelect, activePage }: PaginationProps) => {
+const Pagination = ({ handlePrevious, handleNext, handleSelect, activePage, pageRendered}: PaginationProps) => {
 
 
     const pages = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-
 
     return (
         <div className={styles.paginationContainer}>
@@ -32,6 +32,9 @@ const Pagination = ({ handlePrevious, handleNext, handleSelect, activePage }: Pa
                     })
                 }
             </div>
+                {
+                    <div className={styles.pageRenderInMobile}>{pageRendered}</div>
+                }
             <div className={styles.proximoContainer} onClick={handleNext}>
                 <div>Próximo</div>
                 <Icon name="flechaDerecha" onClick={() => { return }} size={18} />

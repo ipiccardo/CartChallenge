@@ -2,18 +2,36 @@ import { useEffect } from 'react'
 import { getProducts } from '../../../services/products'
 import styles from './CardItemMobile.module.css'
 import Icon from '../../Icon/Icon'
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { ProductsContext } from '../../../context/productsContext';
+import Pagination from '../../Pagination/Pagination'
 
 
 export interface cardItemMobileProps {
     setTotalCarros: (filteredProducts: any) => void
     isOpenSideBar: boolean
+    isInFavorite?: boolean
+    setIsFiltered?: Function
 }
 
-const CardItemMobile = ({setTotalCarros, }: cardItemMobileProps) => {
-    const { products, setProducts, filteredProducts } = useContext(ProductsContext);
-
+const CardItemMobile = ({setTotalCarros, isOpenSideBar, isInFavorite}: cardItemMobileProps) => {
+    const {
+        products,
+        setProducts,
+        filteredProducts,
+        favoriteArray,
+        setFavoriteArray,
+        filteredFavoriteArray,
+        setFilteredFavoriteArray,
+    } = useContext(ProductsContext);
+    const [pageRendered, setPageRendered] = useState<number>(1)
+    const [activePage, setActivePage] = useState<number>(1);
+    const [favoriteCards, setFavoriteCards] = useState<{ [id: string]: boolean }>({});
+    const productsPerPage = 12;
+    const lastProductIndex = pageRendered * productsPerPage;
+    const firstProductIndex = lastProductIndex - productsPerPage;
+    const productsToShow = !isInFavorite ? filteredProducts !== products ? filteredProducts.slice(firstProductIndex, lastProductIndex) : products.slice(firstProductIndex, lastProductIndex)
+        : filteredFavoriteArray !== favoriteArray ? filteredFavoriteArray.slice(firstProductIndex, lastProductIndex) : favoriteArray.slice(firstProductIndex, lastProductIndex)
 
     useEffect(() => {
         const fetchData = async () => {
@@ -27,11 +45,104 @@ const CardItemMobile = ({setTotalCarros, }: cardItemMobileProps) => {
     useEffect(() => {
         setTotalCarros(filteredProducts.length)
     }, [setTotalCarros, filteredProducts])
-    
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const data = await getProducts()
+            const { items } = data
+            setProducts(items)
+        }
+        fetchData()
+    }, [setProducts]);
+
+
+    useEffect(() => {
+        setActivePage(1)
+        setPageRendered(1)
+    }, [filteredProducts])
+
+    useEffect(() => {
+        setTotalCarros(filteredProducts.length)
+    }, [setTotalCarros, filteredProducts])
+
+    useEffect(() => {
+        if (isInFavorite) {
+            setFavoriteArray(JSON.parse(sessionStorage.getItem('favoriteArray') || '[]'));
+            setFilteredFavoriteArray(JSON.parse(sessionStorage.getItem('filteredFavoriteArray') || '[]'))
+        }
+    }, [isInFavorite, setFavoriteArray, setFilteredFavoriteArray])
+
+    const handleNext = (): void => {
+        if (pageRendered < 9) {
+            setActivePage(activePage + 1);
+            setPageRendered(pageRendered + 1);
+        } else {
+            setActivePage(9);
+        }
+    };
+
+    const handlePrevious = (): void => {
+        if (pageRendered > 1) {
+            setActivePage(activePage - 1);
+            setPageRendered(pageRendered - 1);
+        } else {
+            setActivePage(1);
+        }
+    };
+
+    const handleSelect = (e: any, pageNumber?: any): void => {
+        e.target.innerText !== '...' ?
+            setPageRendered(parseInt(e.target.innerText))
+            :
+            setPageRendered(7)
+        setActivePage(pageNumber)
+    }
+
+
+    const handleRemove = (id: any) => {
+        const withoutRemoved = favoriteArray.filter((product) => product.id !== id)
+        setFavoriteArray(withoutRemoved)
+        sessionStorage.setItem('favoriteArray', JSON.stringify(withoutRemoved))
+        setFilteredFavoriteArray(withoutRemoved)
+        sessionStorage.setItem('filteredFavoriteArray', JSON.stringify(withoutRemoved))
+    }
+
+    const handleFavorite = (id: any) => {
+        if (!isOpenSideBar) {
+            const filteredFavoriteCard = filteredProducts.find((product) => product.id === id)
+            if (filteredFavoriteCard) {
+                const isFavorite = favoriteArray.some((favorite) => favorite.id === id)
+                if (!isFavorite) {
+                    setFavoriteArray((favoriteArray) => [...favoriteArray, filteredFavoriteCard])
+                    setFilteredFavoriteArray((filteredFavoriteArray) => [...filteredFavoriteArray, filteredFavoriteCard])
+                    sessionStorage.setItem('favoriteArray', JSON.stringify([...favoriteArray, filteredFavoriteCard]));
+                    sessionStorage.setItem('filteredFavoriteArray', JSON.stringify([...filteredFavoriteArray, filteredFavoriteCard]));
+                } else {
+                    handleRemove(id)
+                }
+                setFavoriteCards((prevFavoriteCards) => {
+                    const newFavoriteCards = { ...prevFavoriteCards };
+                    newFavoriteCards[id] = !prevFavoriteCards[id];
+                    return newFavoriteCards;
+                });
+            }
+        }
+    }   
     return (
         <>
             {
-                products?.map(({ booking, brand = '', certificate, city, financing, id, image, mileage = '', model = '', price = '', promoted, state, version, year = '' }) => {
+                productsToShow?.map(({
+                    brand,
+                    city,
+                    id,
+                    image,
+                    mileage,
+                    model,
+                    price,
+                    state,
+                    version,
+                    year,
+                }) => {
                     const lowercaseBrand: string = brand.charAt(0).toUpperCase() + brand.slice(1).toLowerCase()
                     const lowerCaseModel: string = model.charAt(0).toUpperCase() + model.slice(1).toLowerCase()
                     return (
@@ -41,7 +152,16 @@ const CardItemMobile = ({setTotalCarros, }: cardItemMobileProps) => {
                                 </div>
                                 <button className={styles.cardItemImageButton}>
                                     <div className={styles.iconContainer}>
-                                        <Icon name="like" onClick={() => { return }} size={18} />
+                                    {
+                                            isInFavorite ? (
+                                                <Icon name="likeLleno" onClick={() => handleFavorite(id)} size={18} />
+                                            ) :
+                                                favoriteCards[id] ? (
+                                                    <Icon name="likeLleno" onClick={() => handleFavorite(id)} size={18} />
+                                                ) : (
+                                                    <Icon name="like" onClick={() => handleFavorite(id)} size={18} />
+                                                )
+                                        }
                                     </div>
                                 </button>
                             </div>
@@ -72,6 +192,18 @@ const CardItemMobile = ({setTotalCarros, }: cardItemMobileProps) => {
                     )
                 }
                 )
+            }
+             {
+                products.length > 1 &&
+                <div style={{width: '90%'}}>
+                <Pagination
+                    handlePrevious={handlePrevious}
+                    handleNext={handleNext}
+                    handleSelect={handleSelect}
+                    activePage={activePage} 
+                    pageRendered={pageRendered}
+                    />
+                    </div>
             }
         </>
     )

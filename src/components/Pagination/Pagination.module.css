@@ -48,3 +48,17 @@
   gap: 8px;
   cursor: pointer;
 }
+
+.pageRenderInMobile {
+  display: none;
+}
+
+
+@media (max-width: 500px) {
+  .numbersContainer {
+    display: none;
+  }
+  .pageRenderInMobile {
+    display: block;
+  }
+}
