@@ -12,7 +12,7 @@ type FilterProps = {
 }
 
 const Filters = ({ isFiltered, setIsFiltered, isInFavorite }: FilterProps) => {
-  const { products, setFilteredProducts, favoriteArray, setFilteredFavoriteArray} = useContext(ProductsContext);
+  const { products, setFilteredProducts, favoriteArray, setFilteredFavoriteArray, setTitle, title} = useContext(ProductsContext);
 
   const removeFilter = (index: number) => {
     setIsFiltered((prevFilteredProducts: any) => {
@@ -51,12 +51,15 @@ const Filters = ({ isFiltered, setIsFiltered, isInFavorite }: FilterProps) => {
     if (!isInFavorite) {
       setFilteredProducts(products)
       setIsFiltered([])
+      setTitle('Mais Relevantes')
     } else {
       setIsFiltered([])
       setFilteredFavoriteArray(favoriteArray)
+      setTitle('Mais Relevantes')
     }
   }
-  return (
+
+   return (
     <div className='desktopHeader'>
       <div className='Filters'>
         {

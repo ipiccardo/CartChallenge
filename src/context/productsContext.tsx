@@ -30,6 +30,8 @@ type ProductsContextType = {
   setFilteredFavoriteArray: React.Dispatch<React.SetStateAction<Product[]>>,
   isDropdownOpenMasRelevantes: boolean,
   setIsDropdownOpenMasRelevantes: React.Dispatch<React.SetStateAction<boolean>>
+  title: string,
+  setTitle: React.Dispatch<React.SetStateAction<string>>
 };
 
 export const ProductsContext = createContext<ProductsContextType>({
@@ -42,7 +44,9 @@ export const ProductsContext = createContext<ProductsContextType>({
   filteredFavoriteArray: [],
   setFilteredFavoriteArray: () => {},
   isDropdownOpenMasRelevantes: false,
-  setIsDropdownOpenMasRelevantes: () => true
+  setIsDropdownOpenMasRelevantes: () => true,
+  title: 'Mais Relevantes',
+  setTitle: () => {}
 });
 
 const ProductsProvider = ({ children }: { children: ReactNode }) => {
@@ -51,6 +55,8 @@ const ProductsProvider = ({ children }: { children: ReactNode }) => {
   const [favoriteArray, setFavoriteArray] = useState<Product[]>([]);
   const [filteredFavoriteArray, setFilteredFavoriteArray] = useState<Product[]>(favoriteArray);
   const [isDropdownOpenMasRelevantes, setIsDropdownOpenMasRelevantes] = useState<boolean>(false)
+  const [title, setTitle] = useState<string>('Mais Relevantes')
+
 
   const value = {
     products,
@@ -63,6 +69,8 @@ const ProductsProvider = ({ children }: { children: ReactNode }) => {
     setFilteredFavoriteArray,
     isDropdownOpenMasRelevantes,
     setIsDropdownOpenMasRelevantes,
+    title,
+    setTitle,
   };
 
 

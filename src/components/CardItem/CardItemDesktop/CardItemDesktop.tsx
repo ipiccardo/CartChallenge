@@ -33,13 +33,14 @@ const CardItemDesktop = ({ setTotalCarros, isOpenSideBar, isInFavorite, setIsFil
         setFilteredFavoriteArray,
         isDropdownOpenMasRelevantes,
         setIsDropdownOpenMasRelevantes,
+        title,
+        setTitle
     } = useContext(ProductsContext);
     const [windowWidth, setWindowWidth] = useState<number>(0)
     const [pageRendered, setPageRendered] = useState<number>(1)
     const [activePage, setActivePage] = useState<number>(1);
     const [isActive, setIsActive] = useState<any>({})
     const [images, setImages] = useState<Images>({})
-    const [title, setTitle] = useState<string>('Mais Relevantes')
     const [favoriteCards, setFavoriteCards] = useState<{ [id: string]: boolean }>({});
     const handleResize = () => setWindowWidth(window.screen.width)
     const productsPerPage = 12;
