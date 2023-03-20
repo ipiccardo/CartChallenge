@@ -132,11 +132,10 @@ const SideBar = ({ isOpenSideBar, setIsOpenSideBar, setIsFiltered, isFiltered, i
                         </div>
                         {isDropdownOpenModelo && (
                             <ul className={style.dropdown}>
-                                <ul className={style.dropdown}>
                                     {modelos.map((modelo, index) => {
                                         const cantidadDeProductos = handleCountProperty("model", modelo)
                                         return cantidadDeProductos && 
-                                        <li key={index} onClick={() => handlerFilter('model', modelo)}>{modelo}
+                                        <li className={style.productList} key={index} onClick={() => handlerFilter('model', modelo)}>{modelo}
                                         <span className={style.spanInListItem}>
                                          {`(${(handleCountProperty('model', modelo))})`}
                                         </span>
@@ -144,7 +143,6 @@ const SideBar = ({ isOpenSideBar, setIsOpenSideBar, setIsFiltered, isFiltered, i
                                     })}
                                     <li onClick={() => { filteredProducts !== products && handleShowEvery() }}>Mostrar todo {`(${products.length})`}</li>
                                 </ul>
-                            </ul>
                         )}
                     </li>
                     <li>
