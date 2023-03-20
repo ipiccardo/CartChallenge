@@ -4,15 +4,15 @@ import Icon from '../Icon/Icon'
 import { Link } from 'react-router-dom';
 
 
-
 export type SidebarProps = {
     isOpenSideBar: boolean;
     setIsOpenSideBar: Function;
+    isInFavorite?: boolean
 };
 
 
-const Header = ({isOpenSideBar, setIsOpenSideBar}:SidebarProps)  => {
-    const [windowWidth, setWindowWidth] = useState<number>(0)
+const Header = ({isOpenSideBar, setIsOpenSideBar, isInFavorite}:SidebarProps)  => {
+        const [windowWidth, setWindowWidth] = useState<number>(0)
     const handleResize = () => setWindowWidth(window.screen.width)
 
     useEffect(() => {
@@ -38,7 +38,12 @@ const Header = ({isOpenSideBar, setIsOpenSideBar}:SidebarProps)  => {
                     <div className={styles.iconContainer}>
                         <Icon name="buscar" onClick={() => {return}} size={18} />
                     </div>
-                    <Link className={styles.link} to={'/favorite'}>Buscar</Link>
+                    {
+                        isInFavorite ?
+                        <Link className={styles.link} to={'/'}>Home</Link>
+                        :
+                        <Link className={styles.link} to={'/favorite'}>Favorites</Link> 
+                    }
                 </div>
                 <div className={styles.lineaVertical}>
                     <Icon name="lineaVertical" onClick={() => {return}} size={18} />

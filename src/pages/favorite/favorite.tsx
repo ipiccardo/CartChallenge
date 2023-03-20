@@ -60,7 +60,7 @@ const Dashboard = () => {
     return (
         <>
            <div onClick={handleClick} className={styles.inMobile}>
-                <Header isOpenSideBar={isOpenSideBar} setIsOpenSideBar={setIsOpenSideBar} />
+                <Header isOpenSideBar={isOpenSideBar} setIsOpenSideBar={setIsOpenSideBar} isInFavorite={true}/>
             </div>
             <div className='app-container' onClick={(e) => handleClose(e)}>
                 <SideBar
