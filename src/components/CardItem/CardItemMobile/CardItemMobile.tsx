@@ -195,6 +195,7 @@ const CardItemMobile = ({setTotalCarros, isOpenSideBar, isInFavorite}: cardItemM
                 )
             }
              {
+                 !isInFavorite ?
                 products.length > 1 &&
                 <div style={{width: '90%'}}>
                 <Pagination
@@ -205,6 +206,8 @@ const CardItemMobile = ({setTotalCarros, isOpenSideBar, isInFavorite}: cardItemM
                     pageRendered={pageRendered}
                     />
                     </div>
+                    :
+                    <p className={styles.noProductsSelected}>No has seleccionado productos favoritos</p>
             }
         </>
     )

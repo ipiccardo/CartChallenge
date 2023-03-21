@@ -42,7 +42,7 @@ const Header = ({isOpenSideBar, setIsOpenSideBar, isInFavorite}:SidebarProps)  =
                         isInFavorite ?
                         <Link className={styles.link} to={'/'}>Home</Link>
                         :
-                        <Link className={styles.link} to={'/favorite'}>Favorites</Link> 
+                        <Link className={styles.link} to={'/favorite'}>Buscar</Link> 
                     }
                 </div>
                 <div className={styles.lineaVertical}>

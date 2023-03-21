@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import styles from './CardContainer.module.css'
 import CardItemMobile from '../CardItem/CardItemMobile/CardItemMobile'
 import CardItemDesktop from '../CardItem/CardItemDesktop/CardItemDesktop'
 import Icon from '../Icon/Icon'
+import { ProductsContext } from '../../context/productsContext'
 
 
 
@@ -14,6 +15,7 @@ interface DashboardProps {
 }
 
 const CardContainer = ({ resultadosDeBusqueda, isOpenSideBar, isInFavorite, setIsFiltered }: DashboardProps) => {
+  const {favoriteArray} = useContext(ProductsContext);
   const [windowWidth, setWindowWidth] = useState<number>(0)
   const [desktopMenu, setDesktopMenu] = useState<Boolean>(false)
   const [totalCarros, setTotalCarros] = useState<number>(0)
@@ -51,7 +53,7 @@ const CardContainer = ({ resultadosDeBusqueda, isOpenSideBar, isInFavorite, setI
           )
           :
           <>
-            <p className={styles.resultadosDeBusquedaParagraph}>{totalCarros ? totalCarros : '393.566'} resultados</p>
+            <p className={styles.resultadosDeBusquedaParagraph}>{!isInFavorite ? totalCarros : favoriteArray.length} resultados</p>
             <div className={styles.dashboardIconContainer}>
               <div>
                 <Icon name="cuadrados" onClick={() => handleClick()} size={18} />

@@ -7,14 +7,10 @@
   align-items: flex-start;
   padding: 20px 0px;
   gap: 12px;
-  /* width: 395px; */
   height: 180px;
   background: #ffffff;
   border-bottom: 1px solid #e3e5ed;
-  /* flex: none;
-  order: 0; */
   align-self: stretch;
-  /* flex-grow: 0; */
 }
 
 .cardItemImage {
@@ -33,9 +29,6 @@
   width: 120px;
   height: 106px;
   border-radius: 8px;
-  /* flex: none;
-  order: 0;
-  flex-grow: 0; */
   position: relative;
 }
 
@@ -58,9 +51,6 @@
 .iconContainer {
   width: 20px;
   height: 20px;
-  /* flex: none;
-  order: 0;
-  flex-grow: 0; */
   top: 4px;
   left: 4px;
 }
@@ -88,6 +78,13 @@
   flex-grow: 1;
 }
 
+.noProductsSelected {
+  text-align: center;
+  font-size: 1em;
+  margin: 0 auto;
+}
+
+
 .brandVersionContainer {
   display: flex;
   width: 263px;
@@ -96,7 +93,6 @@
   border-radius: 4px;
   /* order: 0; */
   align-self: stretch;
-  /* flex-grow: 0; */
 }
 
 .brand {
