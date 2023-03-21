@@ -4,6 +4,7 @@ import CardItemMobile from '../CardItem/CardItemMobile/CardItemMobile'
 import CardItemDesktop from '../CardItem/CardItemDesktop/CardItemDesktop'
 import Icon from '../Icon/Icon'
 import { ProductsContext } from '../../context/productsContext'
+import { getProducts } from '../../services/products'
 
 
 
@@ -15,10 +16,19 @@ interface DashboardProps {
 }
 
 const CardContainer = ({ resultadosDeBusqueda, isOpenSideBar, isInFavorite, setIsFiltered }: DashboardProps) => {
-  const {favoriteArray} = useContext(ProductsContext);
+  const {favoriteArray, setProducts} = useContext(ProductsContext);
   const [windowWidth, setWindowWidth] = useState<number>(0)
   const [desktopMenu, setDesktopMenu] = useState<Boolean>(false)
   const [totalCarros, setTotalCarros] = useState<number>(0)
+  
+  useEffect(() => {         
+    const fetchData = async () => {
+        const data = await getProducts()
+        const { items } = data
+        setProducts(items)
+    } 
+      fetchData()
+}, [setProducts]);
 
   const handleResize = () => setWindowWidth(window.screen.width)
   
@@ -31,6 +41,7 @@ const CardContainer = ({ resultadosDeBusqueda, isOpenSideBar, isInFavorite, setI
       }
     }
   }
+
 
   useEffect(() => {
     handleResize()

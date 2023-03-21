@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { getProducts } from '../../../services/products'
 import styles from './CardItemDesktop.module.css'
 import Icon from '../../Icon/Icon'
 import Pagination from '../../Pagination/Pagination'
@@ -24,7 +23,6 @@ export interface Images {
 const CardItemDesktop = ({ setTotalCarros, isOpenSideBar, isInFavorite, setIsFiltered }: cardItemDestopProps) => {
     const {
         products,
-        setProducts,
         filteredProducts,
         setFilteredProducts,
         favoriteArray,
@@ -48,15 +46,6 @@ const CardItemDesktop = ({ setTotalCarros, isOpenSideBar, isInFavorite, setIsFil
     const firstProductIndex = lastProductIndex - productsPerPage;
     const productsToShow = !isInFavorite ? filteredProducts !== products ? filteredProducts.slice(firstProductIndex, lastProductIndex) : products.slice(firstProductIndex, lastProductIndex)
         : filteredFavoriteArray !== favoriteArray ? filteredFavoriteArray.slice(firstProductIndex, lastProductIndex) : favoriteArray.slice(firstProductIndex, lastProductIndex)
-
-    useEffect(() => {
-        const fetchData = async () => {
-            const data = await getProducts()
-            const { items } = data
-            setProducts(items)
-        }
-        fetchData()
-    }, [setProducts]);
 
     useEffect(() => {
         handleResize()
@@ -338,7 +327,6 @@ const CardItemDesktop = ({ setTotalCarros, isOpenSideBar, isInFavorite, setIsFil
                     activePage={activePage}
                     pageRendered={pageRendered}
                      /> :
-
                     <p className={styles.noProductsSelected}>No has seleccionado productos favoritos</p>
             }
         </>

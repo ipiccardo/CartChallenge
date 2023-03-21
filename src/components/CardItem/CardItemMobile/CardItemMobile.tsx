@@ -1,5 +1,4 @@
 import { useEffect } from 'react'
-import { getProducts } from '../../../services/products'
 import styles from './CardItemMobile.module.css'
 import Icon from '../../Icon/Icon'
 import { useContext, useState } from 'react';
@@ -17,7 +16,6 @@ export interface cardItemMobileProps {
 const CardItemMobile = ({setTotalCarros, isOpenSideBar, isInFavorite}: cardItemMobileProps) => {
     const {
         products,
-        setProducts,
         filteredProducts,
         favoriteArray,
         setFavoriteArray,
@@ -34,26 +32,8 @@ const CardItemMobile = ({setTotalCarros, isOpenSideBar, isInFavorite}: cardItemM
         : filteredFavoriteArray !== favoriteArray ? filteredFavoriteArray.slice(firstProductIndex, lastProductIndex) : favoriteArray.slice(firstProductIndex, lastProductIndex)
 
     useEffect(() => {
-        const fetchData = async () => {
-            const data = await getProducts()
-            const { items } = data
-            setProducts(items)
-        }
-        fetchData()
-    }, [setProducts]);
-
-    useEffect(() => {
         setTotalCarros(filteredProducts.length)
     }, [setTotalCarros, filteredProducts])
-
-    useEffect(() => {
-        const fetchData = async () => {
-            const data = await getProducts()
-            const { items } = data
-            setProducts(items)
-        }
-        fetchData()
-    }, [setProducts]);
 
 
     useEffect(() => {
@@ -195,8 +175,8 @@ const CardItemMobile = ({setTotalCarros, isOpenSideBar, isInFavorite}: cardItemM
                 )
             }
              {
-                 !isInFavorite ?
-                products.length > 1 &&
+                !isInFavorite ?
+                products.length >= 1 &&
                 <div style={{width: '90%'}}>
                 <Pagination
                     handlePrevious={handlePrevious}
@@ -207,6 +187,14 @@ const CardItemMobile = ({setTotalCarros, isOpenSideBar, isInFavorite}: cardItemM
                     />
                     </div>
                     :
+                    filteredFavoriteArray.length >= 1 ? 
+                     <Pagination
+                    handlePrevious={handlePrevious}
+                    handleNext={handleNext}
+                    handleSelect={handleSelect}
+                    activePage={activePage}
+                    pageRendered={pageRendered}
+                     /> :
                     <p className={styles.noProductsSelected}>No has seleccionado productos favoritos</p>
             }
         </>
