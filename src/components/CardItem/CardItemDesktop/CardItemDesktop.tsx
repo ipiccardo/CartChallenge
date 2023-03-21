@@ -39,7 +39,6 @@ const CardItemDesktop = ({ setTotalCarros, isOpenSideBar, isInFavorite, setIsFil
     const [activePage, setActivePage] = useState<number>(1);
     const [isActive, setIsActive] = useState<any>({})
     const [images, setImages] = useState<Images>({})
-    const [favoriteCards, setFavoriteCards] = useState<{ [id: string]: boolean }>({});
     const handleResize = () => setWindowWidth(window.screen.width)
     const productsPerPage = 12;
     const lastProductIndex = pageRendered * productsPerPage;
@@ -203,11 +202,6 @@ const CardItemDesktop = ({ setTotalCarros, isOpenSideBar, isInFavorite, setIsFil
                 } else {
                     handleRemove(id)
                 }
-                setFavoriteCards((prevFavoriteCards) => {
-                    const newFavoriteCards = { ...prevFavoriteCards };
-                    newFavoriteCards[id] = !prevFavoriteCards[id];
-                    return newFavoriteCards;
-                });
             }
         }
     }
@@ -268,14 +262,11 @@ const CardItemDesktop = ({ setTotalCarros, isOpenSideBar, isInFavorite, setIsFil
                                 <button className={styles.cardItemImageButton}>
                                     <div className={styles.iconContainer}>
                                         {
-                                            isInFavorite ? (
+                                            (filteredFavoriteArray.some((product) => product.id === id) || 
+                                            favoriteArray.some((product) => product.id === id))  ? (
                                                 <Icon name="likeLleno" onClick={() => handleFavorite(id)} size={18} />
-                                            ) :
-                                                favoriteCards[id] ? (
-                                                    <Icon name="likeLleno" onClick={() => handleFavorite(id)} size={18} />
-                                                ) : (
-                                                    <Icon name="like" onClick={() => handleFavorite(id)} size={18} />
-                                                )
+                                                ) :
+                                                <Icon name="like" onClick={() => handleFavorite(id)} size={18} />
                                         }
                                     </div>
                                 </button>

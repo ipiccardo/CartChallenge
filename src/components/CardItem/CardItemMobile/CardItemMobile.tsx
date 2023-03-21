@@ -24,7 +24,6 @@ const CardItemMobile = ({setTotalCarros, isOpenSideBar, isInFavorite}: cardItemM
     } = useContext(ProductsContext);
     const [pageRendered, setPageRendered] = useState<number>(1)
     const [activePage, setActivePage] = useState<number>(1);
-    const [favoriteCards, setFavoriteCards] = useState<{ [id: string]: boolean }>({});
     const productsPerPage = 12;
     const lastProductIndex = pageRendered * productsPerPage;
     const firstProductIndex = lastProductIndex - productsPerPage;
@@ -100,11 +99,6 @@ const CardItemMobile = ({setTotalCarros, isOpenSideBar, isInFavorite}: cardItemM
                 } else {
                     handleRemove(id)
                 }
-                setFavoriteCards((prevFavoriteCards) => {
-                    const newFavoriteCards = { ...prevFavoriteCards };
-                    newFavoriteCards[id] = !prevFavoriteCards[id];
-                    return newFavoriteCards;
-                });
             }
         }
     }   
@@ -134,14 +128,11 @@ const CardItemMobile = ({setTotalCarros, isOpenSideBar, isInFavorite}: cardItemM
                                 <button className={styles.cardItemImageButton}>
                                     <div className={styles.iconContainer}>
                                     {
-                                            isInFavorite ? (
-                                                <Icon name="likeLleno" onClick={() => handleFavorite(id)} size={18} />
-                                            ) :
-                                                favoriteCards[id] ? (
-                                                    <Icon name="likeLleno" onClick={() => handleFavorite(id)} size={18} />
-                                                ) : (
-                                                    <Icon name="like" onClick={() => handleFavorite(id)} size={18} />
-                                                )
+                                             (filteredFavoriteArray.some((product) => product.id === id) || 
+                                             favoriteArray.some((product) => product.id === id))  ? (
+                                                 <Icon name="likeLleno" onClick={() => handleFavorite(id)} size={18} />
+                                                 ) :
+                                                 <Icon name="like" onClick={() => handleFavorite(id)} size={18} />
                                         }
                                     </div>
                                 </button>
