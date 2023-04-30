@@ -13,7 +13,7 @@ export interface cardItemMobileProps {
     setIsFiltered?: Function
 }
 
-const CardItemMobile = ({setTotalCarros, isOpenSideBar, isInFavorite}: cardItemMobileProps) => {
+const CardItemMobile = ({ setTotalCarros, isOpenSideBar, isInFavorite }: cardItemMobileProps) => {
     const {
         products,
         filteredProducts,
@@ -101,11 +101,11 @@ const CardItemMobile = ({setTotalCarros, isOpenSideBar, isInFavorite}: cardItemM
                 }
             }
         }
-    }   
+    }
     return (
         <>
             {
-                
+
                 productsToShow?.map(({
                     brand,
                     city,
@@ -127,12 +127,12 @@ const CardItemMobile = ({setTotalCarros, isOpenSideBar, isInFavorite}: cardItemM
                                 </div>
                                 <button className={styles.cardItemImageButton}>
                                     <div className={styles.iconContainer}>
-                                    {
-                                             (filteredFavoriteArray.some((product) => product.id === id) || 
-                                             favoriteArray.some((product) => product.id === id))  ? (
-                                                 <Icon name="likeLleno" onClick={() => handleFavorite(id)} size={18} />
-                                                 ) :
-                                                 <Icon name="like" onClick={() => handleFavorite(id)} size={18} />
+                                        {
+                                            (filteredFavoriteArray.some((product) => product.id === id) ||
+                                                favoriteArray.some((product) => product.id === id)) ? (
+                                                <Icon name="likeLleno" onClick={() => handleFavorite(id)} size={18} />
+                                            ) :
+                                                <Icon name="like" onClick={() => handleFavorite(id)} size={18} />
                                         }
                                     </div>
                                 </button>
@@ -165,28 +165,31 @@ const CardItemMobile = ({setTotalCarros, isOpenSideBar, isInFavorite}: cardItemM
                 }
                 )
             }
-             {
+            {
                 !isInFavorite ?
-                products.length >= 1 &&
-                <div style={{width: '90%'}}>
-                <Pagination
-                    handlePrevious={handlePrevious}
-                    handleNext={handleNext}
-                    handleSelect={handleSelect}
-                    activePage={activePage} 
-                    pageRendered={pageRendered}
-                    />
+                    products.length >= 1 &&
+                    <div style={{ width: '90%' }}>
+                        <Pagination
+                            handlePrevious={handlePrevious}
+                            handleNext={handleNext}
+                            handleSelect={handleSelect}
+                            activePage={activePage}
+                            pageRendered={pageRendered}
+                        />
                     </div>
                     :
-                    filteredFavoriteArray.length >= 1 ? 
-                     <Pagination
-                    handlePrevious={handlePrevious}
-                    handleNext={handleNext}
-                    handleSelect={handleSelect}
-                    activePage={activePage}
-                    pageRendered={pageRendered}
-                     /> :
-                    <p className={styles.noProductsSelected}>No has seleccionado productos favoritos</p>
+                    filteredFavoriteArray.length >= 1 ?
+                        <div style={{ width: '90%' }}>
+                            <Pagination
+                                handlePrevious={handlePrevious}
+                                handleNext={handleNext}
+                                handleSelect={handleSelect}
+                                activePage={activePage}
+                                pageRendered={pageRendered}
+                            />
+                        </div>
+                        :
+                        <p className={styles.noProductsSelected}>No has seleccionado productos favoritos</p>
             }
         </>
     )
