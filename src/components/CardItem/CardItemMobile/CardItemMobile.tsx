@@ -167,7 +167,7 @@ const CardItemMobile = ({ setTotalCarros, isOpenSideBar, isInFavorite }: cardIte
             }
             {
                 !isInFavorite ?
-                    products.length >= 1 &&
+                    products.length > 12 &&
                     <div style={{ width: '90%' }}>
                         <Pagination
                             handlePrevious={handlePrevious}
@@ -175,10 +175,11 @@ const CardItemMobile = ({ setTotalCarros, isOpenSideBar, isInFavorite }: cardIte
                             handleSelect={handleSelect}
                             activePage={activePage}
                             pageRendered={pageRendered}
+                            filteredProducts={filteredProducts}
                         />
                     </div>
                     :
-                    filteredFavoriteArray.length >= 1 ?
+                    filteredFavoriteArray.length > 12 ?
                         <div style={{ width: '90%' }}>
                             <Pagination
                                 handlePrevious={handlePrevious}
@@ -186,9 +187,10 @@ const CardItemMobile = ({ setTotalCarros, isOpenSideBar, isInFavorite }: cardIte
                                 handleSelect={handleSelect}
                                 activePage={activePage}
                                 pageRendered={pageRendered}
+                                filteredProducts={filteredFavoriteArray}
                             />
                         </div>
-                        :
+                        : !filteredFavoriteArray.length &&
                         <p className={styles.noProductsSelected}>No has seleccionado productos favoritos</p>
             }
         </>

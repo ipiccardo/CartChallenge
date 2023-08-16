@@ -46,6 +46,8 @@ const CardItemDesktop = ({ setTotalCarros, isOpenSideBar, isInFavorite, setIsFil
     const productsToShow = !isInFavorite ? filteredProducts !== products ? filteredProducts.slice(firstProductIndex, lastProductIndex) : products.slice(firstProductIndex, lastProductIndex)
         : filteredFavoriteArray !== favoriteArray ? filteredFavoriteArray.slice(firstProductIndex, lastProductIndex) : favoriteArray.slice(firstProductIndex, lastProductIndex)
 
+    const [currentPage, setCurrentPage] = useState(1);
+
     useEffect(() => {
         handleResize()
         window.addEventListener('resize', handleResize)
@@ -181,9 +183,7 @@ const CardItemDesktop = ({ setTotalCarros, isOpenSideBar, isInFavorite, setIsFil
         }
     };
 
-    console.log(filteredProducts.length / 12, 'cantidad de paginas')
 
-    console.log(filteredProducts, 'filteredProducts')
 
     const handleRemove = (id: any) => {
         const withoutRemoved = favoriteArray.filter((product) => product.id !== id)
@@ -307,20 +307,24 @@ const CardItemDesktop = ({ setTotalCarros, isOpenSideBar, isInFavorite, setIsFil
                 !isInFavorite ?
                     filteredProducts.length > 12 &&
                     <Pagination
+                        carsForPage={12}
                         handlePrevious={handlePrevious}
                         handleNext={handleNext}
                         handleSelect={handleSelect}
                         activePage={activePage}
                         pageRendered={pageRendered}
+                        filteredProducts={filteredProducts}
                     />
                     :
                     filteredFavoriteArray.length > 12 ?
                         <Pagination
+                            carsForPage={12}
                             handlePrevious={handlePrevious}
                             handleNext={handleNext}
                             handleSelect={handleSelect}
                             activePage={activePage}
                             pageRendered={pageRendered}
+                            filteredProducts={filteredFavoriteArray}
                         /> : !filteredFavoriteArray.length &&
                         <p className={styles.noProductsSelected}>No has seleccionado productos favoritos</p>
             }
