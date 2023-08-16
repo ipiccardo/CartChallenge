@@ -181,6 +181,10 @@ const CardItemDesktop = ({ setTotalCarros, isOpenSideBar, isInFavorite, setIsFil
         }
     };
 
+    console.log(filteredProducts.length / 12, 'cantidad de paginas')
+
+    console.log(filteredProducts, 'filteredProducts')
+
     const handleRemove = (id: any) => {
         const withoutRemoved = favoriteArray.filter((product) => product.id !== id)
         setFavoriteArray(withoutRemoved)
@@ -262,10 +266,10 @@ const CardItemDesktop = ({ setTotalCarros, isOpenSideBar, isInFavorite, setIsFil
                                 <button className={styles.cardItemImageButton}>
                                     <div className={styles.iconContainer}>
                                         {
-                                            (filteredFavoriteArray.some((product) => product.id === id) || 
-                                            favoriteArray.some((product) => product.id === id))  ? (
+                                            (filteredFavoriteArray.some((product) => product.id === id) ||
+                                                favoriteArray.some((product) => product.id === id)) ? (
                                                 <Icon name="likeLleno" onClick={() => handleFavorite(id)} size={18} />
-                                                ) :
+                                            ) :
                                                 <Icon name="like" onClick={() => handleFavorite(id)} size={18} />
                                         }
                                     </div>
@@ -301,24 +305,24 @@ const CardItemDesktop = ({ setTotalCarros, isOpenSideBar, isInFavorite, setIsFil
             }
             {
                 !isInFavorite ?
-                products.length > 1 &&
-                <Pagination
-                    handlePrevious={handlePrevious}
-                    handleNext={handleNext}
-                    handleSelect={handleSelect}
-                    activePage={activePage}
-                    pageRendered={pageRendered}
-                     />
-                     :
-                     filteredFavoriteArray.length >= 1 ? 
-                     <Pagination
-                    handlePrevious={handlePrevious}
-                    handleNext={handleNext}
-                    handleSelect={handleSelect}
-                    activePage={activePage}
-                    pageRendered={pageRendered}
-                     /> :
-                    <p className={styles.noProductsSelected}>No has seleccionado productos favoritos</p>
+                    filteredProducts.length > 12 &&
+                    <Pagination
+                        handlePrevious={handlePrevious}
+                        handleNext={handleNext}
+                        handleSelect={handleSelect}
+                        activePage={activePage}
+                        pageRendered={pageRendered}
+                    />
+                    :
+                    filteredFavoriteArray.length > 12 ?
+                        <Pagination
+                            handlePrevious={handlePrevious}
+                            handleNext={handleNext}
+                            handleSelect={handleSelect}
+                            activePage={activePage}
+                            pageRendered={pageRendered}
+                        /> : !filteredFavoriteArray.length &&
+                        <p className={styles.noProductsSelected}>No has seleccionado productos favoritos</p>
             }
         </>
     )
