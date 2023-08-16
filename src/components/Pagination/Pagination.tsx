@@ -36,12 +36,21 @@ const Pagination = ({ handlePrevious, handleNext, handleSelect, activePage, page
 
     return (
         <div className={styles.paginationContainer}>
-            <div className={styles.anteriorContainer} onClick={handlePrevious}>
-                <Icon name="flechaIzquierda" onClick={() => { return }} size={18} />
-                <div>
-                    Anterior
-                </div>
-            </div>
+            {
+                pages.length > 1 ?
+                    <div className={styles.anteriorContainer} onClick={handlePrevious}>
+                        <Icon name="flechaIzquierda" onClick={() => { return }} size={18} />
+                        <div>
+                            Anterior
+                        </div>
+                    </div> :
+                    <div className={styles.anteriorContainer}>
+                        <Icon name="flechaIzquierda" onClick={() => { return }} size={18} />
+                        <div>
+                            Anterior
+                        </div>
+                    </div>
+            }
             <div className={styles.numbersContainer}>
                 {
                     pages.map((page, index) => {

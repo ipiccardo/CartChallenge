@@ -25,7 +25,8 @@
   height: 42px;
 }
 
-.numbersContainer div:active,.numbersContainer div:focus {
+.numbersContainer div:active,
+.numbersContainer div:focus {
   border-top: solid 1px blue;
   color: blue;
 }
@@ -33,6 +34,7 @@
 .active {
   border-top: solid 1px blue;
   color: blue;
+  margin-top: -1px;
 }
 
 .anteriorContainer {
@@ -52,7 +54,6 @@
 .pageRenderInMobile {
   display: none;
 }
-
 
 @media (max-width: 500px) {
   .numbersContainer {
