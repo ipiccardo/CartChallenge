@@ -37,14 +37,14 @@ const Pagination = ({ handlePrevious, handleNext, handleSelect, activePage, page
     return (
         <div className={styles.paginationContainer}>
             {
-                pages.length > 1 ?
+                pages.length > 1 && activePage !== 1 ?
                     <div className={styles.anteriorContainer} onClick={handlePrevious}>
                         <Icon name="flechaIzquierda" onClick={() => { return }} size={18} />
                         <div>
                             Anterior
                         </div>
                     </div> :
-                    <div className={styles.anteriorContainer}>
+                    <div className={styles.anteriorContainerhidden}>
                         <Icon name="flechaIzquierda" onClick={() => { return }} size={18} />
                         <div>
                             Anterior
@@ -74,7 +74,7 @@ const Pagination = ({ handlePrevious, handleNext, handleSelect, activePage, page
                             <Icon name="flechaDerecha" onClick={() => { return }} size={18} />
                         </div>
                     ) : (
-                        <div className={styles.proximoContainer}>
+                        <div className={styles.proximoContainerHidden}>
                             <div>Próximo</div>
                             <Icon name="flechaDerecha" onClick={() => { return }} size={18} />
                         </div>

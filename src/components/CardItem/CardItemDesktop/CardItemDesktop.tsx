@@ -305,16 +305,27 @@ const CardItemDesktop = ({ setTotalCarros, isOpenSideBar, isInFavorite, setIsFil
             }
             {
                 !isInFavorite ?
-                    filteredProducts.length > 12 &&
-                    <Pagination
-                        carsForPage={12}
-                        handlePrevious={handlePrevious}
-                        handleNext={handleNext}
-                        handleSelect={handleSelect}
-                        activePage={activePage}
-                        pageRendered={pageRendered}
-                        filteredProducts={filteredProducts}
-                    />
+                    filteredProducts.length > 12 ?
+                        <Pagination
+                            carsForPage={12}
+                            handlePrevious={handlePrevious}
+                            handleNext={handleNext}
+                            handleSelect={handleSelect}
+                            activePage={activePage}
+                            pageRendered={pageRendered}
+                            filteredProducts={filteredProducts}
+                        /> :
+                        <div className={styles.widtoutPages}>
+                            <Pagination
+                                carsForPage={12}
+                                handlePrevious={handlePrevious}
+                                handleNext={handleNext}
+                                handleSelect={handleSelect}
+                                activePage={activePage}
+                                pageRendered={pageRendered}
+                                filteredProducts={filteredProducts}
+                            />
+                        </div>
                     :
                     filteredFavoriteArray.length > 12 ?
                         <Pagination

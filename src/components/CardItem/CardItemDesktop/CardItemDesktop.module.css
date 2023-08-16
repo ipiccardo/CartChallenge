@@ -239,13 +239,12 @@
 
 .links a {
   color: #566ded;
-    cursor: pointer;
-    font-size: 14px;
-    line-height: 20px;
-    font-family: "Raleway-Medium", sans-serif;
-    font-weight: 500;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 20px;
+  font-family: "Raleway-Medium", sans-serif;
+  font-weight: 500;
 }
-
 
 /* Mas Relevantes */
 
@@ -348,7 +347,6 @@
   margin: 0 auto;
 }
 
-
 @media (max-width: 500px) {
   .cardItemContainer {
     margin-left: auto;
@@ -382,4 +380,17 @@ li:hover .dropdown {
 
 .open .dropdown {
   display: block;
+}
+
+.widtoutPages {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  bottom: 0px;
+  width: 100%;
+}
+
+.widtoutPages div div {
+  width: 42px;
+  text-align: center;
 }

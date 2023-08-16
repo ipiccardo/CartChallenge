@@ -44,11 +44,19 @@
   cursor: pointer;
 }
 
+.anteriorContainerhidden {
+  visibility: hidden;
+}
+
 .proximoContainer {
   display: flex;
   align-items: center;
   gap: 8px;
   cursor: pointer;
+}
+
+.proximoContainerHidden {
+  visibility: hidden;
 }
 
 .pageRenderInMobile {
