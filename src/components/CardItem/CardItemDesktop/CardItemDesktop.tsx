@@ -230,6 +230,11 @@ const CardItemDesktop = ({ setTotalCarros, isOpenSideBar, isInFavorite, setIsFil
                     </div>
                 </div>
             }
+            {!filteredProducts.length &&
+                (<div style={{ height: '100vh' }}>
+
+                </div>)
+            }
             {
                 productsToShow?.map(({
                     brand,

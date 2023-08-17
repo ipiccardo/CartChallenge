@@ -104,6 +104,11 @@ const CardItemMobile = ({ setTotalCarros, isOpenSideBar, isInFavorite }: cardIte
     }
     return (
         <>
+            {!filteredProducts.length &&
+                (<div style={{ height: '100vh' }}>
+
+                </div>)
+            }
             {
 
                 productsToShow?.map(({
@@ -167,7 +172,7 @@ const CardItemMobile = ({ setTotalCarros, isOpenSideBar, isInFavorite }: cardIte
             }
             {
                 !isInFavorite ?
-                    products.length > 12 &&
+                    filteredProducts.length > 12 &&
                     <div style={{ width: '90%' }}>
                         <Pagination
                             handlePrevious={handlePrevious}
