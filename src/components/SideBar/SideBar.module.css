@@ -71,13 +71,13 @@ li:hover .dropdown {
 
 /* SCROLLBAR */
 
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
   width: 0.1em;
 }
 
 ::-webkit-scrollbar-thumb {
   background-color: rgba(0, 0, 0, 0);
-}
+} */
 
 /* MEDIA QUERYS */
 
